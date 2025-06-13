@@ -31,5 +31,33 @@ reserved = {
 }
 
 
+# Reglas de expresiones regulares
+t_PLUS     = r'\+'
+t_MINUS    = r'-'
+t_TIMES    = r'\*'
+t_DIVIDE   = r'/'
+t_MOD      = r'%'
+t_EQ       = r'=='
+t_NEQ      = r'!='
+t_LT       = r'<'
+t_LE       = r'<='
+t_GT       = r'>'
+t_GE       = r'>='
+t_ASSIGN   = r'='
+t_LPAREN   = r'\('
+t_RPAREN   = r'\)'
+t_LBRACE   = r'\{'
+t_RBRACE   = r'\}'
+t_LBRACKET = r'\['
+t_RBRACKET = r'\]'
+t_SEMI     = r';'
+t_COMMA    = r','
+t_AND      = r'&&'
+t_OR       = r'\|\|'
+t_NOT      = r'!'
+
+# Ignorar espacios y tabulaciones
+t_ignore = ' \t'
+
 # Build the lexer
 lexer = lex.lex()
