@@ -1,5 +1,13 @@
 import ply.lex as lex
 
+# Lista de tokens
+tokens = [
+    'ID', 'NUMBER', 'STRING', 'PLUS', 'MINUS', 'TIMES', 'DIVIDE', 'MOD',
+    'EQ', 'NEQ', 'LT', 'LE', 'GT', 'GE', 'ASSIGN',
+    'LPAREN', 'RPAREN', 'LBRACE', 'RBRACE', 'LBRACKET', 'RBRACKET',
+    'SEMI', 'COMMA', 'AND', 'OR', 'NOT'
+]
+
 reserved = {
     "String": "STRING",
     "double": "DOUBLE",
@@ -29,6 +37,8 @@ reserved = {
     "stdin": "STDIN",
     "readLineSync": "READLINESYNC"
 }
+
+tokens += list(reserved.values())
 
 
 # Reglas de expresiones regulares
