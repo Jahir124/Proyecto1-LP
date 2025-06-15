@@ -239,6 +239,6 @@ if __name__ == "__main__":
 
         '''
 
-lexer.input(data)
+lexer.input(data2)
 for tok in lexer:
     print(tok)
