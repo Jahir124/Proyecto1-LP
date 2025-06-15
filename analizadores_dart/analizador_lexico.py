@@ -27,7 +27,34 @@ reserved = {
     "length": "LENGTH",
     "dynamic": "DYNAMIC",
     "stdin": "STDIN",
-    "readLineSync": "READLINESYNC"
+    "readLineSync": "READLINESYNC",
+    "class": "CLASS",
+    "extends": "EXTENDS",
+    "implements": "IMPLEMENTS",
+    "with": "WITH",
+    "static": "STATIC",
+    "abstract": "ABSTRACT",
+    "enum": "ENUM",
+    "super": "SUPER",
+    "try": "TRY",
+    "catch": "CATCH",
+    "finally": "FINALLY",
+    "throw": "THROW",
+    "assert": "ASSERT",
+    "break": "BREAK",
+    "continue": "CONTINUE",
+    "switch": "SWITCH",
+    "case": "CASE",
+    "default": "DEFAULT",
+    "do": "DO",
+    "import": "IMPORT",
+    "export": "EXPORT",
+    "library": "LIBRARY",
+    "part": "PART",
+    "partOf": "PARTOF",
+    "as": "AS",
+    "is": "IS"
+
 }
 
 # Lista de tokens
@@ -70,7 +97,11 @@ tokens = (
     'MINUS_EQUAL',
     'TIMES_EQUAL',
     'DIVIDE_EQUAL',
-    'MODULE_EQUAL'
+    'MODULE_EQUAL',
+    'DOLLAR_SIGN',
+    'QUOTATION_MARK',
+    'SINGLE_QUOTE',
+    'CIRCUMFLEX',
 ) + tuple(reserved.values())
 
 
@@ -112,6 +143,10 @@ t_ARROW           = r'=>'
 t_COLON           = r':'
 t_DOUBLE_COLON    = r'::'
 t_QUESTION        = r'\?'
+t_DOLLAR_SIGN     = r'\$'
+t_QUOTATION_MARK  = r'\"'
+t_SINGLE_QUOTE    = r'\''
+t_CIRCUMFLEX      = r'\^'
 
 # Ignorar espacios y tabulaciones
 t_ignore = ' \t'
@@ -136,7 +171,7 @@ def t_INT(t):
     return t
 
 def t_STRING(t):
-    r'\"([^\\\n]|(\\.))*?\"'
+    r'(\"([^\\\n]|(\\.))*?\")|(\'([^\\\n]|(\\.))*?\')'
     t.value = t.value[1:-1]
     return t
 
@@ -239,6 +274,50 @@ if __name__ == "__main__":
 
         '''
 
-lexer.input(data2)
+# Prueba rápida Algoritmo Dario
+if __name__ == "__main__":
+    data3 = '''
+        void main() {
+          List<String?> pruebas = [
+            "Anita lava la tina",
+            "¿Acaso hubo búhos acá?",
+            "No es palindromo",
+            "",
+            null,
+          ];
+
+          for (var texto in pruebas) {
+            try {
+              bool es = esPalindromo(texto);
+              print('"$texto" ${es ? "es" : "no es"} un palíndromo.');
+            } catch (e) {
+              print('Error con entrada "$texto": $e');
+            }
+          }
+        }
+
+        bool esPalindromo(String? input) {
+          if (input == null) throw ArgumentError("El texto no puede ser null");
+          if (input.trim().isEmpty) throw FormatException("Cadena vacía no válida");
+
+          final String procesado =
+              input.toLowerCase().replaceAll(RegExp(r'[^a-z0-9]'), '');
+
+          int izquierda = 0;
+          int derecha = procesado.length - 1;
+
+          while (izquierda < derecha) {
+            if (procesado[izquierda] != procesado[derecha]) {
+              return false;
+            }
+            izquierda++;
+            derecha--;
+          }
+
+          return true;
+        }
+    '''
+
+lexer.input(data3)
 for tok in lexer:
     print(tok)
