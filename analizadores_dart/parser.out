@@ -1,0 +1,3091 @@
+Created by PLY version 3.11 (http://www.dabeaz.com/ply)
+
+Unused terminals:
+
+    ABSTRACT
+    ARROW
+    AS
+    ASSERT
+    BITNOT
+    BREAK
+    CASE
+    CATCH
+    CIRCUMFLEX
+    CLASS
+    COLON
+    CONST
+    CONTINUE
+    DECREMENT
+    DEFAULT
+    DIVIDE_EQUAL
+    DO
+    DOLLAR_SIGN
+    DOT
+    DOUBLE_COLON
+    ENUM
+    EXPORT
+    EXTENDS
+    FINAL
+    FINALLY
+    FOR
+    FUNCTION
+    IMPLEMENTS
+    IMPORT
+    IN
+    INCREMENT
+    INT_DIVIDE
+    IS
+    LBRACE
+    LENGTH
+    LIBRARY
+    MAP
+    MINUS_EQUAL
+    MODULE
+    MODULE_EQUAL
+    NOT_EQUALS
+    PART
+    PARTOF
+    PLUS_EQUAL
+    QUESTION
+    QUOTATION_MARK
+    RBRACE
+    READLINESYNC
+    RETURN
+    SET
+    SINGLE_QUOTE
+    STDIN
+    SUPER
+    SWITCH
+    THIS
+    THROW
+    TIMES_EQUAL
+    TRY
+    WHILE
+    WITH
+
+Grammar
+
+Rule 0     S' -> compiler
+Rule 1     compiler -> statement_composed
+Rule 2     statement_composed -> statement
+Rule 3     statement_composed -> statement_composed statement
+Rule 4     statement -> print
+Rule 5     statement -> control_structures
+Rule 6     statement -> function
+Rule 7     statement -> list_def
+Rule 8     statement -> variable_def
+Rule 9     statement -> SEMICOLON
+Rule 10    variable_def -> type ID ASSIGN expression SEMICOLON
+Rule 11    variable_def -> DYNAMIC ID ASSIGN expression SEMICOLON
+Rule 12    variable_def -> VAR ID ASSIGN expression SEMICOLON
+Rule 13    variable_def -> STATIC type ID ASSIGN expression SEMICOLON
+Rule 14    variable_def -> STATIC VAR ID ASSIGN expression SEMICOLON
+Rule 15    variable_def -> STATIC DYNAMIC ID ASSIGN expression SEMICOLON
+Rule 16    print -> PRINT LPAREN RPAREN SEMICOLON
+Rule 17    print -> PRINT LPAREN value RPAREN SEMICOLON
+Rule 18    print -> PRINT LPAREN expression RPAREN SEMICOLON
+Rule 19    expression -> expression PLUS expression
+Rule 20    expression -> expression MINUS expression
+Rule 21    expression -> expression TIMES expression
+Rule 22    expression -> expression DIVIDE expression
+Rule 23    expression -> value PLUS value
+Rule 24    expression -> value
+Rule 25    control_structures -> if_block
+Rule 26    control_structures -> if_block else_block
+Rule 27    if_block -> IF LPAREN conditions RPAREN LBRACKET statement_composed RBRACKET
+Rule 28    else_block -> ELSE LBRACKET statement_composed RBRACKET
+Rule 29    conditions -> condition
+Rule 30    conditions -> conditions AND condition
+Rule 31    conditions -> conditions OR condition
+Rule 32    condition -> value comparison_operator value
+Rule 33    condition -> NOT value
+Rule 34    comparison_operator -> GREATER
+Rule 35    comparison_operator -> LESS
+Rule 36    comparison_operator -> GREATER_EQUAL
+Rule 37    comparison_operator -> LESS_EQUAL
+Rule 38    comparison_operator -> EQUALS
+Rule 39    function -> type ID LPAREN parameters RPAREN LBRACKET statement_composed RBRACKET
+Rule 40    function -> VOID ID LPAREN parameters RPAREN LBRACKET statement_composed RBRACKET
+Rule 41    function -> type ID LPAREN RPAREN LBRACKET statement_composed RBRACKET
+Rule 42    function -> VOID ID LPAREN RPAREN LBRACKET statement_composed RBRACKET
+Rule 43    parameters -> parameter
+Rule 44    parameters -> parameters COMMA parameter
+Rule 45    parameter -> type ID
+Rule 46    parameter -> REQUIRED type ID
+Rule 47    type -> STRING
+Rule 48    type -> INT
+Rule 49    type -> DOUBLE
+Rule 50    type -> BOOL
+Rule 51    list_def -> LIST LBRACKET value_list RBRACKET SEMICOLON
+Rule 52    list_def -> LIST LESS type GREATER ID ASSIGN LBRACKET value_list RBRACKET SEMICOLON
+Rule 53    value_list -> value
+Rule 54    value_list -> value_list COMMA value
+Rule 55    value -> INT
+Rule 56    value -> FLOAT
+Rule 57    value -> STRING
+Rule 58    value -> ID
+Rule 59    value -> TRUE
+Rule 60    value -> FALSE
+
+Terminals, with rules where they appear
+
+ABSTRACT             : 
+AND                  : 30
+ARROW                : 
+AS                   : 
+ASSERT               : 
+ASSIGN               : 10 11 12 13 14 15 52
+BITNOT               : 
+BOOL                 : 50
+BREAK                : 
+CASE                 : 
+CATCH                : 
+CIRCUMFLEX           : 
+CLASS                : 
+COLON                : 
+COMMA                : 44 54
+CONST                : 
+CONTINUE             : 
+DECREMENT            : 
+DEFAULT              : 
+DIVIDE               : 22
+DIVIDE_EQUAL         : 
+DO                   : 
+DOLLAR_SIGN          : 
+DOT                  : 
+DOUBLE               : 49
+DOUBLE_COLON         : 
+DYNAMIC              : 11 15
+ELSE                 : 28
+ENUM                 : 
+EQUALS               : 38
+EXPORT               : 
+EXTENDS              : 
+FALSE                : 60
+FINAL                : 
+FINALLY              : 
+FLOAT                : 56
+FOR                  : 
+FUNCTION             : 
+GREATER              : 34 52
+GREATER_EQUAL        : 36
+ID                   : 10 11 12 13 14 15 39 40 41 42 45 46 52 58
+IF                   : 27
+IMPLEMENTS           : 
+IMPORT               : 
+IN                   : 
+INCREMENT            : 
+INT                  : 48 55
+INT_DIVIDE           : 
+IS                   : 
+LBRACE               : 
+LBRACKET             : 27 28 39 40 41 42 51 52
+LENGTH               : 
+LESS                 : 35 52
+LESS_EQUAL           : 37
+LIBRARY              : 
+LIST                 : 51 52
+LPAREN               : 16 17 18 27 39 40 41 42
+MAP                  : 
+MINUS                : 20
+MINUS_EQUAL          : 
+MODULE               : 
+MODULE_EQUAL         : 
+NOT                  : 33
+NOT_EQUALS           : 
+OR                   : 31
+PART                 : 
+PARTOF               : 
+PLUS                 : 19 23
+PLUS_EQUAL           : 
+PRINT                : 16 17 18
+QUESTION             : 
+QUOTATION_MARK       : 
+RBRACE               : 
+RBRACKET             : 27 28 39 40 41 42 51 52
+READLINESYNC         : 
+REQUIRED             : 46
+RETURN               : 
+RPAREN               : 16 17 18 27 39 40 41 42
+SEMICOLON            : 9 10 11 12 13 14 15 16 17 18 51 52
+SET                  : 
+SINGLE_QUOTE         : 
+STATIC               : 13 14 15
+STDIN                : 
+STRING               : 47 57
+SUPER                : 
+SWITCH               : 
+THIS                 : 
+THROW                : 
+TIMES                : 21
+TIMES_EQUAL          : 
+TRUE                 : 59
+TRY                  : 
+VAR                  : 12 14
+VOID                 : 40 42
+WHILE                : 
+WITH                 : 
+error                : 
+
+Nonterminals, with rules where they appear
+
+comparison_operator  : 32
+compiler             : 0
+condition            : 29 30 31
+conditions           : 27 30 31
+control_structures   : 5
+else_block           : 26
+expression           : 10 11 12 13 14 15 18 19 19 20 20 21 21 22 22
+function             : 6
+if_block             : 25 26
+list_def             : 7
+parameter            : 43 44
+parameters           : 39 40 44
+print                : 4
+statement            : 2 3
+statement_composed   : 1 3 27 28 39 40 41 42
+type                 : 10 13 39 41 45 46 52
+value                : 17 23 23 24 32 32 33 53 54
+value_list           : 51 52 54
+variable_def         : 8
+
+Parsing method: LALR
+
+state 0
+
+    (0) S' -> . compiler
+    (1) compiler -> . statement_composed
+    (2) statement_composed -> . statement
+    (3) statement_composed -> . statement_composed statement
+    (4) statement -> . print
+    (5) statement -> . control_structures
+    (6) statement -> . function
+    (7) statement -> . list_def
+    (8) statement -> . variable_def
+    (9) statement -> . SEMICOLON
+    (16) print -> . PRINT LPAREN RPAREN SEMICOLON
+    (17) print -> . PRINT LPAREN value RPAREN SEMICOLON
+    (18) print -> . PRINT LPAREN expression RPAREN SEMICOLON
+    (25) control_structures -> . if_block
+    (26) control_structures -> . if_block else_block
+    (39) function -> . type ID LPAREN parameters RPAREN LBRACKET statement_composed RBRACKET
+    (40) function -> . VOID ID LPAREN parameters RPAREN LBRACKET statement_composed RBRACKET
+    (41) function -> . type ID LPAREN RPAREN LBRACKET statement_composed RBRACKET
+    (42) function -> . VOID ID LPAREN RPAREN LBRACKET statement_composed RBRACKET
+    (51) list_def -> . LIST LBRACKET value_list RBRACKET SEMICOLON
+    (52) list_def -> . LIST LESS type GREATER ID ASSIGN LBRACKET value_list RBRACKET SEMICOLON
+    (10) variable_def -> . type ID ASSIGN expression SEMICOLON
+    (11) variable_def -> . DYNAMIC ID ASSIGN expression SEMICOLON
+    (12) variable_def -> . VAR ID ASSIGN expression SEMICOLON
+    (13) variable_def -> . STATIC type ID ASSIGN expression SEMICOLON
+    (14) variable_def -> . STATIC VAR ID ASSIGN expression SEMICOLON
+    (15) variable_def -> . STATIC DYNAMIC ID ASSIGN expression SEMICOLON
+    (27) if_block -> . IF LPAREN conditions RPAREN LBRACKET statement_composed RBRACKET
+    (47) type -> . STRING
+    (48) type -> . INT
+    (49) type -> . DOUBLE
+    (50) type -> . BOOL
+
+    SEMICOLON       shift and go to state 9
+    PRINT           shift and go to state 10
+    VOID            shift and go to state 13
+    LIST            shift and go to state 14
+    DYNAMIC         shift and go to state 15
+    VAR             shift and go to state 16
+    STATIC          shift and go to state 17
+    IF              shift and go to state 18
+    STRING          shift and go to state 19
+    INT             shift and go to state 20
+    DOUBLE          shift and go to state 21
+    BOOL            shift and go to state 22
+
+    compiler                       shift and go to state 1
+    statement_composed             shift and go to state 2
+    statement                      shift and go to state 3
+    print                          shift and go to state 4
+    control_structures             shift and go to state 5
+    function                       shift and go to state 6
+    list_def                       shift and go to state 7
+    variable_def                   shift and go to state 8
+    if_block                       shift and go to state 11
+    type                           shift and go to state 12
+
+state 1
+
+    (0) S' -> compiler .
+
+
+
+state 2
+
+    (1) compiler -> statement_composed .
+    (3) statement_composed -> statement_composed . statement
+    (4) statement -> . print
+    (5) statement -> . control_structures
+    (6) statement -> . function
+    (7) statement -> . list_def
+    (8) statement -> . variable_def
+    (9) statement -> . SEMICOLON
+    (16) print -> . PRINT LPAREN RPAREN SEMICOLON
+    (17) print -> . PRINT LPAREN value RPAREN SEMICOLON
+    (18) print -> . PRINT LPAREN expression RPAREN SEMICOLON
+    (25) control_structures -> . if_block
+    (26) control_structures -> . if_block else_block
+    (39) function -> . type ID LPAREN parameters RPAREN LBRACKET statement_composed RBRACKET
+    (40) function -> . VOID ID LPAREN parameters RPAREN LBRACKET statement_composed RBRACKET
+    (41) function -> . type ID LPAREN RPAREN LBRACKET statement_composed RBRACKET
+    (42) function -> . VOID ID LPAREN RPAREN LBRACKET statement_composed RBRACKET
+    (51) list_def -> . LIST LBRACKET value_list RBRACKET SEMICOLON
+    (52) list_def -> . LIST LESS type GREATER ID ASSIGN LBRACKET value_list RBRACKET SEMICOLON
+    (10) variable_def -> . type ID ASSIGN expression SEMICOLON
+    (11) variable_def -> . DYNAMIC ID ASSIGN expression SEMICOLON
+    (12) variable_def -> . VAR ID ASSIGN expression SEMICOLON
+    (13) variable_def -> . STATIC type ID ASSIGN expression SEMICOLON
+    (14) variable_def -> . STATIC VAR ID ASSIGN expression SEMICOLON
+    (15) variable_def -> . STATIC DYNAMIC ID ASSIGN expression SEMICOLON
+    (27) if_block -> . IF LPAREN conditions RPAREN LBRACKET statement_composed RBRACKET
+    (47) type -> . STRING
+    (48) type -> . INT
+    (49) type -> . DOUBLE
+    (50) type -> . BOOL
+
+    $end            reduce using rule 1 (compiler -> statement_composed .)
+    SEMICOLON       shift and go to state 9
+    PRINT           shift and go to state 10
+    VOID            shift and go to state 13
+    LIST            shift and go to state 14
+    DYNAMIC         shift and go to state 15
+    VAR             shift and go to state 16
+    STATIC          shift and go to state 17
+    IF              shift and go to state 18
+    STRING          shift and go to state 19
+    INT             shift and go to state 20
+    DOUBLE          shift and go to state 21
+    BOOL            shift and go to state 22
+
+    statement                      shift and go to state 23
+    print                          shift and go to state 4
+    control_structures             shift and go to state 5
+    function                       shift and go to state 6
+    list_def                       shift and go to state 7
+    variable_def                   shift and go to state 8
+    if_block                       shift and go to state 11
+    type                           shift and go to state 12
+
+state 3
+
+    (2) statement_composed -> statement .
+
+    SEMICOLON       reduce using rule 2 (statement_composed -> statement .)
+    PRINT           reduce using rule 2 (statement_composed -> statement .)
+    VOID            reduce using rule 2 (statement_composed -> statement .)
+    LIST            reduce using rule 2 (statement_composed -> statement .)
+    DYNAMIC         reduce using rule 2 (statement_composed -> statement .)
+    VAR             reduce using rule 2 (statement_composed -> statement .)
+    STATIC          reduce using rule 2 (statement_composed -> statement .)
+    IF              reduce using rule 2 (statement_composed -> statement .)
+    STRING          reduce using rule 2 (statement_composed -> statement .)
+    INT             reduce using rule 2 (statement_composed -> statement .)
+    DOUBLE          reduce using rule 2 (statement_composed -> statement .)
+    BOOL            reduce using rule 2 (statement_composed -> statement .)
+    $end            reduce using rule 2 (statement_composed -> statement .)
+    RBRACKET        reduce using rule 2 (statement_composed -> statement .)
+
+
+state 4
+
+    (4) statement -> print .
+
+    SEMICOLON       reduce using rule 4 (statement -> print .)
+    PRINT           reduce using rule 4 (statement -> print .)
+    VOID            reduce using rule 4 (statement -> print .)
+    LIST            reduce using rule 4 (statement -> print .)
+    DYNAMIC         reduce using rule 4 (statement -> print .)
+    VAR             reduce using rule 4 (statement -> print .)
+    STATIC          reduce using rule 4 (statement -> print .)
+    IF              reduce using rule 4 (statement -> print .)
+    STRING          reduce using rule 4 (statement -> print .)
+    INT             reduce using rule 4 (statement -> print .)
+    DOUBLE          reduce using rule 4 (statement -> print .)
+    BOOL            reduce using rule 4 (statement -> print .)
+    $end            reduce using rule 4 (statement -> print .)
+    RBRACKET        reduce using rule 4 (statement -> print .)
+
+
+state 5
+
+    (5) statement -> control_structures .
+
+    SEMICOLON       reduce using rule 5 (statement -> control_structures .)
+    PRINT           reduce using rule 5 (statement -> control_structures .)
+    VOID            reduce using rule 5 (statement -> control_structures .)
+    LIST            reduce using rule 5 (statement -> control_structures .)
+    DYNAMIC         reduce using rule 5 (statement -> control_structures .)
+    VAR             reduce using rule 5 (statement -> control_structures .)
+    STATIC          reduce using rule 5 (statement -> control_structures .)
+    IF              reduce using rule 5 (statement -> control_structures .)
+    STRING          reduce using rule 5 (statement -> control_structures .)
+    INT             reduce using rule 5 (statement -> control_structures .)
+    DOUBLE          reduce using rule 5 (statement -> control_structures .)
+    BOOL            reduce using rule 5 (statement -> control_structures .)
+    $end            reduce using rule 5 (statement -> control_structures .)
+    RBRACKET        reduce using rule 5 (statement -> control_structures .)
+
+
+state 6
+
+    (6) statement -> function .
+
+    SEMICOLON       reduce using rule 6 (statement -> function .)
+    PRINT           reduce using rule 6 (statement -> function .)
+    VOID            reduce using rule 6 (statement -> function .)
+    LIST            reduce using rule 6 (statement -> function .)
+    DYNAMIC         reduce using rule 6 (statement -> function .)
+    VAR             reduce using rule 6 (statement -> function .)
+    STATIC          reduce using rule 6 (statement -> function .)
+    IF              reduce using rule 6 (statement -> function .)
+    STRING          reduce using rule 6 (statement -> function .)
+    INT             reduce using rule 6 (statement -> function .)
+    DOUBLE          reduce using rule 6 (statement -> function .)
+    BOOL            reduce using rule 6 (statement -> function .)
+    $end            reduce using rule 6 (statement -> function .)
+    RBRACKET        reduce using rule 6 (statement -> function .)
+
+
+state 7
+
+    (7) statement -> list_def .
+
+    SEMICOLON       reduce using rule 7 (statement -> list_def .)
+    PRINT           reduce using rule 7 (statement -> list_def .)
+    VOID            reduce using rule 7 (statement -> list_def .)
+    LIST            reduce using rule 7 (statement -> list_def .)
+    DYNAMIC         reduce using rule 7 (statement -> list_def .)
+    VAR             reduce using rule 7 (statement -> list_def .)
+    STATIC          reduce using rule 7 (statement -> list_def .)
+    IF              reduce using rule 7 (statement -> list_def .)
+    STRING          reduce using rule 7 (statement -> list_def .)
+    INT             reduce using rule 7 (statement -> list_def .)
+    DOUBLE          reduce using rule 7 (statement -> list_def .)
+    BOOL            reduce using rule 7 (statement -> list_def .)
+    $end            reduce using rule 7 (statement -> list_def .)
+    RBRACKET        reduce using rule 7 (statement -> list_def .)
+
+
+state 8
+
+    (8) statement -> variable_def .
+
+    SEMICOLON       reduce using rule 8 (statement -> variable_def .)
+    PRINT           reduce using rule 8 (statement -> variable_def .)
+    VOID            reduce using rule 8 (statement -> variable_def .)
+    LIST            reduce using rule 8 (statement -> variable_def .)
+    DYNAMIC         reduce using rule 8 (statement -> variable_def .)
+    VAR             reduce using rule 8 (statement -> variable_def .)
+    STATIC          reduce using rule 8 (statement -> variable_def .)
+    IF              reduce using rule 8 (statement -> variable_def .)
+    STRING          reduce using rule 8 (statement -> variable_def .)
+    INT             reduce using rule 8 (statement -> variable_def .)
+    DOUBLE          reduce using rule 8 (statement -> variable_def .)
+    BOOL            reduce using rule 8 (statement -> variable_def .)
+    $end            reduce using rule 8 (statement -> variable_def .)
+    RBRACKET        reduce using rule 8 (statement -> variable_def .)
+
+
+state 9
+
+    (9) statement -> SEMICOLON .
+
+    SEMICOLON       reduce using rule 9 (statement -> SEMICOLON .)
+    PRINT           reduce using rule 9 (statement -> SEMICOLON .)
+    VOID            reduce using rule 9 (statement -> SEMICOLON .)
+    LIST            reduce using rule 9 (statement -> SEMICOLON .)
+    DYNAMIC         reduce using rule 9 (statement -> SEMICOLON .)
+    VAR             reduce using rule 9 (statement -> SEMICOLON .)
+    STATIC          reduce using rule 9 (statement -> SEMICOLON .)
+    IF              reduce using rule 9 (statement -> SEMICOLON .)
+    STRING          reduce using rule 9 (statement -> SEMICOLON .)
+    INT             reduce using rule 9 (statement -> SEMICOLON .)
+    DOUBLE          reduce using rule 9 (statement -> SEMICOLON .)
+    BOOL            reduce using rule 9 (statement -> SEMICOLON .)
+    $end            reduce using rule 9 (statement -> SEMICOLON .)
+    RBRACKET        reduce using rule 9 (statement -> SEMICOLON .)
+
+
+state 10
+
+    (16) print -> PRINT . LPAREN RPAREN SEMICOLON
+    (17) print -> PRINT . LPAREN value RPAREN SEMICOLON
+    (18) print -> PRINT . LPAREN expression RPAREN SEMICOLON
+
+    LPAREN          shift and go to state 24
+
+
+state 11
+
+    (25) control_structures -> if_block .
+    (26) control_structures -> if_block . else_block
+    (28) else_block -> . ELSE LBRACKET statement_composed RBRACKET
+
+    SEMICOLON       reduce using rule 25 (control_structures -> if_block .)
+    PRINT           reduce using rule 25 (control_structures -> if_block .)
+    VOID            reduce using rule 25 (control_structures -> if_block .)
+    LIST            reduce using rule 25 (control_structures -> if_block .)
+    DYNAMIC         reduce using rule 25 (control_structures -> if_block .)
+    VAR             reduce using rule 25 (control_structures -> if_block .)
+    STATIC          reduce using rule 25 (control_structures -> if_block .)
+    IF              reduce using rule 25 (control_structures -> if_block .)
+    STRING          reduce using rule 25 (control_structures -> if_block .)
+    INT             reduce using rule 25 (control_structures -> if_block .)
+    DOUBLE          reduce using rule 25 (control_structures -> if_block .)
+    BOOL            reduce using rule 25 (control_structures -> if_block .)
+    $end            reduce using rule 25 (control_structures -> if_block .)
+    RBRACKET        reduce using rule 25 (control_structures -> if_block .)
+    ELSE            shift and go to state 26
+
+    else_block                     shift and go to state 25
+
+state 12
+
+    (39) function -> type . ID LPAREN parameters RPAREN LBRACKET statement_composed RBRACKET
+    (41) function -> type . ID LPAREN RPAREN LBRACKET statement_composed RBRACKET
+    (10) variable_def -> type . ID ASSIGN expression SEMICOLON
+
+    ID              shift and go to state 27
+
+
+state 13
+
+    (40) function -> VOID . ID LPAREN parameters RPAREN LBRACKET statement_composed RBRACKET
+    (42) function -> VOID . ID LPAREN RPAREN LBRACKET statement_composed RBRACKET
+
+    ID              shift and go to state 28
+
+
+state 14
+
+    (51) list_def -> LIST . LBRACKET value_list RBRACKET SEMICOLON
+    (52) list_def -> LIST . LESS type GREATER ID ASSIGN LBRACKET value_list RBRACKET SEMICOLON
+
+    LBRACKET        shift and go to state 29
+    LESS            shift and go to state 30
+
+
+state 15
+
+    (11) variable_def -> DYNAMIC . ID ASSIGN expression SEMICOLON
+
+    ID              shift and go to state 31
+
+
+state 16
+
+    (12) variable_def -> VAR . ID ASSIGN expression SEMICOLON
+
+    ID              shift and go to state 32
+
+
+state 17
+
+    (13) variable_def -> STATIC . type ID ASSIGN expression SEMICOLON
+    (14) variable_def -> STATIC . VAR ID ASSIGN expression SEMICOLON
+    (15) variable_def -> STATIC . DYNAMIC ID ASSIGN expression SEMICOLON
+    (47) type -> . STRING
+    (48) type -> . INT
+    (49) type -> . DOUBLE
+    (50) type -> . BOOL
+
+    VAR             shift and go to state 34
+    DYNAMIC         shift and go to state 35
+    STRING          shift and go to state 19
+    INT             shift and go to state 20
+    DOUBLE          shift and go to state 21
+    BOOL            shift and go to state 22
+
+    type                           shift and go to state 33
+
+state 18
+
+    (27) if_block -> IF . LPAREN conditions RPAREN LBRACKET statement_composed RBRACKET
+
+    LPAREN          shift and go to state 36
+
+
+state 19
+
+    (47) type -> STRING .
+
+    ID              reduce using rule 47 (type -> STRING .)
+    GREATER         reduce using rule 47 (type -> STRING .)
+
+
+state 20
+
+    (48) type -> INT .
+
+    ID              reduce using rule 48 (type -> INT .)
+    GREATER         reduce using rule 48 (type -> INT .)
+
+
+state 21
+
+    (49) type -> DOUBLE .
+
+    ID              reduce using rule 49 (type -> DOUBLE .)
+    GREATER         reduce using rule 49 (type -> DOUBLE .)
+
+
+state 22
+
+    (50) type -> BOOL .
+
+    ID              reduce using rule 50 (type -> BOOL .)
+    GREATER         reduce using rule 50 (type -> BOOL .)
+
+
+state 23
+
+    (3) statement_composed -> statement_composed statement .
+
+    SEMICOLON       reduce using rule 3 (statement_composed -> statement_composed statement .)
+    PRINT           reduce using rule 3 (statement_composed -> statement_composed statement .)
+    VOID            reduce using rule 3 (statement_composed -> statement_composed statement .)
+    LIST            reduce using rule 3 (statement_composed -> statement_composed statement .)
+    DYNAMIC         reduce using rule 3 (statement_composed -> statement_composed statement .)
+    VAR             reduce using rule 3 (statement_composed -> statement_composed statement .)
+    STATIC          reduce using rule 3 (statement_composed -> statement_composed statement .)
+    IF              reduce using rule 3 (statement_composed -> statement_composed statement .)
+    STRING          reduce using rule 3 (statement_composed -> statement_composed statement .)
+    INT             reduce using rule 3 (statement_composed -> statement_composed statement .)
+    DOUBLE          reduce using rule 3 (statement_composed -> statement_composed statement .)
+    BOOL            reduce using rule 3 (statement_composed -> statement_composed statement .)
+    $end            reduce using rule 3 (statement_composed -> statement_composed statement .)
+    RBRACKET        reduce using rule 3 (statement_composed -> statement_composed statement .)
+
+
+state 24
+
+    (16) print -> PRINT LPAREN . RPAREN SEMICOLON
+    (17) print -> PRINT LPAREN . value RPAREN SEMICOLON
+    (18) print -> PRINT LPAREN . expression RPAREN SEMICOLON
+    (55) value -> . INT
+    (56) value -> . FLOAT
+    (57) value -> . STRING
+    (58) value -> . ID
+    (59) value -> . TRUE
+    (60) value -> . FALSE
+    (19) expression -> . expression PLUS expression
+    (20) expression -> . expression MINUS expression
+    (21) expression -> . expression TIMES expression
+    (22) expression -> . expression DIVIDE expression
+    (23) expression -> . value PLUS value
+    (24) expression -> . value
+
+    RPAREN          shift and go to state 37
+    INT             shift and go to state 40
+    FLOAT           shift and go to state 41
+    STRING          shift and go to state 42
+    ID              shift and go to state 43
+    TRUE            shift and go to state 44
+    FALSE           shift and go to state 45
+
+    value                          shift and go to state 38
+    expression                     shift and go to state 39
+
+state 25
+
+    (26) control_structures -> if_block else_block .
+
+    SEMICOLON       reduce using rule 26 (control_structures -> if_block else_block .)
+    PRINT           reduce using rule 26 (control_structures -> if_block else_block .)
+    VOID            reduce using rule 26 (control_structures -> if_block else_block .)
+    LIST            reduce using rule 26 (control_structures -> if_block else_block .)
+    DYNAMIC         reduce using rule 26 (control_structures -> if_block else_block .)
+    VAR             reduce using rule 26 (control_structures -> if_block else_block .)
+    STATIC          reduce using rule 26 (control_structures -> if_block else_block .)
+    IF              reduce using rule 26 (control_structures -> if_block else_block .)
+    STRING          reduce using rule 26 (control_structures -> if_block else_block .)
+    INT             reduce using rule 26 (control_structures -> if_block else_block .)
+    DOUBLE          reduce using rule 26 (control_structures -> if_block else_block .)
+    BOOL            reduce using rule 26 (control_structures -> if_block else_block .)
+    $end            reduce using rule 26 (control_structures -> if_block else_block .)
+    RBRACKET        reduce using rule 26 (control_structures -> if_block else_block .)
+
+
+state 26
+
+    (28) else_block -> ELSE . LBRACKET statement_composed RBRACKET
+
+    LBRACKET        shift and go to state 46
+
+
+state 27
+
+    (39) function -> type ID . LPAREN parameters RPAREN LBRACKET statement_composed RBRACKET
+    (41) function -> type ID . LPAREN RPAREN LBRACKET statement_composed RBRACKET
+    (10) variable_def -> type ID . ASSIGN expression SEMICOLON
+
+    LPAREN          shift and go to state 47
+    ASSIGN          shift and go to state 48
+
+
+state 28
+
+    (40) function -> VOID ID . LPAREN parameters RPAREN LBRACKET statement_composed RBRACKET
+    (42) function -> VOID ID . LPAREN RPAREN LBRACKET statement_composed RBRACKET
+
+    LPAREN          shift and go to state 49
+
+
+state 29
+
+    (51) list_def -> LIST LBRACKET . value_list RBRACKET SEMICOLON
+    (53) value_list -> . value
+    (54) value_list -> . value_list COMMA value
+    (55) value -> . INT
+    (56) value -> . FLOAT
+    (57) value -> . STRING
+    (58) value -> . ID
+    (59) value -> . TRUE
+    (60) value -> . FALSE
+
+    INT             shift and go to state 40
+    FLOAT           shift and go to state 41
+    STRING          shift and go to state 42
+    ID              shift and go to state 43
+    TRUE            shift and go to state 44
+    FALSE           shift and go to state 45
+
+    value_list                     shift and go to state 50
+    value                          shift and go to state 51
+
+state 30
+
+    (52) list_def -> LIST LESS . type GREATER ID ASSIGN LBRACKET value_list RBRACKET SEMICOLON
+    (47) type -> . STRING
+    (48) type -> . INT
+    (49) type -> . DOUBLE
+    (50) type -> . BOOL
+
+    STRING          shift and go to state 19
+    INT             shift and go to state 20
+    DOUBLE          shift and go to state 21
+    BOOL            shift and go to state 22
+
+    type                           shift and go to state 52
+
+state 31
+
+    (11) variable_def -> DYNAMIC ID . ASSIGN expression SEMICOLON
+
+    ASSIGN          shift and go to state 53
+
+
+state 32
+
+    (12) variable_def -> VAR ID . ASSIGN expression SEMICOLON
+
+    ASSIGN          shift and go to state 54
+
+
+state 33
+
+    (13) variable_def -> STATIC type . ID ASSIGN expression SEMICOLON
+
+    ID              shift and go to state 55
+
+
+state 34
+
+    (14) variable_def -> STATIC VAR . ID ASSIGN expression SEMICOLON
+
+    ID              shift and go to state 56
+
+
+state 35
+
+    (15) variable_def -> STATIC DYNAMIC . ID ASSIGN expression SEMICOLON
+
+    ID              shift and go to state 57
+
+
+state 36
+
+    (27) if_block -> IF LPAREN . conditions RPAREN LBRACKET statement_composed RBRACKET
+    (29) conditions -> . condition
+    (30) conditions -> . conditions AND condition
+    (31) conditions -> . conditions OR condition
+    (32) condition -> . value comparison_operator value
+    (33) condition -> . NOT value
+    (55) value -> . INT
+    (56) value -> . FLOAT
+    (57) value -> . STRING
+    (58) value -> . ID
+    (59) value -> . TRUE
+    (60) value -> . FALSE
+
+    NOT             shift and go to state 61
+    INT             shift and go to state 40
+    FLOAT           shift and go to state 41
+    STRING          shift and go to state 42
+    ID              shift and go to state 43
+    TRUE            shift and go to state 44
+    FALSE           shift and go to state 45
+
+    conditions                     shift and go to state 58
+    condition                      shift and go to state 59
+    value                          shift and go to state 60
+
+state 37
+
+    (16) print -> PRINT LPAREN RPAREN . SEMICOLON
+
+    SEMICOLON       shift and go to state 62
+
+
+state 38
+
+    (17) print -> PRINT LPAREN value . RPAREN SEMICOLON
+    (23) expression -> value . PLUS value
+    (24) expression -> value .
+
+  ! shift/reduce conflict for RPAREN resolved as shift
+  ! shift/reduce conflict for PLUS resolved as shift
+    RPAREN          shift and go to state 63
+    PLUS            shift and go to state 64
+    MINUS           reduce using rule 24 (expression -> value .)
+    TIMES           reduce using rule 24 (expression -> value .)
+    DIVIDE          reduce using rule 24 (expression -> value .)
+
+  ! RPAREN          [ reduce using rule 24 (expression -> value .) ]
+  ! PLUS            [ reduce using rule 24 (expression -> value .) ]
+
+
+state 39
+
+    (18) print -> PRINT LPAREN expression . RPAREN SEMICOLON
+    (19) expression -> expression . PLUS expression
+    (20) expression -> expression . MINUS expression
+    (21) expression -> expression . TIMES expression
+    (22) expression -> expression . DIVIDE expression
+
+    RPAREN          shift and go to state 65
+    PLUS            shift and go to state 66
+    MINUS           shift and go to state 67
+    TIMES           shift and go to state 68
+    DIVIDE          shift and go to state 69
+
+
+state 40
+
+    (55) value -> INT .
+
+    RPAREN          reduce using rule 55 (value -> INT .)
+    PLUS            reduce using rule 55 (value -> INT .)
+    MINUS           reduce using rule 55 (value -> INT .)
+    TIMES           reduce using rule 55 (value -> INT .)
+    DIVIDE          reduce using rule 55 (value -> INT .)
+    RBRACKET        reduce using rule 55 (value -> INT .)
+    COMMA           reduce using rule 55 (value -> INT .)
+    GREATER         reduce using rule 55 (value -> INT .)
+    LESS            reduce using rule 55 (value -> INT .)
+    GREATER_EQUAL   reduce using rule 55 (value -> INT .)
+    LESS_EQUAL      reduce using rule 55 (value -> INT .)
+    EQUALS          reduce using rule 55 (value -> INT .)
+    SEMICOLON       reduce using rule 55 (value -> INT .)
+    AND             reduce using rule 55 (value -> INT .)
+    OR              reduce using rule 55 (value -> INT .)
+
+
+state 41
+
+    (56) value -> FLOAT .
+
+    RPAREN          reduce using rule 56 (value -> FLOAT .)
+    PLUS            reduce using rule 56 (value -> FLOAT .)
+    MINUS           reduce using rule 56 (value -> FLOAT .)
+    TIMES           reduce using rule 56 (value -> FLOAT .)
+    DIVIDE          reduce using rule 56 (value -> FLOAT .)
+    RBRACKET        reduce using rule 56 (value -> FLOAT .)
+    COMMA           reduce using rule 56 (value -> FLOAT .)
+    GREATER         reduce using rule 56 (value -> FLOAT .)
+    LESS            reduce using rule 56 (value -> FLOAT .)
+    GREATER_EQUAL   reduce using rule 56 (value -> FLOAT .)
+    LESS_EQUAL      reduce using rule 56 (value -> FLOAT .)
+    EQUALS          reduce using rule 56 (value -> FLOAT .)
+    SEMICOLON       reduce using rule 56 (value -> FLOAT .)
+    AND             reduce using rule 56 (value -> FLOAT .)
+    OR              reduce using rule 56 (value -> FLOAT .)
+
+
+state 42
+
+    (57) value -> STRING .
+
+    RPAREN          reduce using rule 57 (value -> STRING .)
+    PLUS            reduce using rule 57 (value -> STRING .)
+    MINUS           reduce using rule 57 (value -> STRING .)
+    TIMES           reduce using rule 57 (value -> STRING .)
+    DIVIDE          reduce using rule 57 (value -> STRING .)
+    RBRACKET        reduce using rule 57 (value -> STRING .)
+    COMMA           reduce using rule 57 (value -> STRING .)
+    GREATER         reduce using rule 57 (value -> STRING .)
+    LESS            reduce using rule 57 (value -> STRING .)
+    GREATER_EQUAL   reduce using rule 57 (value -> STRING .)
+    LESS_EQUAL      reduce using rule 57 (value -> STRING .)
+    EQUALS          reduce using rule 57 (value -> STRING .)
+    SEMICOLON       reduce using rule 57 (value -> STRING .)
+    AND             reduce using rule 57 (value -> STRING .)
+    OR              reduce using rule 57 (value -> STRING .)
+
+
+state 43
+
+    (58) value -> ID .
+
+    RPAREN          reduce using rule 58 (value -> ID .)
+    PLUS            reduce using rule 58 (value -> ID .)
+    MINUS           reduce using rule 58 (value -> ID .)
+    TIMES           reduce using rule 58 (value -> ID .)
+    DIVIDE          reduce using rule 58 (value -> ID .)
+    RBRACKET        reduce using rule 58 (value -> ID .)
+    COMMA           reduce using rule 58 (value -> ID .)
+    GREATER         reduce using rule 58 (value -> ID .)
+    LESS            reduce using rule 58 (value -> ID .)
+    GREATER_EQUAL   reduce using rule 58 (value -> ID .)
+    LESS_EQUAL      reduce using rule 58 (value -> ID .)
+    EQUALS          reduce using rule 58 (value -> ID .)
+    SEMICOLON       reduce using rule 58 (value -> ID .)
+    AND             reduce using rule 58 (value -> ID .)
+    OR              reduce using rule 58 (value -> ID .)
+
+
+state 44
+
+    (59) value -> TRUE .
+
+    RPAREN          reduce using rule 59 (value -> TRUE .)
+    PLUS            reduce using rule 59 (value -> TRUE .)
+    MINUS           reduce using rule 59 (value -> TRUE .)
+    TIMES           reduce using rule 59 (value -> TRUE .)
+    DIVIDE          reduce using rule 59 (value -> TRUE .)
+    RBRACKET        reduce using rule 59 (value -> TRUE .)
+    COMMA           reduce using rule 59 (value -> TRUE .)
+    GREATER         reduce using rule 59 (value -> TRUE .)
+    LESS            reduce using rule 59 (value -> TRUE .)
+    GREATER_EQUAL   reduce using rule 59 (value -> TRUE .)
+    LESS_EQUAL      reduce using rule 59 (value -> TRUE .)
+    EQUALS          reduce using rule 59 (value -> TRUE .)
+    SEMICOLON       reduce using rule 59 (value -> TRUE .)
+    AND             reduce using rule 59 (value -> TRUE .)
+    OR              reduce using rule 59 (value -> TRUE .)
+
+
+state 45
+
+    (60) value -> FALSE .
+
+    RPAREN          reduce using rule 60 (value -> FALSE .)
+    PLUS            reduce using rule 60 (value -> FALSE .)
+    MINUS           reduce using rule 60 (value -> FALSE .)
+    TIMES           reduce using rule 60 (value -> FALSE .)
+    DIVIDE          reduce using rule 60 (value -> FALSE .)
+    RBRACKET        reduce using rule 60 (value -> FALSE .)
+    COMMA           reduce using rule 60 (value -> FALSE .)
+    GREATER         reduce using rule 60 (value -> FALSE .)
+    LESS            reduce using rule 60 (value -> FALSE .)
+    GREATER_EQUAL   reduce using rule 60 (value -> FALSE .)
+    LESS_EQUAL      reduce using rule 60 (value -> FALSE .)
+    EQUALS          reduce using rule 60 (value -> FALSE .)
+    SEMICOLON       reduce using rule 60 (value -> FALSE .)
+    AND             reduce using rule 60 (value -> FALSE .)
+    OR              reduce using rule 60 (value -> FALSE .)
+
+
+state 46
+
+    (28) else_block -> ELSE LBRACKET . statement_composed RBRACKET
+    (2) statement_composed -> . statement
+    (3) statement_composed -> . statement_composed statement
+    (4) statement -> . print
+    (5) statement -> . control_structures
+    (6) statement -> . function
+    (7) statement -> . list_def
+    (8) statement -> . variable_def
+    (9) statement -> . SEMICOLON
+    (16) print -> . PRINT LPAREN RPAREN SEMICOLON
+    (17) print -> . PRINT LPAREN value RPAREN SEMICOLON
+    (18) print -> . PRINT LPAREN expression RPAREN SEMICOLON
+    (25) control_structures -> . if_block
+    (26) control_structures -> . if_block else_block
+    (39) function -> . type ID LPAREN parameters RPAREN LBRACKET statement_composed RBRACKET
+    (40) function -> . VOID ID LPAREN parameters RPAREN LBRACKET statement_composed RBRACKET
+    (41) function -> . type ID LPAREN RPAREN LBRACKET statement_composed RBRACKET
+    (42) function -> . VOID ID LPAREN RPAREN LBRACKET statement_composed RBRACKET
+    (51) list_def -> . LIST LBRACKET value_list RBRACKET SEMICOLON
+    (52) list_def -> . LIST LESS type GREATER ID ASSIGN LBRACKET value_list RBRACKET SEMICOLON
+    (10) variable_def -> . type ID ASSIGN expression SEMICOLON
+    (11) variable_def -> . DYNAMIC ID ASSIGN expression SEMICOLON
+    (12) variable_def -> . VAR ID ASSIGN expression SEMICOLON
+    (13) variable_def -> . STATIC type ID ASSIGN expression SEMICOLON
+    (14) variable_def -> . STATIC VAR ID ASSIGN expression SEMICOLON
+    (15) variable_def -> . STATIC DYNAMIC ID ASSIGN expression SEMICOLON
+    (27) if_block -> . IF LPAREN conditions RPAREN LBRACKET statement_composed RBRACKET
+    (47) type -> . STRING
+    (48) type -> . INT
+    (49) type -> . DOUBLE
+    (50) type -> . BOOL
+
+    SEMICOLON       shift and go to state 9
+    PRINT           shift and go to state 10
+    VOID            shift and go to state 13
+    LIST            shift and go to state 14
+    DYNAMIC         shift and go to state 15
+    VAR             shift and go to state 16
+    STATIC          shift and go to state 17
+    IF              shift and go to state 18
+    STRING          shift and go to state 19
+    INT             shift and go to state 20
+    DOUBLE          shift and go to state 21
+    BOOL            shift and go to state 22
+
+    statement_composed             shift and go to state 70
+    statement                      shift and go to state 3
+    print                          shift and go to state 4
+    control_structures             shift and go to state 5
+    function                       shift and go to state 6
+    list_def                       shift and go to state 7
+    variable_def                   shift and go to state 8
+    if_block                       shift and go to state 11
+    type                           shift and go to state 12
+
+state 47
+
+    (39) function -> type ID LPAREN . parameters RPAREN LBRACKET statement_composed RBRACKET
+    (41) function -> type ID LPAREN . RPAREN LBRACKET statement_composed RBRACKET
+    (43) parameters -> . parameter
+    (44) parameters -> . parameters COMMA parameter
+    (45) parameter -> . type ID
+    (46) parameter -> . REQUIRED type ID
+    (47) type -> . STRING
+    (48) type -> . INT
+    (49) type -> . DOUBLE
+    (50) type -> . BOOL
+
+    RPAREN          shift and go to state 73
+    REQUIRED        shift and go to state 75
+    STRING          shift and go to state 19
+    INT             shift and go to state 20
+    DOUBLE          shift and go to state 21
+    BOOL            shift and go to state 22
+
+    type                           shift and go to state 71
+    parameters                     shift and go to state 72
+    parameter                      shift and go to state 74
+
+state 48
+
+    (10) variable_def -> type ID ASSIGN . expression SEMICOLON
+    (19) expression -> . expression PLUS expression
+    (20) expression -> . expression MINUS expression
+    (21) expression -> . expression TIMES expression
+    (22) expression -> . expression DIVIDE expression
+    (23) expression -> . value PLUS value
+    (24) expression -> . value
+    (55) value -> . INT
+    (56) value -> . FLOAT
+    (57) value -> . STRING
+    (58) value -> . ID
+    (59) value -> . TRUE
+    (60) value -> . FALSE
+
+    INT             shift and go to state 40
+    FLOAT           shift and go to state 41
+    STRING          shift and go to state 42
+    ID              shift and go to state 43
+    TRUE            shift and go to state 44
+    FALSE           shift and go to state 45
+
+    expression                     shift and go to state 76
+    value                          shift and go to state 77
+
+state 49
+
+    (40) function -> VOID ID LPAREN . parameters RPAREN LBRACKET statement_composed RBRACKET
+    (42) function -> VOID ID LPAREN . RPAREN LBRACKET statement_composed RBRACKET
+    (43) parameters -> . parameter
+    (44) parameters -> . parameters COMMA parameter
+    (45) parameter -> . type ID
+    (46) parameter -> . REQUIRED type ID
+    (47) type -> . STRING
+    (48) type -> . INT
+    (49) type -> . DOUBLE
+    (50) type -> . BOOL
+
+    RPAREN          shift and go to state 79
+    REQUIRED        shift and go to state 75
+    STRING          shift and go to state 19
+    INT             shift and go to state 20
+    DOUBLE          shift and go to state 21
+    BOOL            shift and go to state 22
+
+    parameters                     shift and go to state 78
+    parameter                      shift and go to state 74
+    type                           shift and go to state 71
+
+state 50
+
+    (51) list_def -> LIST LBRACKET value_list . RBRACKET SEMICOLON
+    (54) value_list -> value_list . COMMA value
+
+    RBRACKET        shift and go to state 80
+    COMMA           shift and go to state 81
+
+
+state 51
+
+    (53) value_list -> value .
+
+    RBRACKET        reduce using rule 53 (value_list -> value .)
+    COMMA           reduce using rule 53 (value_list -> value .)
+
+
+state 52
+
+    (52) list_def -> LIST LESS type . GREATER ID ASSIGN LBRACKET value_list RBRACKET SEMICOLON
+
+    GREATER         shift and go to state 82
+
+
+state 53
+
+    (11) variable_def -> DYNAMIC ID ASSIGN . expression SEMICOLON
+    (19) expression -> . expression PLUS expression
+    (20) expression -> . expression MINUS expression
+    (21) expression -> . expression TIMES expression
+    (22) expression -> . expression DIVIDE expression
+    (23) expression -> . value PLUS value
+    (24) expression -> . value
+    (55) value -> . INT
+    (56) value -> . FLOAT
+    (57) value -> . STRING
+    (58) value -> . ID
+    (59) value -> . TRUE
+    (60) value -> . FALSE
+
+    INT             shift and go to state 40
+    FLOAT           shift and go to state 41
+    STRING          shift and go to state 42
+    ID              shift and go to state 43
+    TRUE            shift and go to state 44
+    FALSE           shift and go to state 45
+
+    expression                     shift and go to state 83
+    value                          shift and go to state 77
+
+state 54
+
+    (12) variable_def -> VAR ID ASSIGN . expression SEMICOLON
+    (19) expression -> . expression PLUS expression
+    (20) expression -> . expression MINUS expression
+    (21) expression -> . expression TIMES expression
+    (22) expression -> . expression DIVIDE expression
+    (23) expression -> . value PLUS value
+    (24) expression -> . value
+    (55) value -> . INT
+    (56) value -> . FLOAT
+    (57) value -> . STRING
+    (58) value -> . ID
+    (59) value -> . TRUE
+    (60) value -> . FALSE
+
+    INT             shift and go to state 40
+    FLOAT           shift and go to state 41
+    STRING          shift and go to state 42
+    ID              shift and go to state 43
+    TRUE            shift and go to state 44
+    FALSE           shift and go to state 45
+
+    expression                     shift and go to state 84
+    value                          shift and go to state 77
+
+state 55
+
+    (13) variable_def -> STATIC type ID . ASSIGN expression SEMICOLON
+
+    ASSIGN          shift and go to state 85
+
+
+state 56
+
+    (14) variable_def -> STATIC VAR ID . ASSIGN expression SEMICOLON
+
+    ASSIGN          shift and go to state 86
+
+
+state 57
+
+    (15) variable_def -> STATIC DYNAMIC ID . ASSIGN expression SEMICOLON
+
+    ASSIGN          shift and go to state 87
+
+
+state 58
+
+    (27) if_block -> IF LPAREN conditions . RPAREN LBRACKET statement_composed RBRACKET
+    (30) conditions -> conditions . AND condition
+    (31) conditions -> conditions . OR condition
+
+    RPAREN          shift and go to state 88
+    AND             shift and go to state 89
+    OR              shift and go to state 90
+
+
+state 59
+
+    (29) conditions -> condition .
+
+    RPAREN          reduce using rule 29 (conditions -> condition .)
+    AND             reduce using rule 29 (conditions -> condition .)
+    OR              reduce using rule 29 (conditions -> condition .)
+
+
+state 60
+
+    (32) condition -> value . comparison_operator value
+    (34) comparison_operator -> . GREATER
+    (35) comparison_operator -> . LESS
+    (36) comparison_operator -> . GREATER_EQUAL
+    (37) comparison_operator -> . LESS_EQUAL
+    (38) comparison_operator -> . EQUALS
+
+    GREATER         shift and go to state 92
+    LESS            shift and go to state 93
+    GREATER_EQUAL   shift and go to state 94
+    LESS_EQUAL      shift and go to state 95
+    EQUALS          shift and go to state 96
+
+    comparison_operator            shift and go to state 91
+
+state 61
+
+    (33) condition -> NOT . value
+    (55) value -> . INT
+    (56) value -> . FLOAT
+    (57) value -> . STRING
+    (58) value -> . ID
+    (59) value -> . TRUE
+    (60) value -> . FALSE
+
+    INT             shift and go to state 40
+    FLOAT           shift and go to state 41
+    STRING          shift and go to state 42
+    ID              shift and go to state 43
+    TRUE            shift and go to state 44
+    FALSE           shift and go to state 45
+
+    value                          shift and go to state 97
+
+state 62
+
+    (16) print -> PRINT LPAREN RPAREN SEMICOLON .
+
+    SEMICOLON       reduce using rule 16 (print -> PRINT LPAREN RPAREN SEMICOLON .)
+    PRINT           reduce using rule 16 (print -> PRINT LPAREN RPAREN SEMICOLON .)
+    VOID            reduce using rule 16 (print -> PRINT LPAREN RPAREN SEMICOLON .)
+    LIST            reduce using rule 16 (print -> PRINT LPAREN RPAREN SEMICOLON .)
+    DYNAMIC         reduce using rule 16 (print -> PRINT LPAREN RPAREN SEMICOLON .)
+    VAR             reduce using rule 16 (print -> PRINT LPAREN RPAREN SEMICOLON .)
+    STATIC          reduce using rule 16 (print -> PRINT LPAREN RPAREN SEMICOLON .)
+    IF              reduce using rule 16 (print -> PRINT LPAREN RPAREN SEMICOLON .)
+    STRING          reduce using rule 16 (print -> PRINT LPAREN RPAREN SEMICOLON .)
+    INT             reduce using rule 16 (print -> PRINT LPAREN RPAREN SEMICOLON .)
+    DOUBLE          reduce using rule 16 (print -> PRINT LPAREN RPAREN SEMICOLON .)
+    BOOL            reduce using rule 16 (print -> PRINT LPAREN RPAREN SEMICOLON .)
+    $end            reduce using rule 16 (print -> PRINT LPAREN RPAREN SEMICOLON .)
+    RBRACKET        reduce using rule 16 (print -> PRINT LPAREN RPAREN SEMICOLON .)
+
+
+state 63
+
+    (17) print -> PRINT LPAREN value RPAREN . SEMICOLON
+
+    SEMICOLON       shift and go to state 98
+
+
+state 64
+
+    (23) expression -> value PLUS . value
+    (55) value -> . INT
+    (56) value -> . FLOAT
+    (57) value -> . STRING
+    (58) value -> . ID
+    (59) value -> . TRUE
+    (60) value -> . FALSE
+
+    INT             shift and go to state 40
+    FLOAT           shift and go to state 41
+    STRING          shift and go to state 42
+    ID              shift and go to state 43
+    TRUE            shift and go to state 44
+    FALSE           shift and go to state 45
+
+    value                          shift and go to state 99
+
+state 65
+
+    (18) print -> PRINT LPAREN expression RPAREN . SEMICOLON
+
+    SEMICOLON       shift and go to state 100
+
+
+state 66
+
+    (19) expression -> expression PLUS . expression
+    (19) expression -> . expression PLUS expression
+    (20) expression -> . expression MINUS expression
+    (21) expression -> . expression TIMES expression
+    (22) expression -> . expression DIVIDE expression
+    (23) expression -> . value PLUS value
+    (24) expression -> . value
+    (55) value -> . INT
+    (56) value -> . FLOAT
+    (57) value -> . STRING
+    (58) value -> . ID
+    (59) value -> . TRUE
+    (60) value -> . FALSE
+
+    INT             shift and go to state 40
+    FLOAT           shift and go to state 41
+    STRING          shift and go to state 42
+    ID              shift and go to state 43
+    TRUE            shift and go to state 44
+    FALSE           shift and go to state 45
+
+    expression                     shift and go to state 101
+    value                          shift and go to state 77
+
+state 67
+
+    (20) expression -> expression MINUS . expression
+    (19) expression -> . expression PLUS expression
+    (20) expression -> . expression MINUS expression
+    (21) expression -> . expression TIMES expression
+    (22) expression -> . expression DIVIDE expression
+    (23) expression -> . value PLUS value
+    (24) expression -> . value
+    (55) value -> . INT
+    (56) value -> . FLOAT
+    (57) value -> . STRING
+    (58) value -> . ID
+    (59) value -> . TRUE
+    (60) value -> . FALSE
+
+    INT             shift and go to state 40
+    FLOAT           shift and go to state 41
+    STRING          shift and go to state 42
+    ID              shift and go to state 43
+    TRUE            shift and go to state 44
+    FALSE           shift and go to state 45
+
+    expression                     shift and go to state 102
+    value                          shift and go to state 77
+
+state 68
+
+    (21) expression -> expression TIMES . expression
+    (19) expression -> . expression PLUS expression
+    (20) expression -> . expression MINUS expression
+    (21) expression -> . expression TIMES expression
+    (22) expression -> . expression DIVIDE expression
+    (23) expression -> . value PLUS value
+    (24) expression -> . value
+    (55) value -> . INT
+    (56) value -> . FLOAT
+    (57) value -> . STRING
+    (58) value -> . ID
+    (59) value -> . TRUE
+    (60) value -> . FALSE
+
+    INT             shift and go to state 40
+    FLOAT           shift and go to state 41
+    STRING          shift and go to state 42
+    ID              shift and go to state 43
+    TRUE            shift and go to state 44
+    FALSE           shift and go to state 45
+
+    expression                     shift and go to state 103
+    value                          shift and go to state 77
+
+state 69
+
+    (22) expression -> expression DIVIDE . expression
+    (19) expression -> . expression PLUS expression
+    (20) expression -> . expression MINUS expression
+    (21) expression -> . expression TIMES expression
+    (22) expression -> . expression DIVIDE expression
+    (23) expression -> . value PLUS value
+    (24) expression -> . value
+    (55) value -> . INT
+    (56) value -> . FLOAT
+    (57) value -> . STRING
+    (58) value -> . ID
+    (59) value -> . TRUE
+    (60) value -> . FALSE
+
+    INT             shift and go to state 40
+    FLOAT           shift and go to state 41
+    STRING          shift and go to state 42
+    ID              shift and go to state 43
+    TRUE            shift and go to state 44
+    FALSE           shift and go to state 45
+
+    expression                     shift and go to state 104
+    value                          shift and go to state 77
+
+state 70
+
+    (28) else_block -> ELSE LBRACKET statement_composed . RBRACKET
+    (3) statement_composed -> statement_composed . statement
+    (4) statement -> . print
+    (5) statement -> . control_structures
+    (6) statement -> . function
+    (7) statement -> . list_def
+    (8) statement -> . variable_def
+    (9) statement -> . SEMICOLON
+    (16) print -> . PRINT LPAREN RPAREN SEMICOLON
+    (17) print -> . PRINT LPAREN value RPAREN SEMICOLON
+    (18) print -> . PRINT LPAREN expression RPAREN SEMICOLON
+    (25) control_structures -> . if_block
+    (26) control_structures -> . if_block else_block
+    (39) function -> . type ID LPAREN parameters RPAREN LBRACKET statement_composed RBRACKET
+    (40) function -> . VOID ID LPAREN parameters RPAREN LBRACKET statement_composed RBRACKET
+    (41) function -> . type ID LPAREN RPAREN LBRACKET statement_composed RBRACKET
+    (42) function -> . VOID ID LPAREN RPAREN LBRACKET statement_composed RBRACKET
+    (51) list_def -> . LIST LBRACKET value_list RBRACKET SEMICOLON
+    (52) list_def -> . LIST LESS type GREATER ID ASSIGN LBRACKET value_list RBRACKET SEMICOLON
+    (10) variable_def -> . type ID ASSIGN expression SEMICOLON
+    (11) variable_def -> . DYNAMIC ID ASSIGN expression SEMICOLON
+    (12) variable_def -> . VAR ID ASSIGN expression SEMICOLON
+    (13) variable_def -> . STATIC type ID ASSIGN expression SEMICOLON
+    (14) variable_def -> . STATIC VAR ID ASSIGN expression SEMICOLON
+    (15) variable_def -> . STATIC DYNAMIC ID ASSIGN expression SEMICOLON
+    (27) if_block -> . IF LPAREN conditions RPAREN LBRACKET statement_composed RBRACKET
+    (47) type -> . STRING
+    (48) type -> . INT
+    (49) type -> . DOUBLE
+    (50) type -> . BOOL
+
+    RBRACKET        shift and go to state 105
+    SEMICOLON       shift and go to state 9
+    PRINT           shift and go to state 10
+    VOID            shift and go to state 13
+    LIST            shift and go to state 14
+    DYNAMIC         shift and go to state 15
+    VAR             shift and go to state 16
+    STATIC          shift and go to state 17
+    IF              shift and go to state 18
+    STRING          shift and go to state 19
+    INT             shift and go to state 20
+    DOUBLE          shift and go to state 21
+    BOOL            shift and go to state 22
+
+    statement                      shift and go to state 23
+    print                          shift and go to state 4
+    control_structures             shift and go to state 5
+    function                       shift and go to state 6
+    list_def                       shift and go to state 7
+    variable_def                   shift and go to state 8
+    if_block                       shift and go to state 11
+    type                           shift and go to state 12
+
+state 71
+
+    (45) parameter -> type . ID
+
+    ID              shift and go to state 106
+
+
+state 72
+
+    (39) function -> type ID LPAREN parameters . RPAREN LBRACKET statement_composed RBRACKET
+    (44) parameters -> parameters . COMMA parameter
+
+    RPAREN          shift and go to state 107
+    COMMA           shift and go to state 108
+
+
+state 73
+
+    (41) function -> type ID LPAREN RPAREN . LBRACKET statement_composed RBRACKET
+
+    LBRACKET        shift and go to state 109
+
+
+state 74
+
+    (43) parameters -> parameter .
+
+    RPAREN          reduce using rule 43 (parameters -> parameter .)
+    COMMA           reduce using rule 43 (parameters -> parameter .)
+
+
+state 75
+
+    (46) parameter -> REQUIRED . type ID
+    (47) type -> . STRING
+    (48) type -> . INT
+    (49) type -> . DOUBLE
+    (50) type -> . BOOL
+
+    STRING          shift and go to state 19
+    INT             shift and go to state 20
+    DOUBLE          shift and go to state 21
+    BOOL            shift and go to state 22
+
+    type                           shift and go to state 110
+
+state 76
+
+    (10) variable_def -> type ID ASSIGN expression . SEMICOLON
+    (19) expression -> expression . PLUS expression
+    (20) expression -> expression . MINUS expression
+    (21) expression -> expression . TIMES expression
+    (22) expression -> expression . DIVIDE expression
+
+    SEMICOLON       shift and go to state 111
+    PLUS            shift and go to state 66
+    MINUS           shift and go to state 67
+    TIMES           shift and go to state 68
+    DIVIDE          shift and go to state 69
+
+
+state 77
+
+    (23) expression -> value . PLUS value
+    (24) expression -> value .
+
+  ! shift/reduce conflict for PLUS resolved as shift
+    PLUS            shift and go to state 64
+    SEMICOLON       reduce using rule 24 (expression -> value .)
+    MINUS           reduce using rule 24 (expression -> value .)
+    TIMES           reduce using rule 24 (expression -> value .)
+    DIVIDE          reduce using rule 24 (expression -> value .)
+    RPAREN          reduce using rule 24 (expression -> value .)
+
+  ! PLUS            [ reduce using rule 24 (expression -> value .) ]
+
+
+state 78
+
+    (40) function -> VOID ID LPAREN parameters . RPAREN LBRACKET statement_composed RBRACKET
+    (44) parameters -> parameters . COMMA parameter
+
+    RPAREN          shift and go to state 112
+    COMMA           shift and go to state 108
+
+
+state 79
+
+    (42) function -> VOID ID LPAREN RPAREN . LBRACKET statement_composed RBRACKET
+
+    LBRACKET        shift and go to state 113
+
+
+state 80
+
+    (51) list_def -> LIST LBRACKET value_list RBRACKET . SEMICOLON
+
+    SEMICOLON       shift and go to state 114
+
+
+state 81
+
+    (54) value_list -> value_list COMMA . value
+    (55) value -> . INT
+    (56) value -> . FLOAT
+    (57) value -> . STRING
+    (58) value -> . ID
+    (59) value -> . TRUE
+    (60) value -> . FALSE
+
+    INT             shift and go to state 40
+    FLOAT           shift and go to state 41
+    STRING          shift and go to state 42
+    ID              shift and go to state 43
+    TRUE            shift and go to state 44
+    FALSE           shift and go to state 45
+
+    value                          shift and go to state 115
+
+state 82
+
+    (52) list_def -> LIST LESS type GREATER . ID ASSIGN LBRACKET value_list RBRACKET SEMICOLON
+
+    ID              shift and go to state 116
+
+
+state 83
+
+    (11) variable_def -> DYNAMIC ID ASSIGN expression . SEMICOLON
+    (19) expression -> expression . PLUS expression
+    (20) expression -> expression . MINUS expression
+    (21) expression -> expression . TIMES expression
+    (22) expression -> expression . DIVIDE expression
+
+    SEMICOLON       shift and go to state 117
+    PLUS            shift and go to state 66
+    MINUS           shift and go to state 67
+    TIMES           shift and go to state 68
+    DIVIDE          shift and go to state 69
+
+
+state 84
+
+    (12) variable_def -> VAR ID ASSIGN expression . SEMICOLON
+    (19) expression -> expression . PLUS expression
+    (20) expression -> expression . MINUS expression
+    (21) expression -> expression . TIMES expression
+    (22) expression -> expression . DIVIDE expression
+
+    SEMICOLON       shift and go to state 118
+    PLUS            shift and go to state 66
+    MINUS           shift and go to state 67
+    TIMES           shift and go to state 68
+    DIVIDE          shift and go to state 69
+
+
+state 85
+
+    (13) variable_def -> STATIC type ID ASSIGN . expression SEMICOLON
+    (19) expression -> . expression PLUS expression
+    (20) expression -> . expression MINUS expression
+    (21) expression -> . expression TIMES expression
+    (22) expression -> . expression DIVIDE expression
+    (23) expression -> . value PLUS value
+    (24) expression -> . value
+    (55) value -> . INT
+    (56) value -> . FLOAT
+    (57) value -> . STRING
+    (58) value -> . ID
+    (59) value -> . TRUE
+    (60) value -> . FALSE
+
+    INT             shift and go to state 40
+    FLOAT           shift and go to state 41
+    STRING          shift and go to state 42
+    ID              shift and go to state 43
+    TRUE            shift and go to state 44
+    FALSE           shift and go to state 45
+
+    expression                     shift and go to state 119
+    value                          shift and go to state 77
+
+state 86
+
+    (14) variable_def -> STATIC VAR ID ASSIGN . expression SEMICOLON
+    (19) expression -> . expression PLUS expression
+    (20) expression -> . expression MINUS expression
+    (21) expression -> . expression TIMES expression
+    (22) expression -> . expression DIVIDE expression
+    (23) expression -> . value PLUS value
+    (24) expression -> . value
+    (55) value -> . INT
+    (56) value -> . FLOAT
+    (57) value -> . STRING
+    (58) value -> . ID
+    (59) value -> . TRUE
+    (60) value -> . FALSE
+
+    INT             shift and go to state 40
+    FLOAT           shift and go to state 41
+    STRING          shift and go to state 42
+    ID              shift and go to state 43
+    TRUE            shift and go to state 44
+    FALSE           shift and go to state 45
+
+    expression                     shift and go to state 120
+    value                          shift and go to state 77
+
+state 87
+
+    (15) variable_def -> STATIC DYNAMIC ID ASSIGN . expression SEMICOLON
+    (19) expression -> . expression PLUS expression
+    (20) expression -> . expression MINUS expression
+    (21) expression -> . expression TIMES expression
+    (22) expression -> . expression DIVIDE expression
+    (23) expression -> . value PLUS value
+    (24) expression -> . value
+    (55) value -> . INT
+    (56) value -> . FLOAT
+    (57) value -> . STRING
+    (58) value -> . ID
+    (59) value -> . TRUE
+    (60) value -> . FALSE
+
+    INT             shift and go to state 40
+    FLOAT           shift and go to state 41
+    STRING          shift and go to state 42
+    ID              shift and go to state 43
+    TRUE            shift and go to state 44
+    FALSE           shift and go to state 45
+
+    expression                     shift and go to state 121
+    value                          shift and go to state 77
+
+state 88
+
+    (27) if_block -> IF LPAREN conditions RPAREN . LBRACKET statement_composed RBRACKET
+
+    LBRACKET        shift and go to state 122
+
+
+state 89
+
+    (30) conditions -> conditions AND . condition
+    (32) condition -> . value comparison_operator value
+    (33) condition -> . NOT value
+    (55) value -> . INT
+    (56) value -> . FLOAT
+    (57) value -> . STRING
+    (58) value -> . ID
+    (59) value -> . TRUE
+    (60) value -> . FALSE
+
+    NOT             shift and go to state 61
+    INT             shift and go to state 40
+    FLOAT           shift and go to state 41
+    STRING          shift and go to state 42
+    ID              shift and go to state 43
+    TRUE            shift and go to state 44
+    FALSE           shift and go to state 45
+
+    condition                      shift and go to state 123
+    value                          shift and go to state 60
+
+state 90
+
+    (31) conditions -> conditions OR . condition
+    (32) condition -> . value comparison_operator value
+    (33) condition -> . NOT value
+    (55) value -> . INT
+    (56) value -> . FLOAT
+    (57) value -> . STRING
+    (58) value -> . ID
+    (59) value -> . TRUE
+    (60) value -> . FALSE
+
+    NOT             shift and go to state 61
+    INT             shift and go to state 40
+    FLOAT           shift and go to state 41
+    STRING          shift and go to state 42
+    ID              shift and go to state 43
+    TRUE            shift and go to state 44
+    FALSE           shift and go to state 45
+
+    condition                      shift and go to state 124
+    value                          shift and go to state 60
+
+state 91
+
+    (32) condition -> value comparison_operator . value
+    (55) value -> . INT
+    (56) value -> . FLOAT
+    (57) value -> . STRING
+    (58) value -> . ID
+    (59) value -> . TRUE
+    (60) value -> . FALSE
+
+    INT             shift and go to state 40
+    FLOAT           shift and go to state 41
+    STRING          shift and go to state 42
+    ID              shift and go to state 43
+    TRUE            shift and go to state 44
+    FALSE           shift and go to state 45
+
+    value                          shift and go to state 125
+
+state 92
+
+    (34) comparison_operator -> GREATER .
+
+    INT             reduce using rule 34 (comparison_operator -> GREATER .)
+    FLOAT           reduce using rule 34 (comparison_operator -> GREATER .)
+    STRING          reduce using rule 34 (comparison_operator -> GREATER .)
+    ID              reduce using rule 34 (comparison_operator -> GREATER .)
+    TRUE            reduce using rule 34 (comparison_operator -> GREATER .)
+    FALSE           reduce using rule 34 (comparison_operator -> GREATER .)
+
+
+state 93
+
+    (35) comparison_operator -> LESS .
+
+    INT             reduce using rule 35 (comparison_operator -> LESS .)
+    FLOAT           reduce using rule 35 (comparison_operator -> LESS .)
+    STRING          reduce using rule 35 (comparison_operator -> LESS .)
+    ID              reduce using rule 35 (comparison_operator -> LESS .)
+    TRUE            reduce using rule 35 (comparison_operator -> LESS .)
+    FALSE           reduce using rule 35 (comparison_operator -> LESS .)
+
+
+state 94
+
+    (36) comparison_operator -> GREATER_EQUAL .
+
+    INT             reduce using rule 36 (comparison_operator -> GREATER_EQUAL .)
+    FLOAT           reduce using rule 36 (comparison_operator -> GREATER_EQUAL .)
+    STRING          reduce using rule 36 (comparison_operator -> GREATER_EQUAL .)
+    ID              reduce using rule 36 (comparison_operator -> GREATER_EQUAL .)
+    TRUE            reduce using rule 36 (comparison_operator -> GREATER_EQUAL .)
+    FALSE           reduce using rule 36 (comparison_operator -> GREATER_EQUAL .)
+
+
+state 95
+
+    (37) comparison_operator -> LESS_EQUAL .
+
+    INT             reduce using rule 37 (comparison_operator -> LESS_EQUAL .)
+    FLOAT           reduce using rule 37 (comparison_operator -> LESS_EQUAL .)
+    STRING          reduce using rule 37 (comparison_operator -> LESS_EQUAL .)
+    ID              reduce using rule 37 (comparison_operator -> LESS_EQUAL .)
+    TRUE            reduce using rule 37 (comparison_operator -> LESS_EQUAL .)
+    FALSE           reduce using rule 37 (comparison_operator -> LESS_EQUAL .)
+
+
+state 96
+
+    (38) comparison_operator -> EQUALS .
+
+    INT             reduce using rule 38 (comparison_operator -> EQUALS .)
+    FLOAT           reduce using rule 38 (comparison_operator -> EQUALS .)
+    STRING          reduce using rule 38 (comparison_operator -> EQUALS .)
+    ID              reduce using rule 38 (comparison_operator -> EQUALS .)
+    TRUE            reduce using rule 38 (comparison_operator -> EQUALS .)
+    FALSE           reduce using rule 38 (comparison_operator -> EQUALS .)
+
+
+state 97
+
+    (33) condition -> NOT value .
+
+    RPAREN          reduce using rule 33 (condition -> NOT value .)
+    AND             reduce using rule 33 (condition -> NOT value .)
+    OR              reduce using rule 33 (condition -> NOT value .)
+
+
+state 98
+
+    (17) print -> PRINT LPAREN value RPAREN SEMICOLON .
+
+    SEMICOLON       reduce using rule 17 (print -> PRINT LPAREN value RPAREN SEMICOLON .)
+    PRINT           reduce using rule 17 (print -> PRINT LPAREN value RPAREN SEMICOLON .)
+    VOID            reduce using rule 17 (print -> PRINT LPAREN value RPAREN SEMICOLON .)
+    LIST            reduce using rule 17 (print -> PRINT LPAREN value RPAREN SEMICOLON .)
+    DYNAMIC         reduce using rule 17 (print -> PRINT LPAREN value RPAREN SEMICOLON .)
+    VAR             reduce using rule 17 (print -> PRINT LPAREN value RPAREN SEMICOLON .)
+    STATIC          reduce using rule 17 (print -> PRINT LPAREN value RPAREN SEMICOLON .)
+    IF              reduce using rule 17 (print -> PRINT LPAREN value RPAREN SEMICOLON .)
+    STRING          reduce using rule 17 (print -> PRINT LPAREN value RPAREN SEMICOLON .)
+    INT             reduce using rule 17 (print -> PRINT LPAREN value RPAREN SEMICOLON .)
+    DOUBLE          reduce using rule 17 (print -> PRINT LPAREN value RPAREN SEMICOLON .)
+    BOOL            reduce using rule 17 (print -> PRINT LPAREN value RPAREN SEMICOLON .)
+    $end            reduce using rule 17 (print -> PRINT LPAREN value RPAREN SEMICOLON .)
+    RBRACKET        reduce using rule 17 (print -> PRINT LPAREN value RPAREN SEMICOLON .)
+
+
+state 99
+
+    (23) expression -> value PLUS value .
+
+    RPAREN          reduce using rule 23 (expression -> value PLUS value .)
+    PLUS            reduce using rule 23 (expression -> value PLUS value .)
+    MINUS           reduce using rule 23 (expression -> value PLUS value .)
+    TIMES           reduce using rule 23 (expression -> value PLUS value .)
+    DIVIDE          reduce using rule 23 (expression -> value PLUS value .)
+    SEMICOLON       reduce using rule 23 (expression -> value PLUS value .)
+
+
+state 100
+
+    (18) print -> PRINT LPAREN expression RPAREN SEMICOLON .
+
+    SEMICOLON       reduce using rule 18 (print -> PRINT LPAREN expression RPAREN SEMICOLON .)
+    PRINT           reduce using rule 18 (print -> PRINT LPAREN expression RPAREN SEMICOLON .)
+    VOID            reduce using rule 18 (print -> PRINT LPAREN expression RPAREN SEMICOLON .)
+    LIST            reduce using rule 18 (print -> PRINT LPAREN expression RPAREN SEMICOLON .)
+    DYNAMIC         reduce using rule 18 (print -> PRINT LPAREN expression RPAREN SEMICOLON .)
+    VAR             reduce using rule 18 (print -> PRINT LPAREN expression RPAREN SEMICOLON .)
+    STATIC          reduce using rule 18 (print -> PRINT LPAREN expression RPAREN SEMICOLON .)
+    IF              reduce using rule 18 (print -> PRINT LPAREN expression RPAREN SEMICOLON .)
+    STRING          reduce using rule 18 (print -> PRINT LPAREN expression RPAREN SEMICOLON .)
+    INT             reduce using rule 18 (print -> PRINT LPAREN expression RPAREN SEMICOLON .)
+    DOUBLE          reduce using rule 18 (print -> PRINT LPAREN expression RPAREN SEMICOLON .)
+    BOOL            reduce using rule 18 (print -> PRINT LPAREN expression RPAREN SEMICOLON .)
+    $end            reduce using rule 18 (print -> PRINT LPAREN expression RPAREN SEMICOLON .)
+    RBRACKET        reduce using rule 18 (print -> PRINT LPAREN expression RPAREN SEMICOLON .)
+
+
+state 101
+
+    (19) expression -> expression PLUS expression .
+    (19) expression -> expression . PLUS expression
+    (20) expression -> expression . MINUS expression
+    (21) expression -> expression . TIMES expression
+    (22) expression -> expression . DIVIDE expression
+
+  ! shift/reduce conflict for PLUS resolved as shift
+  ! shift/reduce conflict for MINUS resolved as shift
+  ! shift/reduce conflict for TIMES resolved as shift
+  ! shift/reduce conflict for DIVIDE resolved as shift
+    RPAREN          reduce using rule 19 (expression -> expression PLUS expression .)
+    SEMICOLON       reduce using rule 19 (expression -> expression PLUS expression .)
+    PLUS            shift and go to state 66
+    MINUS           shift and go to state 67
+    TIMES           shift and go to state 68
+    DIVIDE          shift and go to state 69
+
+  ! PLUS            [ reduce using rule 19 (expression -> expression PLUS expression .) ]
+  ! MINUS           [ reduce using rule 19 (expression -> expression PLUS expression .) ]
+  ! TIMES           [ reduce using rule 19 (expression -> expression PLUS expression .) ]
+  ! DIVIDE          [ reduce using rule 19 (expression -> expression PLUS expression .) ]
+
+
+state 102
+
+    (20) expression -> expression MINUS expression .
+    (19) expression -> expression . PLUS expression
+    (20) expression -> expression . MINUS expression
+    (21) expression -> expression . TIMES expression
+    (22) expression -> expression . DIVIDE expression
+
+  ! shift/reduce conflict for PLUS resolved as shift
+  ! shift/reduce conflict for MINUS resolved as shift
+  ! shift/reduce conflict for TIMES resolved as shift
+  ! shift/reduce conflict for DIVIDE resolved as shift
+    RPAREN          reduce using rule 20 (expression -> expression MINUS expression .)
+    SEMICOLON       reduce using rule 20 (expression -> expression MINUS expression .)
+    PLUS            shift and go to state 66
+    MINUS           shift and go to state 67
+    TIMES           shift and go to state 68
+    DIVIDE          shift and go to state 69
+
+  ! PLUS            [ reduce using rule 20 (expression -> expression MINUS expression .) ]
+  ! MINUS           [ reduce using rule 20 (expression -> expression MINUS expression .) ]
+  ! TIMES           [ reduce using rule 20 (expression -> expression MINUS expression .) ]
+  ! DIVIDE          [ reduce using rule 20 (expression -> expression MINUS expression .) ]
+
+
+state 103
+
+    (21) expression -> expression TIMES expression .
+    (19) expression -> expression . PLUS expression
+    (20) expression -> expression . MINUS expression
+    (21) expression -> expression . TIMES expression
+    (22) expression -> expression . DIVIDE expression
+
+  ! shift/reduce conflict for PLUS resolved as shift
+  ! shift/reduce conflict for MINUS resolved as shift
+  ! shift/reduce conflict for TIMES resolved as shift
+  ! shift/reduce conflict for DIVIDE resolved as shift
+    RPAREN          reduce using rule 21 (expression -> expression TIMES expression .)
+    SEMICOLON       reduce using rule 21 (expression -> expression TIMES expression .)
+    PLUS            shift and go to state 66
+    MINUS           shift and go to state 67
+    TIMES           shift and go to state 68
+    DIVIDE          shift and go to state 69
+
+  ! PLUS            [ reduce using rule 21 (expression -> expression TIMES expression .) ]
+  ! MINUS           [ reduce using rule 21 (expression -> expression TIMES expression .) ]
+  ! TIMES           [ reduce using rule 21 (expression -> expression TIMES expression .) ]
+  ! DIVIDE          [ reduce using rule 21 (expression -> expression TIMES expression .) ]
+
+
+state 104
+
+    (22) expression -> expression DIVIDE expression .
+    (19) expression -> expression . PLUS expression
+    (20) expression -> expression . MINUS expression
+    (21) expression -> expression . TIMES expression
+    (22) expression -> expression . DIVIDE expression
+
+  ! shift/reduce conflict for PLUS resolved as shift
+  ! shift/reduce conflict for MINUS resolved as shift
+  ! shift/reduce conflict for TIMES resolved as shift
+  ! shift/reduce conflict for DIVIDE resolved as shift
+    RPAREN          reduce using rule 22 (expression -> expression DIVIDE expression .)
+    SEMICOLON       reduce using rule 22 (expression -> expression DIVIDE expression .)
+    PLUS            shift and go to state 66
+    MINUS           shift and go to state 67
+    TIMES           shift and go to state 68
+    DIVIDE          shift and go to state 69
+
+  ! PLUS            [ reduce using rule 22 (expression -> expression DIVIDE expression .) ]
+  ! MINUS           [ reduce using rule 22 (expression -> expression DIVIDE expression .) ]
+  ! TIMES           [ reduce using rule 22 (expression -> expression DIVIDE expression .) ]
+  ! DIVIDE          [ reduce using rule 22 (expression -> expression DIVIDE expression .) ]
+
+
+state 105
+
+    (28) else_block -> ELSE LBRACKET statement_composed RBRACKET .
+
+    SEMICOLON       reduce using rule 28 (else_block -> ELSE LBRACKET statement_composed RBRACKET .)
+    PRINT           reduce using rule 28 (else_block -> ELSE LBRACKET statement_composed RBRACKET .)
+    VOID            reduce using rule 28 (else_block -> ELSE LBRACKET statement_composed RBRACKET .)
+    LIST            reduce using rule 28 (else_block -> ELSE LBRACKET statement_composed RBRACKET .)
+    DYNAMIC         reduce using rule 28 (else_block -> ELSE LBRACKET statement_composed RBRACKET .)
+    VAR             reduce using rule 28 (else_block -> ELSE LBRACKET statement_composed RBRACKET .)
+    STATIC          reduce using rule 28 (else_block -> ELSE LBRACKET statement_composed RBRACKET .)
+    IF              reduce using rule 28 (else_block -> ELSE LBRACKET statement_composed RBRACKET .)
+    STRING          reduce using rule 28 (else_block -> ELSE LBRACKET statement_composed RBRACKET .)
+    INT             reduce using rule 28 (else_block -> ELSE LBRACKET statement_composed RBRACKET .)
+    DOUBLE          reduce using rule 28 (else_block -> ELSE LBRACKET statement_composed RBRACKET .)
+    BOOL            reduce using rule 28 (else_block -> ELSE LBRACKET statement_composed RBRACKET .)
+    $end            reduce using rule 28 (else_block -> ELSE LBRACKET statement_composed RBRACKET .)
+    RBRACKET        reduce using rule 28 (else_block -> ELSE LBRACKET statement_composed RBRACKET .)
+
+
+state 106
+
+    (45) parameter -> type ID .
+
+    RPAREN          reduce using rule 45 (parameter -> type ID .)
+    COMMA           reduce using rule 45 (parameter -> type ID .)
+
+
+state 107
+
+    (39) function -> type ID LPAREN parameters RPAREN . LBRACKET statement_composed RBRACKET
+
+    LBRACKET        shift and go to state 126
+
+
+state 108
+
+    (44) parameters -> parameters COMMA . parameter
+    (45) parameter -> . type ID
+    (46) parameter -> . REQUIRED type ID
+    (47) type -> . STRING
+    (48) type -> . INT
+    (49) type -> . DOUBLE
+    (50) type -> . BOOL
+
+    REQUIRED        shift and go to state 75
+    STRING          shift and go to state 19
+    INT             shift and go to state 20
+    DOUBLE          shift and go to state 21
+    BOOL            shift and go to state 22
+
+    parameter                      shift and go to state 127
+    type                           shift and go to state 71
+
+state 109
+
+    (41) function -> type ID LPAREN RPAREN LBRACKET . statement_composed RBRACKET
+    (2) statement_composed -> . statement
+    (3) statement_composed -> . statement_composed statement
+    (4) statement -> . print
+    (5) statement -> . control_structures
+    (6) statement -> . function
+    (7) statement -> . list_def
+    (8) statement -> . variable_def
+    (9) statement -> . SEMICOLON
+    (16) print -> . PRINT LPAREN RPAREN SEMICOLON
+    (17) print -> . PRINT LPAREN value RPAREN SEMICOLON
+    (18) print -> . PRINT LPAREN expression RPAREN SEMICOLON
+    (25) control_structures -> . if_block
+    (26) control_structures -> . if_block else_block
+    (39) function -> . type ID LPAREN parameters RPAREN LBRACKET statement_composed RBRACKET
+    (40) function -> . VOID ID LPAREN parameters RPAREN LBRACKET statement_composed RBRACKET
+    (41) function -> . type ID LPAREN RPAREN LBRACKET statement_composed RBRACKET
+    (42) function -> . VOID ID LPAREN RPAREN LBRACKET statement_composed RBRACKET
+    (51) list_def -> . LIST LBRACKET value_list RBRACKET SEMICOLON
+    (52) list_def -> . LIST LESS type GREATER ID ASSIGN LBRACKET value_list RBRACKET SEMICOLON
+    (10) variable_def -> . type ID ASSIGN expression SEMICOLON
+    (11) variable_def -> . DYNAMIC ID ASSIGN expression SEMICOLON
+    (12) variable_def -> . VAR ID ASSIGN expression SEMICOLON
+    (13) variable_def -> . STATIC type ID ASSIGN expression SEMICOLON
+    (14) variable_def -> . STATIC VAR ID ASSIGN expression SEMICOLON
+    (15) variable_def -> . STATIC DYNAMIC ID ASSIGN expression SEMICOLON
+    (27) if_block -> . IF LPAREN conditions RPAREN LBRACKET statement_composed RBRACKET
+    (47) type -> . STRING
+    (48) type -> . INT
+    (49) type -> . DOUBLE
+    (50) type -> . BOOL
+
+    SEMICOLON       shift and go to state 9
+    PRINT           shift and go to state 10
+    VOID            shift and go to state 13
+    LIST            shift and go to state 14
+    DYNAMIC         shift and go to state 15
+    VAR             shift and go to state 16
+    STATIC          shift and go to state 17
+    IF              shift and go to state 18
+    STRING          shift and go to state 19
+    INT             shift and go to state 20
+    DOUBLE          shift and go to state 21
+    BOOL            shift and go to state 22
+
+    type                           shift and go to state 12
+    statement_composed             shift and go to state 128
+    statement                      shift and go to state 3
+    print                          shift and go to state 4
+    control_structures             shift and go to state 5
+    function                       shift and go to state 6
+    list_def                       shift and go to state 7
+    variable_def                   shift and go to state 8
+    if_block                       shift and go to state 11
+
+state 110
+
+    (46) parameter -> REQUIRED type . ID
+
+    ID              shift and go to state 129
+
+
+state 111
+
+    (10) variable_def -> type ID ASSIGN expression SEMICOLON .
+
+    SEMICOLON       reduce using rule 10 (variable_def -> type ID ASSIGN expression SEMICOLON .)
+    PRINT           reduce using rule 10 (variable_def -> type ID ASSIGN expression SEMICOLON .)
+    VOID            reduce using rule 10 (variable_def -> type ID ASSIGN expression SEMICOLON .)
+    LIST            reduce using rule 10 (variable_def -> type ID ASSIGN expression SEMICOLON .)
+    DYNAMIC         reduce using rule 10 (variable_def -> type ID ASSIGN expression SEMICOLON .)
+    VAR             reduce using rule 10 (variable_def -> type ID ASSIGN expression SEMICOLON .)
+    STATIC          reduce using rule 10 (variable_def -> type ID ASSIGN expression SEMICOLON .)
+    IF              reduce using rule 10 (variable_def -> type ID ASSIGN expression SEMICOLON .)
+    STRING          reduce using rule 10 (variable_def -> type ID ASSIGN expression SEMICOLON .)
+    INT             reduce using rule 10 (variable_def -> type ID ASSIGN expression SEMICOLON .)
+    DOUBLE          reduce using rule 10 (variable_def -> type ID ASSIGN expression SEMICOLON .)
+    BOOL            reduce using rule 10 (variable_def -> type ID ASSIGN expression SEMICOLON .)
+    $end            reduce using rule 10 (variable_def -> type ID ASSIGN expression SEMICOLON .)
+    RBRACKET        reduce using rule 10 (variable_def -> type ID ASSIGN expression SEMICOLON .)
+
+
+state 112
+
+    (40) function -> VOID ID LPAREN parameters RPAREN . LBRACKET statement_composed RBRACKET
+
+    LBRACKET        shift and go to state 130
+
+
+state 113
+
+    (42) function -> VOID ID LPAREN RPAREN LBRACKET . statement_composed RBRACKET
+    (2) statement_composed -> . statement
+    (3) statement_composed -> . statement_composed statement
+    (4) statement -> . print
+    (5) statement -> . control_structures
+    (6) statement -> . function
+    (7) statement -> . list_def
+    (8) statement -> . variable_def
+    (9) statement -> . SEMICOLON
+    (16) print -> . PRINT LPAREN RPAREN SEMICOLON
+    (17) print -> . PRINT LPAREN value RPAREN SEMICOLON
+    (18) print -> . PRINT LPAREN expression RPAREN SEMICOLON
+    (25) control_structures -> . if_block
+    (26) control_structures -> . if_block else_block
+    (39) function -> . type ID LPAREN parameters RPAREN LBRACKET statement_composed RBRACKET
+    (40) function -> . VOID ID LPAREN parameters RPAREN LBRACKET statement_composed RBRACKET
+    (41) function -> . type ID LPAREN RPAREN LBRACKET statement_composed RBRACKET
+    (42) function -> . VOID ID LPAREN RPAREN LBRACKET statement_composed RBRACKET
+    (51) list_def -> . LIST LBRACKET value_list RBRACKET SEMICOLON
+    (52) list_def -> . LIST LESS type GREATER ID ASSIGN LBRACKET value_list RBRACKET SEMICOLON
+    (10) variable_def -> . type ID ASSIGN expression SEMICOLON
+    (11) variable_def -> . DYNAMIC ID ASSIGN expression SEMICOLON
+    (12) variable_def -> . VAR ID ASSIGN expression SEMICOLON
+    (13) variable_def -> . STATIC type ID ASSIGN expression SEMICOLON
+    (14) variable_def -> . STATIC VAR ID ASSIGN expression SEMICOLON
+    (15) variable_def -> . STATIC DYNAMIC ID ASSIGN expression SEMICOLON
+    (27) if_block -> . IF LPAREN conditions RPAREN LBRACKET statement_composed RBRACKET
+    (47) type -> . STRING
+    (48) type -> . INT
+    (49) type -> . DOUBLE
+    (50) type -> . BOOL
+
+    SEMICOLON       shift and go to state 9
+    PRINT           shift and go to state 10
+    VOID            shift and go to state 13
+    LIST            shift and go to state 14
+    DYNAMIC         shift and go to state 15
+    VAR             shift and go to state 16
+    STATIC          shift and go to state 17
+    IF              shift and go to state 18
+    STRING          shift and go to state 19
+    INT             shift and go to state 20
+    DOUBLE          shift and go to state 21
+    BOOL            shift and go to state 22
+
+    statement_composed             shift and go to state 131
+    statement                      shift and go to state 3
+    print                          shift and go to state 4
+    control_structures             shift and go to state 5
+    function                       shift and go to state 6
+    list_def                       shift and go to state 7
+    variable_def                   shift and go to state 8
+    if_block                       shift and go to state 11
+    type                           shift and go to state 12
+
+state 114
+
+    (51) list_def -> LIST LBRACKET value_list RBRACKET SEMICOLON .
+
+    SEMICOLON       reduce using rule 51 (list_def -> LIST LBRACKET value_list RBRACKET SEMICOLON .)
+    PRINT           reduce using rule 51 (list_def -> LIST LBRACKET value_list RBRACKET SEMICOLON .)
+    VOID            reduce using rule 51 (list_def -> LIST LBRACKET value_list RBRACKET SEMICOLON .)
+    LIST            reduce using rule 51 (list_def -> LIST LBRACKET value_list RBRACKET SEMICOLON .)
+    DYNAMIC         reduce using rule 51 (list_def -> LIST LBRACKET value_list RBRACKET SEMICOLON .)
+    VAR             reduce using rule 51 (list_def -> LIST LBRACKET value_list RBRACKET SEMICOLON .)
+    STATIC          reduce using rule 51 (list_def -> LIST LBRACKET value_list RBRACKET SEMICOLON .)
+    IF              reduce using rule 51 (list_def -> LIST LBRACKET value_list RBRACKET SEMICOLON .)
+    STRING          reduce using rule 51 (list_def -> LIST LBRACKET value_list RBRACKET SEMICOLON .)
+    INT             reduce using rule 51 (list_def -> LIST LBRACKET value_list RBRACKET SEMICOLON .)
+    DOUBLE          reduce using rule 51 (list_def -> LIST LBRACKET value_list RBRACKET SEMICOLON .)
+    BOOL            reduce using rule 51 (list_def -> LIST LBRACKET value_list RBRACKET SEMICOLON .)
+    $end            reduce using rule 51 (list_def -> LIST LBRACKET value_list RBRACKET SEMICOLON .)
+    RBRACKET        reduce using rule 51 (list_def -> LIST LBRACKET value_list RBRACKET SEMICOLON .)
+
+
+state 115
+
+    (54) value_list -> value_list COMMA value .
+
+    RBRACKET        reduce using rule 54 (value_list -> value_list COMMA value .)
+    COMMA           reduce using rule 54 (value_list -> value_list COMMA value .)
+
+
+state 116
+
+    (52) list_def -> LIST LESS type GREATER ID . ASSIGN LBRACKET value_list RBRACKET SEMICOLON
+
+    ASSIGN          shift and go to state 132
+
+
+state 117
+
+    (11) variable_def -> DYNAMIC ID ASSIGN expression SEMICOLON .
+
+    SEMICOLON       reduce using rule 11 (variable_def -> DYNAMIC ID ASSIGN expression SEMICOLON .)
+    PRINT           reduce using rule 11 (variable_def -> DYNAMIC ID ASSIGN expression SEMICOLON .)
+    VOID            reduce using rule 11 (variable_def -> DYNAMIC ID ASSIGN expression SEMICOLON .)
+    LIST            reduce using rule 11 (variable_def -> DYNAMIC ID ASSIGN expression SEMICOLON .)
+    DYNAMIC         reduce using rule 11 (variable_def -> DYNAMIC ID ASSIGN expression SEMICOLON .)
+    VAR             reduce using rule 11 (variable_def -> DYNAMIC ID ASSIGN expression SEMICOLON .)
+    STATIC          reduce using rule 11 (variable_def -> DYNAMIC ID ASSIGN expression SEMICOLON .)
+    IF              reduce using rule 11 (variable_def -> DYNAMIC ID ASSIGN expression SEMICOLON .)
+    STRING          reduce using rule 11 (variable_def -> DYNAMIC ID ASSIGN expression SEMICOLON .)
+    INT             reduce using rule 11 (variable_def -> DYNAMIC ID ASSIGN expression SEMICOLON .)
+    DOUBLE          reduce using rule 11 (variable_def -> DYNAMIC ID ASSIGN expression SEMICOLON .)
+    BOOL            reduce using rule 11 (variable_def -> DYNAMIC ID ASSIGN expression SEMICOLON .)
+    $end            reduce using rule 11 (variable_def -> DYNAMIC ID ASSIGN expression SEMICOLON .)
+    RBRACKET        reduce using rule 11 (variable_def -> DYNAMIC ID ASSIGN expression SEMICOLON .)
+
+
+state 118
+
+    (12) variable_def -> VAR ID ASSIGN expression SEMICOLON .
+
+    SEMICOLON       reduce using rule 12 (variable_def -> VAR ID ASSIGN expression SEMICOLON .)
+    PRINT           reduce using rule 12 (variable_def -> VAR ID ASSIGN expression SEMICOLON .)
+    VOID            reduce using rule 12 (variable_def -> VAR ID ASSIGN expression SEMICOLON .)
+    LIST            reduce using rule 12 (variable_def -> VAR ID ASSIGN expression SEMICOLON .)
+    DYNAMIC         reduce using rule 12 (variable_def -> VAR ID ASSIGN expression SEMICOLON .)
+    VAR             reduce using rule 12 (variable_def -> VAR ID ASSIGN expression SEMICOLON .)
+    STATIC          reduce using rule 12 (variable_def -> VAR ID ASSIGN expression SEMICOLON .)
+    IF              reduce using rule 12 (variable_def -> VAR ID ASSIGN expression SEMICOLON .)
+    STRING          reduce using rule 12 (variable_def -> VAR ID ASSIGN expression SEMICOLON .)
+    INT             reduce using rule 12 (variable_def -> VAR ID ASSIGN expression SEMICOLON .)
+    DOUBLE          reduce using rule 12 (variable_def -> VAR ID ASSIGN expression SEMICOLON .)
+    BOOL            reduce using rule 12 (variable_def -> VAR ID ASSIGN expression SEMICOLON .)
+    $end            reduce using rule 12 (variable_def -> VAR ID ASSIGN expression SEMICOLON .)
+    RBRACKET        reduce using rule 12 (variable_def -> VAR ID ASSIGN expression SEMICOLON .)
+
+
+state 119
+
+    (13) variable_def -> STATIC type ID ASSIGN expression . SEMICOLON
+    (19) expression -> expression . PLUS expression
+    (20) expression -> expression . MINUS expression
+    (21) expression -> expression . TIMES expression
+    (22) expression -> expression . DIVIDE expression
+
+    SEMICOLON       shift and go to state 133
+    PLUS            shift and go to state 66
+    MINUS           shift and go to state 67
+    TIMES           shift and go to state 68
+    DIVIDE          shift and go to state 69
+
+
+state 120
+
+    (14) variable_def -> STATIC VAR ID ASSIGN expression . SEMICOLON
+    (19) expression -> expression . PLUS expression
+    (20) expression -> expression . MINUS expression
+    (21) expression -> expression . TIMES expression
+    (22) expression -> expression . DIVIDE expression
+
+    SEMICOLON       shift and go to state 134
+    PLUS            shift and go to state 66
+    MINUS           shift and go to state 67
+    TIMES           shift and go to state 68
+    DIVIDE          shift and go to state 69
+
+
+state 121
+
+    (15) variable_def -> STATIC DYNAMIC ID ASSIGN expression . SEMICOLON
+    (19) expression -> expression . PLUS expression
+    (20) expression -> expression . MINUS expression
+    (21) expression -> expression . TIMES expression
+    (22) expression -> expression . DIVIDE expression
+
+    SEMICOLON       shift and go to state 135
+    PLUS            shift and go to state 66
+    MINUS           shift and go to state 67
+    TIMES           shift and go to state 68
+    DIVIDE          shift and go to state 69
+
+
+state 122
+
+    (27) if_block -> IF LPAREN conditions RPAREN LBRACKET . statement_composed RBRACKET
+    (2) statement_composed -> . statement
+    (3) statement_composed -> . statement_composed statement
+    (4) statement -> . print
+    (5) statement -> . control_structures
+    (6) statement -> . function
+    (7) statement -> . list_def
+    (8) statement -> . variable_def
+    (9) statement -> . SEMICOLON
+    (16) print -> . PRINT LPAREN RPAREN SEMICOLON
+    (17) print -> . PRINT LPAREN value RPAREN SEMICOLON
+    (18) print -> . PRINT LPAREN expression RPAREN SEMICOLON
+    (25) control_structures -> . if_block
+    (26) control_structures -> . if_block else_block
+    (39) function -> . type ID LPAREN parameters RPAREN LBRACKET statement_composed RBRACKET
+    (40) function -> . VOID ID LPAREN parameters RPAREN LBRACKET statement_composed RBRACKET
+    (41) function -> . type ID LPAREN RPAREN LBRACKET statement_composed RBRACKET
+    (42) function -> . VOID ID LPAREN RPAREN LBRACKET statement_composed RBRACKET
+    (51) list_def -> . LIST LBRACKET value_list RBRACKET SEMICOLON
+    (52) list_def -> . LIST LESS type GREATER ID ASSIGN LBRACKET value_list RBRACKET SEMICOLON
+    (10) variable_def -> . type ID ASSIGN expression SEMICOLON
+    (11) variable_def -> . DYNAMIC ID ASSIGN expression SEMICOLON
+    (12) variable_def -> . VAR ID ASSIGN expression SEMICOLON
+    (13) variable_def -> . STATIC type ID ASSIGN expression SEMICOLON
+    (14) variable_def -> . STATIC VAR ID ASSIGN expression SEMICOLON
+    (15) variable_def -> . STATIC DYNAMIC ID ASSIGN expression SEMICOLON
+    (27) if_block -> . IF LPAREN conditions RPAREN LBRACKET statement_composed RBRACKET
+    (47) type -> . STRING
+    (48) type -> . INT
+    (49) type -> . DOUBLE
+    (50) type -> . BOOL
+
+    SEMICOLON       shift and go to state 9
+    PRINT           shift and go to state 10
+    VOID            shift and go to state 13
+    LIST            shift and go to state 14
+    DYNAMIC         shift and go to state 15
+    VAR             shift and go to state 16
+    STATIC          shift and go to state 17
+    IF              shift and go to state 18
+    STRING          shift and go to state 19
+    INT             shift and go to state 20
+    DOUBLE          shift and go to state 21
+    BOOL            shift and go to state 22
+
+    statement_composed             shift and go to state 136
+    statement                      shift and go to state 3
+    print                          shift and go to state 4
+    control_structures             shift and go to state 5
+    function                       shift and go to state 6
+    list_def                       shift and go to state 7
+    variable_def                   shift and go to state 8
+    if_block                       shift and go to state 11
+    type                           shift and go to state 12
+
+state 123
+
+    (30) conditions -> conditions AND condition .
+
+    RPAREN          reduce using rule 30 (conditions -> conditions AND condition .)
+    AND             reduce using rule 30 (conditions -> conditions AND condition .)
+    OR              reduce using rule 30 (conditions -> conditions AND condition .)
+
+
+state 124
+
+    (31) conditions -> conditions OR condition .
+
+    RPAREN          reduce using rule 31 (conditions -> conditions OR condition .)
+    AND             reduce using rule 31 (conditions -> conditions OR condition .)
+    OR              reduce using rule 31 (conditions -> conditions OR condition .)
+
+
+state 125
+
+    (32) condition -> value comparison_operator value .
+
+    RPAREN          reduce using rule 32 (condition -> value comparison_operator value .)
+    AND             reduce using rule 32 (condition -> value comparison_operator value .)
+    OR              reduce using rule 32 (condition -> value comparison_operator value .)
+
+
+state 126
+
+    (39) function -> type ID LPAREN parameters RPAREN LBRACKET . statement_composed RBRACKET
+    (2) statement_composed -> . statement
+    (3) statement_composed -> . statement_composed statement
+    (4) statement -> . print
+    (5) statement -> . control_structures
+    (6) statement -> . function
+    (7) statement -> . list_def
+    (8) statement -> . variable_def
+    (9) statement -> . SEMICOLON
+    (16) print -> . PRINT LPAREN RPAREN SEMICOLON
+    (17) print -> . PRINT LPAREN value RPAREN SEMICOLON
+    (18) print -> . PRINT LPAREN expression RPAREN SEMICOLON
+    (25) control_structures -> . if_block
+    (26) control_structures -> . if_block else_block
+    (39) function -> . type ID LPAREN parameters RPAREN LBRACKET statement_composed RBRACKET
+    (40) function -> . VOID ID LPAREN parameters RPAREN LBRACKET statement_composed RBRACKET
+    (41) function -> . type ID LPAREN RPAREN LBRACKET statement_composed RBRACKET
+    (42) function -> . VOID ID LPAREN RPAREN LBRACKET statement_composed RBRACKET
+    (51) list_def -> . LIST LBRACKET value_list RBRACKET SEMICOLON
+    (52) list_def -> . LIST LESS type GREATER ID ASSIGN LBRACKET value_list RBRACKET SEMICOLON
+    (10) variable_def -> . type ID ASSIGN expression SEMICOLON
+    (11) variable_def -> . DYNAMIC ID ASSIGN expression SEMICOLON
+    (12) variable_def -> . VAR ID ASSIGN expression SEMICOLON
+    (13) variable_def -> . STATIC type ID ASSIGN expression SEMICOLON
+    (14) variable_def -> . STATIC VAR ID ASSIGN expression SEMICOLON
+    (15) variable_def -> . STATIC DYNAMIC ID ASSIGN expression SEMICOLON
+    (27) if_block -> . IF LPAREN conditions RPAREN LBRACKET statement_composed RBRACKET
+    (47) type -> . STRING
+    (48) type -> . INT
+    (49) type -> . DOUBLE
+    (50) type -> . BOOL
+
+    SEMICOLON       shift and go to state 9
+    PRINT           shift and go to state 10
+    VOID            shift and go to state 13
+    LIST            shift and go to state 14
+    DYNAMIC         shift and go to state 15
+    VAR             shift and go to state 16
+    STATIC          shift and go to state 17
+    IF              shift and go to state 18
+    STRING          shift and go to state 19
+    INT             shift and go to state 20
+    DOUBLE          shift and go to state 21
+    BOOL            shift and go to state 22
+
+    type                           shift and go to state 12
+    statement_composed             shift and go to state 137
+    statement                      shift and go to state 3
+    print                          shift and go to state 4
+    control_structures             shift and go to state 5
+    function                       shift and go to state 6
+    list_def                       shift and go to state 7
+    variable_def                   shift and go to state 8
+    if_block                       shift and go to state 11
+
+state 127
+
+    (44) parameters -> parameters COMMA parameter .
+
+    RPAREN          reduce using rule 44 (parameters -> parameters COMMA parameter .)
+    COMMA           reduce using rule 44 (parameters -> parameters COMMA parameter .)
+
+
+state 128
+
+    (41) function -> type ID LPAREN RPAREN LBRACKET statement_composed . RBRACKET
+    (3) statement_composed -> statement_composed . statement
+    (4) statement -> . print
+    (5) statement -> . control_structures
+    (6) statement -> . function
+    (7) statement -> . list_def
+    (8) statement -> . variable_def
+    (9) statement -> . SEMICOLON
+    (16) print -> . PRINT LPAREN RPAREN SEMICOLON
+    (17) print -> . PRINT LPAREN value RPAREN SEMICOLON
+    (18) print -> . PRINT LPAREN expression RPAREN SEMICOLON
+    (25) control_structures -> . if_block
+    (26) control_structures -> . if_block else_block
+    (39) function -> . type ID LPAREN parameters RPAREN LBRACKET statement_composed RBRACKET
+    (40) function -> . VOID ID LPAREN parameters RPAREN LBRACKET statement_composed RBRACKET
+    (41) function -> . type ID LPAREN RPAREN LBRACKET statement_composed RBRACKET
+    (42) function -> . VOID ID LPAREN RPAREN LBRACKET statement_composed RBRACKET
+    (51) list_def -> . LIST LBRACKET value_list RBRACKET SEMICOLON
+    (52) list_def -> . LIST LESS type GREATER ID ASSIGN LBRACKET value_list RBRACKET SEMICOLON
+    (10) variable_def -> . type ID ASSIGN expression SEMICOLON
+    (11) variable_def -> . DYNAMIC ID ASSIGN expression SEMICOLON
+    (12) variable_def -> . VAR ID ASSIGN expression SEMICOLON
+    (13) variable_def -> . STATIC type ID ASSIGN expression SEMICOLON
+    (14) variable_def -> . STATIC VAR ID ASSIGN expression SEMICOLON
+    (15) variable_def -> . STATIC DYNAMIC ID ASSIGN expression SEMICOLON
+    (27) if_block -> . IF LPAREN conditions RPAREN LBRACKET statement_composed RBRACKET
+    (47) type -> . STRING
+    (48) type -> . INT
+    (49) type -> . DOUBLE
+    (50) type -> . BOOL
+
+    RBRACKET        shift and go to state 138
+    SEMICOLON       shift and go to state 9
+    PRINT           shift and go to state 10
+    VOID            shift and go to state 13
+    LIST            shift and go to state 14
+    DYNAMIC         shift and go to state 15
+    VAR             shift and go to state 16
+    STATIC          shift and go to state 17
+    IF              shift and go to state 18
+    STRING          shift and go to state 19
+    INT             shift and go to state 20
+    DOUBLE          shift and go to state 21
+    BOOL            shift and go to state 22
+
+    type                           shift and go to state 12
+    statement                      shift and go to state 23
+    print                          shift and go to state 4
+    control_structures             shift and go to state 5
+    function                       shift and go to state 6
+    list_def                       shift and go to state 7
+    variable_def                   shift and go to state 8
+    if_block                       shift and go to state 11
+
+state 129
+
+    (46) parameter -> REQUIRED type ID .
+
+    RPAREN          reduce using rule 46 (parameter -> REQUIRED type ID .)
+    COMMA           reduce using rule 46 (parameter -> REQUIRED type ID .)
+
+
+state 130
+
+    (40) function -> VOID ID LPAREN parameters RPAREN LBRACKET . statement_composed RBRACKET
+    (2) statement_composed -> . statement
+    (3) statement_composed -> . statement_composed statement
+    (4) statement -> . print
+    (5) statement -> . control_structures
+    (6) statement -> . function
+    (7) statement -> . list_def
+    (8) statement -> . variable_def
+    (9) statement -> . SEMICOLON
+    (16) print -> . PRINT LPAREN RPAREN SEMICOLON
+    (17) print -> . PRINT LPAREN value RPAREN SEMICOLON
+    (18) print -> . PRINT LPAREN expression RPAREN SEMICOLON
+    (25) control_structures -> . if_block
+    (26) control_structures -> . if_block else_block
+    (39) function -> . type ID LPAREN parameters RPAREN LBRACKET statement_composed RBRACKET
+    (40) function -> . VOID ID LPAREN parameters RPAREN LBRACKET statement_composed RBRACKET
+    (41) function -> . type ID LPAREN RPAREN LBRACKET statement_composed RBRACKET
+    (42) function -> . VOID ID LPAREN RPAREN LBRACKET statement_composed RBRACKET
+    (51) list_def -> . LIST LBRACKET value_list RBRACKET SEMICOLON
+    (52) list_def -> . LIST LESS type GREATER ID ASSIGN LBRACKET value_list RBRACKET SEMICOLON
+    (10) variable_def -> . type ID ASSIGN expression SEMICOLON
+    (11) variable_def -> . DYNAMIC ID ASSIGN expression SEMICOLON
+    (12) variable_def -> . VAR ID ASSIGN expression SEMICOLON
+    (13) variable_def -> . STATIC type ID ASSIGN expression SEMICOLON
+    (14) variable_def -> . STATIC VAR ID ASSIGN expression SEMICOLON
+    (15) variable_def -> . STATIC DYNAMIC ID ASSIGN expression SEMICOLON
+    (27) if_block -> . IF LPAREN conditions RPAREN LBRACKET statement_composed RBRACKET
+    (47) type -> . STRING
+    (48) type -> . INT
+    (49) type -> . DOUBLE
+    (50) type -> . BOOL
+
+    SEMICOLON       shift and go to state 9
+    PRINT           shift and go to state 10
+    VOID            shift and go to state 13
+    LIST            shift and go to state 14
+    DYNAMIC         shift and go to state 15
+    VAR             shift and go to state 16
+    STATIC          shift and go to state 17
+    IF              shift and go to state 18
+    STRING          shift and go to state 19
+    INT             shift and go to state 20
+    DOUBLE          shift and go to state 21
+    BOOL            shift and go to state 22
+
+    statement_composed             shift and go to state 139
+    statement                      shift and go to state 3
+    print                          shift and go to state 4
+    control_structures             shift and go to state 5
+    function                       shift and go to state 6
+    list_def                       shift and go to state 7
+    variable_def                   shift and go to state 8
+    if_block                       shift and go to state 11
+    type                           shift and go to state 12
+
+state 131
+
+    (42) function -> VOID ID LPAREN RPAREN LBRACKET statement_composed . RBRACKET
+    (3) statement_composed -> statement_composed . statement
+    (4) statement -> . print
+    (5) statement -> . control_structures
+    (6) statement -> . function
+    (7) statement -> . list_def
+    (8) statement -> . variable_def
+    (9) statement -> . SEMICOLON
+    (16) print -> . PRINT LPAREN RPAREN SEMICOLON
+    (17) print -> . PRINT LPAREN value RPAREN SEMICOLON
+    (18) print -> . PRINT LPAREN expression RPAREN SEMICOLON
+    (25) control_structures -> . if_block
+    (26) control_structures -> . if_block else_block
+    (39) function -> . type ID LPAREN parameters RPAREN LBRACKET statement_composed RBRACKET
+    (40) function -> . VOID ID LPAREN parameters RPAREN LBRACKET statement_composed RBRACKET
+    (41) function -> . type ID LPAREN RPAREN LBRACKET statement_composed RBRACKET
+    (42) function -> . VOID ID LPAREN RPAREN LBRACKET statement_composed RBRACKET
+    (51) list_def -> . LIST LBRACKET value_list RBRACKET SEMICOLON
+    (52) list_def -> . LIST LESS type GREATER ID ASSIGN LBRACKET value_list RBRACKET SEMICOLON
+    (10) variable_def -> . type ID ASSIGN expression SEMICOLON
+    (11) variable_def -> . DYNAMIC ID ASSIGN expression SEMICOLON
+    (12) variable_def -> . VAR ID ASSIGN expression SEMICOLON
+    (13) variable_def -> . STATIC type ID ASSIGN expression SEMICOLON
+    (14) variable_def -> . STATIC VAR ID ASSIGN expression SEMICOLON
+    (15) variable_def -> . STATIC DYNAMIC ID ASSIGN expression SEMICOLON
+    (27) if_block -> . IF LPAREN conditions RPAREN LBRACKET statement_composed RBRACKET
+    (47) type -> . STRING
+    (48) type -> . INT
+    (49) type -> . DOUBLE
+    (50) type -> . BOOL
+
+    RBRACKET        shift and go to state 140
+    SEMICOLON       shift and go to state 9
+    PRINT           shift and go to state 10
+    VOID            shift and go to state 13
+    LIST            shift and go to state 14
+    DYNAMIC         shift and go to state 15
+    VAR             shift and go to state 16
+    STATIC          shift and go to state 17
+    IF              shift and go to state 18
+    STRING          shift and go to state 19
+    INT             shift and go to state 20
+    DOUBLE          shift and go to state 21
+    BOOL            shift and go to state 22
+
+    statement                      shift and go to state 23
+    print                          shift and go to state 4
+    control_structures             shift and go to state 5
+    function                       shift and go to state 6
+    list_def                       shift and go to state 7
+    variable_def                   shift and go to state 8
+    if_block                       shift and go to state 11
+    type                           shift and go to state 12
+
+state 132
+
+    (52) list_def -> LIST LESS type GREATER ID ASSIGN . LBRACKET value_list RBRACKET SEMICOLON
+
+    LBRACKET        shift and go to state 141
+
+
+state 133
+
+    (13) variable_def -> STATIC type ID ASSIGN expression SEMICOLON .
+
+    SEMICOLON       reduce using rule 13 (variable_def -> STATIC type ID ASSIGN expression SEMICOLON .)
+    PRINT           reduce using rule 13 (variable_def -> STATIC type ID ASSIGN expression SEMICOLON .)
+    VOID            reduce using rule 13 (variable_def -> STATIC type ID ASSIGN expression SEMICOLON .)
+    LIST            reduce using rule 13 (variable_def -> STATIC type ID ASSIGN expression SEMICOLON .)
+    DYNAMIC         reduce using rule 13 (variable_def -> STATIC type ID ASSIGN expression SEMICOLON .)
+    VAR             reduce using rule 13 (variable_def -> STATIC type ID ASSIGN expression SEMICOLON .)
+    STATIC          reduce using rule 13 (variable_def -> STATIC type ID ASSIGN expression SEMICOLON .)
+    IF              reduce using rule 13 (variable_def -> STATIC type ID ASSIGN expression SEMICOLON .)
+    STRING          reduce using rule 13 (variable_def -> STATIC type ID ASSIGN expression SEMICOLON .)
+    INT             reduce using rule 13 (variable_def -> STATIC type ID ASSIGN expression SEMICOLON .)
+    DOUBLE          reduce using rule 13 (variable_def -> STATIC type ID ASSIGN expression SEMICOLON .)
+    BOOL            reduce using rule 13 (variable_def -> STATIC type ID ASSIGN expression SEMICOLON .)
+    $end            reduce using rule 13 (variable_def -> STATIC type ID ASSIGN expression SEMICOLON .)
+    RBRACKET        reduce using rule 13 (variable_def -> STATIC type ID ASSIGN expression SEMICOLON .)
+
+
+state 134
+
+    (14) variable_def -> STATIC VAR ID ASSIGN expression SEMICOLON .
+
+    SEMICOLON       reduce using rule 14 (variable_def -> STATIC VAR ID ASSIGN expression SEMICOLON .)
+    PRINT           reduce using rule 14 (variable_def -> STATIC VAR ID ASSIGN expression SEMICOLON .)
+    VOID            reduce using rule 14 (variable_def -> STATIC VAR ID ASSIGN expression SEMICOLON .)
+    LIST            reduce using rule 14 (variable_def -> STATIC VAR ID ASSIGN expression SEMICOLON .)
+    DYNAMIC         reduce using rule 14 (variable_def -> STATIC VAR ID ASSIGN expression SEMICOLON .)
+    VAR             reduce using rule 14 (variable_def -> STATIC VAR ID ASSIGN expression SEMICOLON .)
+    STATIC          reduce using rule 14 (variable_def -> STATIC VAR ID ASSIGN expression SEMICOLON .)
+    IF              reduce using rule 14 (variable_def -> STATIC VAR ID ASSIGN expression SEMICOLON .)
+    STRING          reduce using rule 14 (variable_def -> STATIC VAR ID ASSIGN expression SEMICOLON .)
+    INT             reduce using rule 14 (variable_def -> STATIC VAR ID ASSIGN expression SEMICOLON .)
+    DOUBLE          reduce using rule 14 (variable_def -> STATIC VAR ID ASSIGN expression SEMICOLON .)
+    BOOL            reduce using rule 14 (variable_def -> STATIC VAR ID ASSIGN expression SEMICOLON .)
+    $end            reduce using rule 14 (variable_def -> STATIC VAR ID ASSIGN expression SEMICOLON .)
+    RBRACKET        reduce using rule 14 (variable_def -> STATIC VAR ID ASSIGN expression SEMICOLON .)
+
+
+state 135
+
+    (15) variable_def -> STATIC DYNAMIC ID ASSIGN expression SEMICOLON .
+
+    SEMICOLON       reduce using rule 15 (variable_def -> STATIC DYNAMIC ID ASSIGN expression SEMICOLON .)
+    PRINT           reduce using rule 15 (variable_def -> STATIC DYNAMIC ID ASSIGN expression SEMICOLON .)
+    VOID            reduce using rule 15 (variable_def -> STATIC DYNAMIC ID ASSIGN expression SEMICOLON .)
+    LIST            reduce using rule 15 (variable_def -> STATIC DYNAMIC ID ASSIGN expression SEMICOLON .)
+    DYNAMIC         reduce using rule 15 (variable_def -> STATIC DYNAMIC ID ASSIGN expression SEMICOLON .)
+    VAR             reduce using rule 15 (variable_def -> STATIC DYNAMIC ID ASSIGN expression SEMICOLON .)
+    STATIC          reduce using rule 15 (variable_def -> STATIC DYNAMIC ID ASSIGN expression SEMICOLON .)
+    IF              reduce using rule 15 (variable_def -> STATIC DYNAMIC ID ASSIGN expression SEMICOLON .)
+    STRING          reduce using rule 15 (variable_def -> STATIC DYNAMIC ID ASSIGN expression SEMICOLON .)
+    INT             reduce using rule 15 (variable_def -> STATIC DYNAMIC ID ASSIGN expression SEMICOLON .)
+    DOUBLE          reduce using rule 15 (variable_def -> STATIC DYNAMIC ID ASSIGN expression SEMICOLON .)
+    BOOL            reduce using rule 15 (variable_def -> STATIC DYNAMIC ID ASSIGN expression SEMICOLON .)
+    $end            reduce using rule 15 (variable_def -> STATIC DYNAMIC ID ASSIGN expression SEMICOLON .)
+    RBRACKET        reduce using rule 15 (variable_def -> STATIC DYNAMIC ID ASSIGN expression SEMICOLON .)
+
+
+state 136
+
+    (27) if_block -> IF LPAREN conditions RPAREN LBRACKET statement_composed . RBRACKET
+    (3) statement_composed -> statement_composed . statement
+    (4) statement -> . print
+    (5) statement -> . control_structures
+    (6) statement -> . function
+    (7) statement -> . list_def
+    (8) statement -> . variable_def
+    (9) statement -> . SEMICOLON
+    (16) print -> . PRINT LPAREN RPAREN SEMICOLON
+    (17) print -> . PRINT LPAREN value RPAREN SEMICOLON
+    (18) print -> . PRINT LPAREN expression RPAREN SEMICOLON
+    (25) control_structures -> . if_block
+    (26) control_structures -> . if_block else_block
+    (39) function -> . type ID LPAREN parameters RPAREN LBRACKET statement_composed RBRACKET
+    (40) function -> . VOID ID LPAREN parameters RPAREN LBRACKET statement_composed RBRACKET
+    (41) function -> . type ID LPAREN RPAREN LBRACKET statement_composed RBRACKET
+    (42) function -> . VOID ID LPAREN RPAREN LBRACKET statement_composed RBRACKET
+    (51) list_def -> . LIST LBRACKET value_list RBRACKET SEMICOLON
+    (52) list_def -> . LIST LESS type GREATER ID ASSIGN LBRACKET value_list RBRACKET SEMICOLON
+    (10) variable_def -> . type ID ASSIGN expression SEMICOLON
+    (11) variable_def -> . DYNAMIC ID ASSIGN expression SEMICOLON
+    (12) variable_def -> . VAR ID ASSIGN expression SEMICOLON
+    (13) variable_def -> . STATIC type ID ASSIGN expression SEMICOLON
+    (14) variable_def -> . STATIC VAR ID ASSIGN expression SEMICOLON
+    (15) variable_def -> . STATIC DYNAMIC ID ASSIGN expression SEMICOLON
+    (27) if_block -> . IF LPAREN conditions RPAREN LBRACKET statement_composed RBRACKET
+    (47) type -> . STRING
+    (48) type -> . INT
+    (49) type -> . DOUBLE
+    (50) type -> . BOOL
+
+    RBRACKET        shift and go to state 142
+    SEMICOLON       shift and go to state 9
+    PRINT           shift and go to state 10
+    VOID            shift and go to state 13
+    LIST            shift and go to state 14
+    DYNAMIC         shift and go to state 15
+    VAR             shift and go to state 16
+    STATIC          shift and go to state 17
+    IF              shift and go to state 18
+    STRING          shift and go to state 19
+    INT             shift and go to state 20
+    DOUBLE          shift and go to state 21
+    BOOL            shift and go to state 22
+
+    statement                      shift and go to state 23
+    print                          shift and go to state 4
+    control_structures             shift and go to state 5
+    function                       shift and go to state 6
+    list_def                       shift and go to state 7
+    variable_def                   shift and go to state 8
+    if_block                       shift and go to state 11
+    type                           shift and go to state 12
+
+state 137
+
+    (39) function -> type ID LPAREN parameters RPAREN LBRACKET statement_composed . RBRACKET
+    (3) statement_composed -> statement_composed . statement
+    (4) statement -> . print
+    (5) statement -> . control_structures
+    (6) statement -> . function
+    (7) statement -> . list_def
+    (8) statement -> . variable_def
+    (9) statement -> . SEMICOLON
+    (16) print -> . PRINT LPAREN RPAREN SEMICOLON
+    (17) print -> . PRINT LPAREN value RPAREN SEMICOLON
+    (18) print -> . PRINT LPAREN expression RPAREN SEMICOLON
+    (25) control_structures -> . if_block
+    (26) control_structures -> . if_block else_block
+    (39) function -> . type ID LPAREN parameters RPAREN LBRACKET statement_composed RBRACKET
+    (40) function -> . VOID ID LPAREN parameters RPAREN LBRACKET statement_composed RBRACKET
+    (41) function -> . type ID LPAREN RPAREN LBRACKET statement_composed RBRACKET
+    (42) function -> . VOID ID LPAREN RPAREN LBRACKET statement_composed RBRACKET
+    (51) list_def -> . LIST LBRACKET value_list RBRACKET SEMICOLON
+    (52) list_def -> . LIST LESS type GREATER ID ASSIGN LBRACKET value_list RBRACKET SEMICOLON
+    (10) variable_def -> . type ID ASSIGN expression SEMICOLON
+    (11) variable_def -> . DYNAMIC ID ASSIGN expression SEMICOLON
+    (12) variable_def -> . VAR ID ASSIGN expression SEMICOLON
+    (13) variable_def -> . STATIC type ID ASSIGN expression SEMICOLON
+    (14) variable_def -> . STATIC VAR ID ASSIGN expression SEMICOLON
+    (15) variable_def -> . STATIC DYNAMIC ID ASSIGN expression SEMICOLON
+    (27) if_block -> . IF LPAREN conditions RPAREN LBRACKET statement_composed RBRACKET
+    (47) type -> . STRING
+    (48) type -> . INT
+    (49) type -> . DOUBLE
+    (50) type -> . BOOL
+
+    RBRACKET        shift and go to state 143
+    SEMICOLON       shift and go to state 9
+    PRINT           shift and go to state 10
+    VOID            shift and go to state 13
+    LIST            shift and go to state 14
+    DYNAMIC         shift and go to state 15
+    VAR             shift and go to state 16
+    STATIC          shift and go to state 17
+    IF              shift and go to state 18
+    STRING          shift and go to state 19
+    INT             shift and go to state 20
+    DOUBLE          shift and go to state 21
+    BOOL            shift and go to state 22
+
+    type                           shift and go to state 12
+    statement                      shift and go to state 23
+    print                          shift and go to state 4
+    control_structures             shift and go to state 5
+    function                       shift and go to state 6
+    list_def                       shift and go to state 7
+    variable_def                   shift and go to state 8
+    if_block                       shift and go to state 11
+
+state 138
+
+    (41) function -> type ID LPAREN RPAREN LBRACKET statement_composed RBRACKET .
+
+    SEMICOLON       reduce using rule 41 (function -> type ID LPAREN RPAREN LBRACKET statement_composed RBRACKET .)
+    PRINT           reduce using rule 41 (function -> type ID LPAREN RPAREN LBRACKET statement_composed RBRACKET .)
+    VOID            reduce using rule 41 (function -> type ID LPAREN RPAREN LBRACKET statement_composed RBRACKET .)
+    LIST            reduce using rule 41 (function -> type ID LPAREN RPAREN LBRACKET statement_composed RBRACKET .)
+    DYNAMIC         reduce using rule 41 (function -> type ID LPAREN RPAREN LBRACKET statement_composed RBRACKET .)
+    VAR             reduce using rule 41 (function -> type ID LPAREN RPAREN LBRACKET statement_composed RBRACKET .)
+    STATIC          reduce using rule 41 (function -> type ID LPAREN RPAREN LBRACKET statement_composed RBRACKET .)
+    IF              reduce using rule 41 (function -> type ID LPAREN RPAREN LBRACKET statement_composed RBRACKET .)
+    STRING          reduce using rule 41 (function -> type ID LPAREN RPAREN LBRACKET statement_composed RBRACKET .)
+    INT             reduce using rule 41 (function -> type ID LPAREN RPAREN LBRACKET statement_composed RBRACKET .)
+    DOUBLE          reduce using rule 41 (function -> type ID LPAREN RPAREN LBRACKET statement_composed RBRACKET .)
+    BOOL            reduce using rule 41 (function -> type ID LPAREN RPAREN LBRACKET statement_composed RBRACKET .)
+    $end            reduce using rule 41 (function -> type ID LPAREN RPAREN LBRACKET statement_composed RBRACKET .)
+    RBRACKET        reduce using rule 41 (function -> type ID LPAREN RPAREN LBRACKET statement_composed RBRACKET .)
+
+
+state 139
+
+    (40) function -> VOID ID LPAREN parameters RPAREN LBRACKET statement_composed . RBRACKET
+    (3) statement_composed -> statement_composed . statement
+    (4) statement -> . print
+    (5) statement -> . control_structures
+    (6) statement -> . function
+    (7) statement -> . list_def
+    (8) statement -> . variable_def
+    (9) statement -> . SEMICOLON
+    (16) print -> . PRINT LPAREN RPAREN SEMICOLON
+    (17) print -> . PRINT LPAREN value RPAREN SEMICOLON
+    (18) print -> . PRINT LPAREN expression RPAREN SEMICOLON
+    (25) control_structures -> . if_block
+    (26) control_structures -> . if_block else_block
+    (39) function -> . type ID LPAREN parameters RPAREN LBRACKET statement_composed RBRACKET
+    (40) function -> . VOID ID LPAREN parameters RPAREN LBRACKET statement_composed RBRACKET
+    (41) function -> . type ID LPAREN RPAREN LBRACKET statement_composed RBRACKET
+    (42) function -> . VOID ID LPAREN RPAREN LBRACKET statement_composed RBRACKET
+    (51) list_def -> . LIST LBRACKET value_list RBRACKET SEMICOLON
+    (52) list_def -> . LIST LESS type GREATER ID ASSIGN LBRACKET value_list RBRACKET SEMICOLON
+    (10) variable_def -> . type ID ASSIGN expression SEMICOLON
+    (11) variable_def -> . DYNAMIC ID ASSIGN expression SEMICOLON
+    (12) variable_def -> . VAR ID ASSIGN expression SEMICOLON
+    (13) variable_def -> . STATIC type ID ASSIGN expression SEMICOLON
+    (14) variable_def -> . STATIC VAR ID ASSIGN expression SEMICOLON
+    (15) variable_def -> . STATIC DYNAMIC ID ASSIGN expression SEMICOLON
+    (27) if_block -> . IF LPAREN conditions RPAREN LBRACKET statement_composed RBRACKET
+    (47) type -> . STRING
+    (48) type -> . INT
+    (49) type -> . DOUBLE
+    (50) type -> . BOOL
+
+    RBRACKET        shift and go to state 144
+    SEMICOLON       shift and go to state 9
+    PRINT           shift and go to state 10
+    VOID            shift and go to state 13
+    LIST            shift and go to state 14
+    DYNAMIC         shift and go to state 15
+    VAR             shift and go to state 16
+    STATIC          shift and go to state 17
+    IF              shift and go to state 18
+    STRING          shift and go to state 19
+    INT             shift and go to state 20
+    DOUBLE          shift and go to state 21
+    BOOL            shift and go to state 22
+
+    statement                      shift and go to state 23
+    print                          shift and go to state 4
+    control_structures             shift and go to state 5
+    function                       shift and go to state 6
+    list_def                       shift and go to state 7
+    variable_def                   shift and go to state 8
+    if_block                       shift and go to state 11
+    type                           shift and go to state 12
+
+state 140
+
+    (42) function -> VOID ID LPAREN RPAREN LBRACKET statement_composed RBRACKET .
+
+    SEMICOLON       reduce using rule 42 (function -> VOID ID LPAREN RPAREN LBRACKET statement_composed RBRACKET .)
+    PRINT           reduce using rule 42 (function -> VOID ID LPAREN RPAREN LBRACKET statement_composed RBRACKET .)
+    VOID            reduce using rule 42 (function -> VOID ID LPAREN RPAREN LBRACKET statement_composed RBRACKET .)
+    LIST            reduce using rule 42 (function -> VOID ID LPAREN RPAREN LBRACKET statement_composed RBRACKET .)
+    DYNAMIC         reduce using rule 42 (function -> VOID ID LPAREN RPAREN LBRACKET statement_composed RBRACKET .)
+    VAR             reduce using rule 42 (function -> VOID ID LPAREN RPAREN LBRACKET statement_composed RBRACKET .)
+    STATIC          reduce using rule 42 (function -> VOID ID LPAREN RPAREN LBRACKET statement_composed RBRACKET .)
+    IF              reduce using rule 42 (function -> VOID ID LPAREN RPAREN LBRACKET statement_composed RBRACKET .)
+    STRING          reduce using rule 42 (function -> VOID ID LPAREN RPAREN LBRACKET statement_composed RBRACKET .)
+    INT             reduce using rule 42 (function -> VOID ID LPAREN RPAREN LBRACKET statement_composed RBRACKET .)
+    DOUBLE          reduce using rule 42 (function -> VOID ID LPAREN RPAREN LBRACKET statement_composed RBRACKET .)
+    BOOL            reduce using rule 42 (function -> VOID ID LPAREN RPAREN LBRACKET statement_composed RBRACKET .)
+    $end            reduce using rule 42 (function -> VOID ID LPAREN RPAREN LBRACKET statement_composed RBRACKET .)
+    RBRACKET        reduce using rule 42 (function -> VOID ID LPAREN RPAREN LBRACKET statement_composed RBRACKET .)
+
+
+state 141
+
+    (52) list_def -> LIST LESS type GREATER ID ASSIGN LBRACKET . value_list RBRACKET SEMICOLON
+    (53) value_list -> . value
+    (54) value_list -> . value_list COMMA value
+    (55) value -> . INT
+    (56) value -> . FLOAT
+    (57) value -> . STRING
+    (58) value -> . ID
+    (59) value -> . TRUE
+    (60) value -> . FALSE
+
+    INT             shift and go to state 40
+    FLOAT           shift and go to state 41
+    STRING          shift and go to state 42
+    ID              shift and go to state 43
+    TRUE            shift and go to state 44
+    FALSE           shift and go to state 45
+
+    value_list                     shift and go to state 145
+    value                          shift and go to state 51
+
+state 142
+
+    (27) if_block -> IF LPAREN conditions RPAREN LBRACKET statement_composed RBRACKET .
+
+    ELSE            reduce using rule 27 (if_block -> IF LPAREN conditions RPAREN LBRACKET statement_composed RBRACKET .)
+    SEMICOLON       reduce using rule 27 (if_block -> IF LPAREN conditions RPAREN LBRACKET statement_composed RBRACKET .)
+    PRINT           reduce using rule 27 (if_block -> IF LPAREN conditions RPAREN LBRACKET statement_composed RBRACKET .)
+    VOID            reduce using rule 27 (if_block -> IF LPAREN conditions RPAREN LBRACKET statement_composed RBRACKET .)
+    LIST            reduce using rule 27 (if_block -> IF LPAREN conditions RPAREN LBRACKET statement_composed RBRACKET .)
+    DYNAMIC         reduce using rule 27 (if_block -> IF LPAREN conditions RPAREN LBRACKET statement_composed RBRACKET .)
+    VAR             reduce using rule 27 (if_block -> IF LPAREN conditions RPAREN LBRACKET statement_composed RBRACKET .)
+    STATIC          reduce using rule 27 (if_block -> IF LPAREN conditions RPAREN LBRACKET statement_composed RBRACKET .)
+    IF              reduce using rule 27 (if_block -> IF LPAREN conditions RPAREN LBRACKET statement_composed RBRACKET .)
+    STRING          reduce using rule 27 (if_block -> IF LPAREN conditions RPAREN LBRACKET statement_composed RBRACKET .)
+    INT             reduce using rule 27 (if_block -> IF LPAREN conditions RPAREN LBRACKET statement_composed RBRACKET .)
+    DOUBLE          reduce using rule 27 (if_block -> IF LPAREN conditions RPAREN LBRACKET statement_composed RBRACKET .)
+    BOOL            reduce using rule 27 (if_block -> IF LPAREN conditions RPAREN LBRACKET statement_composed RBRACKET .)
+    $end            reduce using rule 27 (if_block -> IF LPAREN conditions RPAREN LBRACKET statement_composed RBRACKET .)
+    RBRACKET        reduce using rule 27 (if_block -> IF LPAREN conditions RPAREN LBRACKET statement_composed RBRACKET .)
+
+
+state 143
+
+    (39) function -> type ID LPAREN parameters RPAREN LBRACKET statement_composed RBRACKET .
+
+    SEMICOLON       reduce using rule 39 (function -> type ID LPAREN parameters RPAREN LBRACKET statement_composed RBRACKET .)
+    PRINT           reduce using rule 39 (function -> type ID LPAREN parameters RPAREN LBRACKET statement_composed RBRACKET .)
+    VOID            reduce using rule 39 (function -> type ID LPAREN parameters RPAREN LBRACKET statement_composed RBRACKET .)
+    LIST            reduce using rule 39 (function -> type ID LPAREN parameters RPAREN LBRACKET statement_composed RBRACKET .)
+    DYNAMIC         reduce using rule 39 (function -> type ID LPAREN parameters RPAREN LBRACKET statement_composed RBRACKET .)
+    VAR             reduce using rule 39 (function -> type ID LPAREN parameters RPAREN LBRACKET statement_composed RBRACKET .)
+    STATIC          reduce using rule 39 (function -> type ID LPAREN parameters RPAREN LBRACKET statement_composed RBRACKET .)
+    IF              reduce using rule 39 (function -> type ID LPAREN parameters RPAREN LBRACKET statement_composed RBRACKET .)
+    STRING          reduce using rule 39 (function -> type ID LPAREN parameters RPAREN LBRACKET statement_composed RBRACKET .)
+    INT             reduce using rule 39 (function -> type ID LPAREN parameters RPAREN LBRACKET statement_composed RBRACKET .)
+    DOUBLE          reduce using rule 39 (function -> type ID LPAREN parameters RPAREN LBRACKET statement_composed RBRACKET .)
+    BOOL            reduce using rule 39 (function -> type ID LPAREN parameters RPAREN LBRACKET statement_composed RBRACKET .)
+    $end            reduce using rule 39 (function -> type ID LPAREN parameters RPAREN LBRACKET statement_composed RBRACKET .)
+    RBRACKET        reduce using rule 39 (function -> type ID LPAREN parameters RPAREN LBRACKET statement_composed RBRACKET .)
+
+
+state 144
+
+    (40) function -> VOID ID LPAREN parameters RPAREN LBRACKET statement_composed RBRACKET .
+
+    SEMICOLON       reduce using rule 40 (function -> VOID ID LPAREN parameters RPAREN LBRACKET statement_composed RBRACKET .)
+    PRINT           reduce using rule 40 (function -> VOID ID LPAREN parameters RPAREN LBRACKET statement_composed RBRACKET .)
+    VOID            reduce using rule 40 (function -> VOID ID LPAREN parameters RPAREN LBRACKET statement_composed RBRACKET .)
+    LIST            reduce using rule 40 (function -> VOID ID LPAREN parameters RPAREN LBRACKET statement_composed RBRACKET .)
+    DYNAMIC         reduce using rule 40 (function -> VOID ID LPAREN parameters RPAREN LBRACKET statement_composed RBRACKET .)
+    VAR             reduce using rule 40 (function -> VOID ID LPAREN parameters RPAREN LBRACKET statement_composed RBRACKET .)
+    STATIC          reduce using rule 40 (function -> VOID ID LPAREN parameters RPAREN LBRACKET statement_composed RBRACKET .)
+    IF              reduce using rule 40 (function -> VOID ID LPAREN parameters RPAREN LBRACKET statement_composed RBRACKET .)
+    STRING          reduce using rule 40 (function -> VOID ID LPAREN parameters RPAREN LBRACKET statement_composed RBRACKET .)
+    INT             reduce using rule 40 (function -> VOID ID LPAREN parameters RPAREN LBRACKET statement_composed RBRACKET .)
+    DOUBLE          reduce using rule 40 (function -> VOID ID LPAREN parameters RPAREN LBRACKET statement_composed RBRACKET .)
+    BOOL            reduce using rule 40 (function -> VOID ID LPAREN parameters RPAREN LBRACKET statement_composed RBRACKET .)
+    $end            reduce using rule 40 (function -> VOID ID LPAREN parameters RPAREN LBRACKET statement_composed RBRACKET .)
+    RBRACKET        reduce using rule 40 (function -> VOID ID LPAREN parameters RPAREN LBRACKET statement_composed RBRACKET .)
+
+
+state 145
+
+    (52) list_def -> LIST LESS type GREATER ID ASSIGN LBRACKET value_list . RBRACKET SEMICOLON
+    (54) value_list -> value_list . COMMA value
+
+    RBRACKET        shift and go to state 146
+    COMMA           shift and go to state 81
+
+
+state 146
+
+    (52) list_def -> LIST LESS type GREATER ID ASSIGN LBRACKET value_list RBRACKET . SEMICOLON
+
+    SEMICOLON       shift and go to state 147
+
+
+state 147
+
+    (52) list_def -> LIST LESS type GREATER ID ASSIGN LBRACKET value_list RBRACKET SEMICOLON .
+
+    SEMICOLON       reduce using rule 52 (list_def -> LIST LESS type GREATER ID ASSIGN LBRACKET value_list RBRACKET SEMICOLON .)
+    PRINT           reduce using rule 52 (list_def -> LIST LESS type GREATER ID ASSIGN LBRACKET value_list RBRACKET SEMICOLON .)
+    VOID            reduce using rule 52 (list_def -> LIST LESS type GREATER ID ASSIGN LBRACKET value_list RBRACKET SEMICOLON .)
+    LIST            reduce using rule 52 (list_def -> LIST LESS type GREATER ID ASSIGN LBRACKET value_list RBRACKET SEMICOLON .)
+    DYNAMIC         reduce using rule 52 (list_def -> LIST LESS type GREATER ID ASSIGN LBRACKET value_list RBRACKET SEMICOLON .)
+    VAR             reduce using rule 52 (list_def -> LIST LESS type GREATER ID ASSIGN LBRACKET value_list RBRACKET SEMICOLON .)
+    STATIC          reduce using rule 52 (list_def -> LIST LESS type GREATER ID ASSIGN LBRACKET value_list RBRACKET SEMICOLON .)
+    IF              reduce using rule 52 (list_def -> LIST LESS type GREATER ID ASSIGN LBRACKET value_list RBRACKET SEMICOLON .)
+    STRING          reduce using rule 52 (list_def -> LIST LESS type GREATER ID ASSIGN LBRACKET value_list RBRACKET SEMICOLON .)
+    INT             reduce using rule 52 (list_def -> LIST LESS type GREATER ID ASSIGN LBRACKET value_list RBRACKET SEMICOLON .)
+    DOUBLE          reduce using rule 52 (list_def -> LIST LESS type GREATER ID ASSIGN LBRACKET value_list RBRACKET SEMICOLON .)
+    BOOL            reduce using rule 52 (list_def -> LIST LESS type GREATER ID ASSIGN LBRACKET value_list RBRACKET SEMICOLON .)
+    $end            reduce using rule 52 (list_def -> LIST LESS type GREATER ID ASSIGN LBRACKET value_list RBRACKET SEMICOLON .)
+    RBRACKET        reduce using rule 52 (list_def -> LIST LESS type GREATER ID ASSIGN LBRACKET value_list RBRACKET SEMICOLON .)
+
+WARNING: 
+WARNING: Conflicts:
+WARNING: 
+WARNING: shift/reduce conflict for RPAREN in state 38 resolved as shift
+WARNING: shift/reduce conflict for PLUS in state 38 resolved as shift
+WARNING: shift/reduce conflict for PLUS in state 77 resolved as shift
+WARNING: shift/reduce conflict for PLUS in state 101 resolved as shift
+WARNING: shift/reduce conflict for MINUS in state 101 resolved as shift
+WARNING: shift/reduce conflict for TIMES in state 101 resolved as shift
+WARNING: shift/reduce conflict for DIVIDE in state 101 resolved as shift
+WARNING: shift/reduce conflict for PLUS in state 102 resolved as shift
+WARNING: shift/reduce conflict for MINUS in state 102 resolved as shift
+WARNING: shift/reduce conflict for TIMES in state 102 resolved as shift
+WARNING: shift/reduce conflict for DIVIDE in state 102 resolved as shift
+WARNING: shift/reduce conflict for PLUS in state 103 resolved as shift
+WARNING: shift/reduce conflict for MINUS in state 103 resolved as shift
+WARNING: shift/reduce conflict for TIMES in state 103 resolved as shift
+WARNING: shift/reduce conflict for DIVIDE in state 103 resolved as shift
+WARNING: shift/reduce conflict for PLUS in state 104 resolved as shift
+WARNING: shift/reduce conflict for MINUS in state 104 resolved as shift
+WARNING: shift/reduce conflict for TIMES in state 104 resolved as shift
+WARNING: shift/reduce conflict for DIVIDE in state 104 resolved as shift

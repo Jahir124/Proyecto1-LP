@@ -27,7 +27,33 @@ reserved = {
     "length": "LENGTH",
     "dynamic": "DYNAMIC",
     "stdin": "STDIN",
-    "readLineSync": "READLINESYNC"
+    "readLineSync": "READLINESYNC",
+    "class": "CLASS",
+    "extends": "EXTENDS",
+    "implements": "IMPLEMENTS",
+    "with": "WITH",
+    "static": "STATIC",
+    "abstract": "ABSTRACT",
+    "enum": "ENUM",
+    "super": "SUPER",
+    "try": "TRY",
+    "catch": "CATCH",
+    "finally": "FINALLY",
+    "throw": "THROW",
+    "assert": "ASSERT",
+    "break": "BREAK",
+    "continue": "CONTINUE",
+    "switch": "SWITCH",
+    "case": "CASE",
+    "default": "DEFAULT",
+    "do": "DO",
+    "import": "IMPORT",
+    "export": "EXPORT",
+    "library": "LIBRARY",
+    "part": "PART",
+    "partOf": "PARTOF",
+    "as": "AS",
+    "is": "IS"
 }
 
 # Lista de tokens
@@ -70,7 +96,11 @@ tokens = (
     'MINUS_EQUAL',
     'TIMES_EQUAL',
     'DIVIDE_EQUAL',
-    'MODULE_EQUAL'
+    'MODULE_EQUAL',
+    'DOLLAR_SIGN',
+    'QUOTATION_MARK',
+    'SINGLE_QUOTE',
+    'CIRCUMFLEX',
 ) + tuple(reserved.values())
 
 
@@ -112,6 +142,10 @@ t_ARROW           = r'=>'
 t_COLON           = r':'
 t_DOUBLE_COLON    = r'::'
 t_QUESTION        = r'\?'
+t_DOLLAR_SIGN     = r'\$'
+t_QUOTATION_MARK  = r'\"'
+t_SINGLE_QUOTE    = r'\''
+t_CIRCUMFLEX      = r'\^'
 
 # Ignorar espacios y tabulaciones
 t_ignore = ' \t'
