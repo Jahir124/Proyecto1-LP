@@ -142,7 +142,7 @@ def t_STRING(t):
 
 def t_ID(t):
     r'[a-zA-Z_][a-zA-Z0-9_]*'
-    t.type = reserved.get(t.value, 'ID') 
+    t.type = reserved.get(t.value, 'ID')
     return t
 
 # Seguimiento de líneas
@@ -158,87 +158,37 @@ def t_error(t):
 #Construcción del lexer
 lexer = lex.lex()
 
-# Prueba rápida Algoritmo Jahir
-if __name__ == "__main__":
-    data = '''
-        int binarySearch(List<int> listIntegers, int target) {
-         int start = 0;
-         int end = listIntegers.length - 1;
-         while (start <= end) {
-         int half = (start + end) ~/ 2; // ~/ It's integer division
-         if (listIntegers[half] == target) {
-         return half; // Found, return the index
-         } else if (listIntegers[medio] < target) {
-         start = half + 1;
-         } else {
-         end = half - 1;
-         }
-         }
-         return -1; // Not found
-        }
-    '''
+lexic_results = []
+def analyze_tokens(data):
+    global results
+    lexic_results.clear()
+    lexer.input(data)
 
-#Prueba rápida Algoritmo Javier
-if __name__ == "__main__":
-    data2 = '''
-            // Algoritmo de búsqueda con estadísticas básicas 
-            class Analizador { 
-            List<int> datos; 
-            Map<String, dynamic> resumen; 
-            Analizador(this.datos) { 
-            resumen = {"min": 0, "max": 0, "promedio": 0.0, "existe": 
-            false}; 
-            } 
-            int busquedaBinaria(int objetivo) { 
-            int ini = 0, fin = datos.length - 1; 
-            while (ini <= fin) { 
-            int mid = (ini + fin) ~/ 2; 
-            if (datos[mid] == objetivo) { 
-            resumen["existe"] = true; 
-            return mid; 
-            } else if (datos[mid] < objetivo) { 
-            ini = mid + 1; 
-            } else { 
-            fin = mid - 1; 
-            } 
-            } 
-            return -1; 
-            } 
-            void calcularResumen() { 
-            int suma = 0, min = datos[0], max = datos[0]; 
-            for (int val in datos) { 
-            suma += val; 
-            if (val < min) min = val; 
-            if (val > max) max = val; 
-            } 
-            resumen["min"] = min; 
-            resumen["max"] = max; 
-            resumen["promedio"] = suma / datos.length; 
-            } 
-            void mostrarResumen() { 
-            print("Resumen:"); 
-            print("Min: ${resumen["min"]}, Max: ${resumen["max"]}, 
-            Promedio: ${resumen["promedio"]}"); 
-            print("Elemento buscado existe: ${resumen["existe"]}"); 
-            } 
-            } 
-            void main() { 
-            List<int> lista = [3, 6, 8, 12, 15, 20]; 
-            int objetivo = 12; 
-            var analizador = Analizador(lista); 
-            int pos = analizador.busquedaBinaria(objetivo); 
-            analizador.calcularResumen(); 
-            if (pos != -1) { 
-            print("Elemento encontrado en posición $pos"); 
-            } else { 
-            print("Elemento no encontrado"); 
-            } 
-            analizador.mostrarResumen(); 
-            var entrada = 2.34;
-            }
+    while True:
+        tok = lexer.token()
+        if not tok:
+            break
+        lexic_results.append(str(tok))
+        print(tok)
 
-        '''
+    return lexic_results
 
-lexer.input(data)
-for tok in lexer:
-    print(tok)
+algorithm = """
+    int binarySearch(List<int> listIntegers, int target) {
+     int start = 0;
+     int end = listIntegers.length - 1;
+     while (start <= end) {
+      int half = (start + end) ~/ 2; // ~/ It's integer division
+      if (listIntegers[half] == target) {
+       return half; // Found, return the index
+      } else if (listIntegers[medio] < target) {
+       start = half + 1;
+      } else {
+       end = half - 1;
+      }
+     }
+     return -1; // Not found
+    }
+"""
+
+result = analyze_tokens(algorithm)
