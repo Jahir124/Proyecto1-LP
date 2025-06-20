@@ -53,7 +53,8 @@ reserved = {
     "part": "PART",
     "partOf": "PARTOF",
     "as": "AS",
-    "is": "IS"
+    "is": "IS",
+    "new" : "NEW"
 }
 
 # Lista de tokens

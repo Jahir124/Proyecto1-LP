@@ -19,7 +19,8 @@ def p_statement(p):
                  | function_call
                  | return_statement
                  | incdec_statement
-                 | class_def'''
+                 | class_def
+                 | object_instantiation'''
 
 def p_variable_def(p):
     '''variable_def : type ID ASSIGN expression SEMICOLON
@@ -136,6 +137,31 @@ def p_type(p):
             | INT
             | DOUBLE
             | BOOL'''
+def p_object_instantiation(p):
+    '''object_instantiation : VAR ID ASSIGN NEW ID LPAREN argument_list_opt RPAREN SEMICOLON
+                            | type ID ASSIGN NEW ID LPAREN argument_list_opt RPAREN SEMICOLON
+                            | VAR ID ASSIGN ID LPAREN argument_list_opt RPAREN SEMICOLON
+                            | type ID ASSIGN ID LPAREN argument_list_opt RPAREN SEMICOLON
+                            | ID ID ASSIGN NEW ID LPAREN argument_list_opt RPAREN SEMICOLON
+                            | ID ID ASSIGN ID LPAREN argument_list_opt RPAREN SEMICOLON
+                            | ID ASSIGN NEW ID LPAREN argument_list_opt RPAREN SEMICOLON
+                            | ID ASSIGN ID LPAREN argument_list_opt RPAREN SEMICOLON
+                            | ID ASSIGN NEW ID LPAREN RPAREN SEMICOLON
+                            | ID ASSIGN ID LPAREN RPAREN SEMICOLON
+                            | VAR ID ASSIGN NEW ID LPAREN RPAREN SEMICOLON
+                            | VAR ID ASSIGN ID LPAREN RPAREN SEMICOLON
+                            | type ID ASSIGN NEW ID LPAREN RPAREN SEMICOLON
+                            | type ID ASSIGN ID LPAREN RPAREN SEMICOLON
+    '''
+
+def p_argument_list_opt(p):
+    '''argument_list_opt : argument_list
+                         | empty'''
+
+def p_empty(p):
+    'empty :'
+    pass
+
 
 # Lists
 def p_list_def(p):
