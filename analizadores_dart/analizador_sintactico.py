@@ -11,9 +11,12 @@ def p_statement_composed(p):
 
 def p_statement(p):
     '''statement : print_stmt
+                 | input_stmt
                  | control_structures
                  | function
+                 | lambda_function
                  | list_def
+                 | map_def
                  | variable_def
                  | SEMICOLON
                  | function_call
@@ -35,6 +38,12 @@ def p_print_stmt(p):
     '''print_stmt : PRINT LPAREN RPAREN SEMICOLON
                   | PRINT LPAREN value RPAREN SEMICOLON
                   | PRINT LPAREN expression RPAREN SEMICOLON'''
+
+# Input
+def p_input_stmt(p):
+    '''input_stmt : STDIN DOT READLINESYNC LPAREN RPAREN SEMICOLON
+                  | VAR ID ASSIGN STDIN DOT READLINESYNC LPAREN RPAREN SEMICOLON
+                  | type ID ASSIGN STDIN DOT READLINESYNC LPAREN RPAREN SEMICOLON'''
 
 # Expressions
 def p_expression_arithmetic(p):
@@ -67,7 +76,8 @@ def p_incdec_statement(p):
 def p_control_structures(p):
     '''control_structures : if_block
                           | if_block else_block
-                          | while_loop'''
+                          | while_loop
+                          | for_loop'''
 
 def p_if_block(p):
     '''if_block : IF LPAREN conditions RPAREN LBRACE statement_composed RBRACE'''
@@ -122,8 +132,52 @@ def p_return_statement(p):
 def p_while_loop(p):
     '''while_loop : WHILE LPAREN conditions RPAREN LBRACE statement_composed RBRACE'''
 
+# For loop (Estructura de control)
+def p_for_loop(p):
+    '''for_loop : FOR LPAREN for_init SEMICOLON conditions SEMICOLON for_update RPAREN LBRACE statement_composed RBRACE
+                | FOR LPAREN type ID IN ID RPAREN LBRACE statement_composed RBRACE'''
+
+def p_for_init(p):
+    '''for_init : variable_def
+                | empty'''
+
+def p_for_update(p):
+    '''for_update : incdec_statement
+                  | ID ASSIGN expression
+                  | empty'''
+
 def p_class_body(p):
-    '''class_body : statement_composed'''
+    '''class_body : class_member
+                  | class_body class_member'''
+
+def p_class_member(p):
+    '''class_member : class_property
+                    | class_method
+                    | constructor'''
+
+def p_class_property(p):
+    '''class_property : type ID SEMICOLON
+                      | VAR ID SEMICOLON
+                      | FINAL type ID SEMICOLON
+                      | CONST type ID SEMICOLON
+                      | STATIC type ID SEMICOLON
+                      | type ID ASSIGN expression SEMICOLON
+                      | VAR ID ASSIGN expression SEMICOLON
+                      | FINAL type ID ASSIGN expression SEMICOLON
+                      | CONST type ID ASSIGN expression SEMICOLON
+                      | STATIC type ID ASSIGN expression SEMICOLON'''
+
+def p_class_method(p):
+    '''class_method : type ID LPAREN parameters RPAREN LBRACE statement_composed RBRACE
+                    | VOID ID LPAREN parameters RPAREN LBRACE statement_composed RBRACE
+                    | type ID LPAREN RPAREN LBRACE statement_composed RBRACE
+                    | VOID ID LPAREN RPAREN LBRACE statement_composed RBRACE
+                    | STATIC type ID LPAREN parameters RPAREN LBRACE statement_composed RBRACE
+                    | STATIC VOID ID LPAREN parameters RPAREN LBRACE statement_composed RBRACE'''
+
+def p_constructor(p):
+    '''constructor : ID LPAREN parameters RPAREN LBRACE statement_composed RBRACE
+                   | ID LPAREN RPAREN LBRACE statement_composed RBRACE'''
 
 def p_class_def(p):
     '''class_def : CLASS ID LBRACE class_body RBRACE
@@ -172,6 +226,18 @@ def p_value_list(p):
     '''value_list : value
                   | value_list COMMA value'''
 
+# Maps (Estructura de datos)
+def p_map_def(p):
+    '''map_def : MAP LESS type COMMA type GREATER ID ASSIGN LBRACE map_entries RBRACE SEMICOLON
+               | MAP ID ASSIGN LBRACE map_entries RBRACE SEMICOLON'''
+
+def p_map_entries(p):
+    '''map_entries : map_entry
+                   | map_entries COMMA map_entry'''
+
+def p_map_entry(p):
+    '''map_entry : value COLON value'''
+
 # Values
 def p_value(p):
     '''value : INT
@@ -180,6 +246,13 @@ def p_value(p):
              | ID
              | TRUE
              | FALSE'''
+
+# Lambda functions (Tipo de función)
+def p_lambda_function(p):
+    '''lambda_function : type ID ASSIGN LPAREN parameters RPAREN ARROW expression SEMICOLON
+                       | VAR ID ASSIGN LPAREN parameters RPAREN ARROW expression SEMICOLON
+                       | type ID ASSIGN LPAREN RPAREN ARROW expression SEMICOLON
+                       | VAR ID ASSIGN LPAREN RPAREN ARROW expression SEMICOLON'''
 
 sintactic_results = []
 
