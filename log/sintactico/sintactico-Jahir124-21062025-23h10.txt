@@ -1,0 +1,7 @@
+Syntax error at token 'LIST' (value: 'List') on line 182
+Syntax error at token 'DOT' (value: '.') on line 184
+Syntax error at token 'LBRACKET' (value: '[') on line 187
+Syntax error at token 'RBRACE' (value: '}') on line 189
+Syntax error at token 'LBRACKET' (value: '[') on line 189
+Syntax error at token 'PLUS' (value: '+') on line 190
+Syntax error at token 'MINUS' (value: '-') on line 192
