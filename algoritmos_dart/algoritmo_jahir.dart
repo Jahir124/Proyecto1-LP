@@ -43,7 +43,7 @@ void main() {
   Estudiante? buscado = buscarEstudiante(estudiantes, nombreBuscado);
 
   if (buscado != null) {
-    print("\n🔍 Estudiante encontrado: ${buscado.nombre}");
+    print("\n Estudiante encontrado: ${buscado.nombre}");
     print("Promedio: ${buscado.promedio}");
   } else {
     print("\n Estudiante '$nombreBuscado' no encontrado.");
