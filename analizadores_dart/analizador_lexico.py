@@ -1,4 +1,5 @@
 import ply.lex as lex
+from datetime import datetime
 
 reserved = {
     "String": "STRING",
@@ -16,7 +17,7 @@ reserved = {
     "void": "VOID",
     "final": "FINAL",
     "const": "CONST",
-    "function": "FUNCTION",
+    "Function": "FUNCTION",
     "for": "FOR",
     "while": "WHILE",
     "required": "REQUIRED",
@@ -51,7 +52,7 @@ reserved = {
     "export": "EXPORT",
     "library": "LIBRARY",
     "part": "PART",
-    "partOf": "PARTOF",
+    "of": "OF",
     "as": "AS",
     "is": "IS",
     "new" : "NEW"
@@ -227,3 +228,32 @@ algorithm = """
 """
 
 result = analyze_tokens(algorithm)
+
+archivos = {
+    "javierkiu": "algoritmos_dart/algoritmo_javier.dart",
+    "Jahir124" : "algoritmos_dart/algoritmo_jahir.dart",
+    "drac2606" : "algoritmos_dart/algoritmo_dario.dart"
+}
+
+
+ahora = datetime.now()
+fecha = ahora.strftime("%d%m%Y")
+hora = ahora.strftime("%Hh%M")
+
+for user, file in archivos.items():
+    with open(file, "r") as f:
+        data = f.read()
+
+    logname = f"log/lexico/lexico-{user}-{fecha}-{hora}.txt"
+    with open(logname, "w") as f:
+        lexer.input(data)
+
+        while True:
+            tok = lexer.token()
+            if not tok:
+                break
+            lexic_results.append(str(tok))
+            print(tok)
+            f.write(str(tok) + '\n')
+
+

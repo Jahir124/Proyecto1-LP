@@ -1,5 +1,6 @@
 import ply.yacc as yacc
 from analizador_lexico import tokens
+from datetime import datetime
 
 #Inicio Aporte Jahir Cajas
 def p_compiler(p):
@@ -60,17 +61,6 @@ def p_expression_paren(p):
 def p_expression_value(p):
     '''expression : value'''
 
-def p_expression_incdec(p):
-    '''expression : ID INCREMENT
-                  | ID DECREMENT
-                  | INCREMENT ID
-                  | DECREMENT ID'''
-
-def p_incdec_statement(p):
-    '''incdec_statement : ID INCREMENT SEMICOLON
-                        | ID DECREMENT SEMICOLON
-                        | INCREMENT ID SEMICOLON
-                        | DECREMENT ID SEMICOLON'''
 
 # Conditionals
 def p_control_structures(p):
@@ -116,6 +106,19 @@ def p_parameters(p):
 def p_parameter(p):
     '''parameter : type ID
                  | REQUIRED type ID'''
+    
+# APORTE JAVIER RODRIGUEZ    
+def p_expression_incdec(p):
+    '''expression : ID INCREMENT
+                  | ID DECREMENT
+                  | INCREMENT ID
+                  | DECREMENT ID'''
+
+def p_incdec_statement(p):
+    '''incdec_statement : ID INCREMENT SEMICOLON
+                        | ID DECREMENT SEMICOLON
+                        | INCREMENT ID SEMICOLON
+                        | DECREMENT ID SEMICOLON'''
 
 def p_function_call(p):
     '''function_call : ID LPAREN RPAREN SEMICOLON
@@ -132,10 +135,40 @@ def p_return_statement(p):
 def p_while_loop(p):
     '''while_loop : WHILE LPAREN conditions RPAREN LBRACE statement_composed RBRACE'''
 
+def p_object_instantiation(p):
+    '''object_instantiation : VAR ID ASSIGN NEW ID LPAREN argument_list_opt RPAREN SEMICOLON
+                            | type ID ASSIGN NEW ID LPAREN argument_list_opt RPAREN SEMICOLON
+                            | VAR ID ASSIGN ID LPAREN argument_list_opt RPAREN SEMICOLON
+                            | type ID ASSIGN ID LPAREN argument_list_opt RPAREN SEMICOLON
+                            | ID ID ASSIGN NEW ID LPAREN argument_list_opt RPAREN SEMICOLON
+                            | ID ID ASSIGN ID LPAREN argument_list_opt RPAREN SEMICOLON
+                            | ID ASSIGN NEW ID LPAREN argument_list_opt RPAREN SEMICOLON
+                            | ID ASSIGN ID LPAREN argument_list_opt RPAREN SEMICOLON
+                            | ID ASSIGN NEW ID LPAREN RPAREN SEMICOLON
+                            | ID ASSIGN ID LPAREN RPAREN SEMICOLON
+                            | VAR ID ASSIGN NEW ID LPAREN RPAREN SEMICOLON
+                            | VAR ID ASSIGN ID LPAREN RPAREN SEMICOLON
+                            | type ID ASSIGN NEW ID LPAREN RPAREN SEMICOLON
+                            | type ID ASSIGN ID LPAREN RPAREN SEMICOLON
+    '''
+
+def p_class_body(p):
+    '''class_body : class_member
+                  | class_body class_member'''
+
+def p_class_def(p):
+    '''class_def : CLASS ID LBRACE class_body RBRACE
+                 | CLASS ID EXTENDS ID LBRACE class_body RBRACE
+                 | CLASS ID IMPLEMENTS ID LBRACE class_body RBRACE
+                 | CLASS ID EXTENDS ID IMPLEMENTS ID LBRACE class_body RBRACE'''
+#FIN APORTE
+
+
 # For loop (Estructura de control)
 def p_for_loop(p):
     '''for_loop : FOR LPAREN for_init SEMICOLON conditions SEMICOLON for_update RPAREN LBRACE statement_composed RBRACE
                 | FOR LPAREN type ID IN ID RPAREN LBRACE statement_composed RBRACE'''
+
 
 def p_for_init(p):
     '''for_init : variable_def
@@ -146,9 +179,6 @@ def p_for_update(p):
                   | ID ASSIGN expression
                   | empty'''
 
-def p_class_body(p):
-    '''class_body : class_member
-                  | class_body class_member'''
 
 def p_class_member(p):
     '''class_member : class_property
@@ -179,11 +209,6 @@ def p_constructor(p):
     '''constructor : ID LPAREN parameters RPAREN LBRACE statement_composed RBRACE
                    | ID LPAREN RPAREN LBRACE statement_composed RBRACE'''
 
-def p_class_def(p):
-    '''class_def : CLASS ID LBRACE class_body RBRACE
-                 | CLASS ID EXTENDS ID LBRACE class_body RBRACE
-                 | CLASS ID IMPLEMENTS ID LBRACE class_body RBRACE
-                 | CLASS ID EXTENDS ID IMPLEMENTS ID LBRACE class_body RBRACE'''
 
 #Data Types
 def p_type(p):
@@ -191,22 +216,6 @@ def p_type(p):
             | INT
             | DOUBLE
             | BOOL'''
-def p_object_instantiation(p):
-    '''object_instantiation : VAR ID ASSIGN NEW ID LPAREN argument_list_opt RPAREN SEMICOLON
-                            | type ID ASSIGN NEW ID LPAREN argument_list_opt RPAREN SEMICOLON
-                            | VAR ID ASSIGN ID LPAREN argument_list_opt RPAREN SEMICOLON
-                            | type ID ASSIGN ID LPAREN argument_list_opt RPAREN SEMICOLON
-                            | ID ID ASSIGN NEW ID LPAREN argument_list_opt RPAREN SEMICOLON
-                            | ID ID ASSIGN ID LPAREN argument_list_opt RPAREN SEMICOLON
-                            | ID ASSIGN NEW ID LPAREN argument_list_opt RPAREN SEMICOLON
-                            | ID ASSIGN ID LPAREN argument_list_opt RPAREN SEMICOLON
-                            | ID ASSIGN NEW ID LPAREN RPAREN SEMICOLON
-                            | ID ASSIGN ID LPAREN RPAREN SEMICOLON
-                            | VAR ID ASSIGN NEW ID LPAREN RPAREN SEMICOLON
-                            | VAR ID ASSIGN ID LPAREN RPAREN SEMICOLON
-                            | type ID ASSIGN NEW ID LPAREN RPAREN SEMICOLON
-                            | type ID ASSIGN ID LPAREN RPAREN SEMICOLON
-    '''
 
 def p_argument_list_opt(p):
     '''argument_list_opt : argument_list
@@ -267,7 +276,37 @@ def p_error(p):
 
 parser = yacc.yacc()
 
+def analyze_syntax(data):
+    sintactic_results.clear()
+    result = parser.parse(data)
+    sintactic_results.append(f"Parsing result : {result}")
+    print(f"Parsing result : {result}")
+    return sintactic_results
 
+# --- Logging process for all user files ---
+archivos = {
+    "javierkiu": "algoritmos_dart/algoritmo_javier.dart",
+    "Jahir124" : "algoritmos_dart/algoritmo_jahir.dart",
+    "drac2606" : "algoritmos_dart/algoritmo_dario.dart"
+}
+
+ahora = datetime.now()
+fecha = ahora.strftime("%d%m%Y")
+hora = ahora.strftime("%Hh%M")
+
+for user, file in archivos.items():
+    with open(file, "r") as f:
+        data = f.read()
+
+    logname = f"log/sintactico/sintactico-{user}-{fecha}-{hora}.txt"
+    with open(logname, "w") as f:
+        sintactic_results.clear()
+        parser.parse(data)
+        for line in sintactic_results:
+            print(line)
+            f.write(str(line) + '\n')
+
+# --- Interactive test and REPL (optional, can be left as is) ---
 def test_parser(input_code):
     result = parser.parse(input_code)
     msg = f"Parsing result : {result}"
