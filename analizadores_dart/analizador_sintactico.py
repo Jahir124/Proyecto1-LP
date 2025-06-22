@@ -1,6 +1,7 @@
 import ply.yacc as yacc
 from analizador_lexico import tokens
 from datetime import datetime
+import os
 
 #Inicio Aporte Jahir Cajas
 def p_compiler(p):
@@ -283,51 +284,36 @@ def analyze_syntax(data):
     print(f"Parsing result : {result}")
     return sintactic_results
 
-# --- Logging process for all user files ---
-archivos = {
-    "javierkiu": "algoritmos_dart/algoritmo_javier.dart",
-    "Jahir124" : "algoritmos_dart/algoritmo_jahir.dart",
-    "drac2606" : "algoritmos_dart/algoritmo_dario.dart"
-}
+import os
+from datetime import datetime
 
+# Variables que usas para nombre usuario y archivo de prueba
+username = "Jahir124"  # Cambia por tu usuario
+file_test = r"C:\Users\jahir\PycharmProjects\Proyecto1-LP\algoritmos_dart\algoritmo_jahir.dart"  # Cambia por tu ruta local
+
+os.makedirs("logs", exist_ok=True)  # Crea carpeta logs si no existe
+
+# Leer archivo de entrada
+with open(file_test, "r", encoding="utf-8") as f:
+    data = f.read()
+
+# Limpiar resultados anteriores
+sintactic_results.clear()
+
+# Parsear el código fuente
+parser.parse(data)
+
+# Crear nombre del archivo log con fecha y hora
 ahora = datetime.now()
-fecha = ahora.strftime("%d%m%Y")
-hora = ahora.strftime("%Hh%M")
+fecha_hora = ahora.strftime("%d-%m-%Y-%Hh%M")
+log_filename = f"logs/sintactico-{username}-{fecha_hora}.txt"
 
-for user, file in archivos.items():
-    with open(file, "r") as f:
-        data = f.read()
+# Guardar resultados en el archivo de log
+with open(log_filename, "w", encoding="utf-8") as log_file:
+    for line in sintactic_results:
+        print(line)             # Opcional: imprimir en consola
+        log_file.write(line + "\n")
 
-    logname = f"log/sintactico/sintactico-{user}-{fecha}-{hora}.txt"
-    with open(logname, "w") as f:
-        sintactic_results.clear()
-        parser.parse(data)
-        for line in sintactic_results:
-            print(line)
-            f.write(str(line) + '\n')
-
-# --- Interactive test and REPL (optional, can be left as is) ---
-def test_parser(input_code):
-    result = parser.parse(input_code)
-    msg = f"Parsing result : {result}"
-    sintactic_results.append(msg)
-    print(msg)
-
-test_parser("""
-    int v = 10;
-    v++;
-    ++v;
-    v--;
-    --v;
-""")
-
-while True:
-   try:
-       s = input('calc > ')
-   except EOFError:
-       break
-   if not s: continue
-   result = parser.parse(s)
-   print(result)
+print(f"\nTokens sintácticos de {username} guardados en: {log_filename}")
 
 #fin Aporte Jahir
