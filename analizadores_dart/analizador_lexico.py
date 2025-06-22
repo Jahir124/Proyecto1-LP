@@ -1,6 +1,6 @@
 import ply.lex as lex
 from datetime import datetime
-
+import os
 reserved = {
     "String": "STRING",
     "double": "DOUBLE",
@@ -210,50 +210,32 @@ def analyze_tokens(data):
     return lexic_results
 
 algorithm = """
-    int binarySearch(List<int> listIntegers, int target) {
-     int start = 0;
-     int end = listIntegers.length - 1;
-     while (start <= end) {
-      int half = (start + end) ~/ 2; // ~/ It's integer division
-      if (listIntegers[half] == target) {
-       return half; // Found, return the index
-      } else if (listIntegers[medio] < target) {
-       start = half + 1;
-      } else {
-       end = half - 1;
-      }
-     }
-     return -1; // Not found
-    }
+
 """
 
 result = analyze_tokens(algorithm)
 
-archivos = {
-    "javierkiu": "algoritmos_dart/algoritmo_javier.dart",
-    "Jahir124" : "algoritmos_dart/algoritmo_jahir.dart",
-    "drac2606" : "algoritmos_dart/algoritmo_dario.dart"
-}
+username = "Jahir124" #Cambien su username
+file_test = r"C:\Users\jahir\PycharmProjects\Proyecto1-LP\algoritmos_dart\algoritmo_jahir.dart" #Cambien su local path
 
+os.makedirs("logs", exist_ok=True)
+
+with open(file_test, "r", encoding="utf-8") as f:
+    data = f.read()
 
 ahora = datetime.now()
-fecha = ahora.strftime("%d%m%Y")
-hora = ahora.strftime("%Hh%M")
+fecha_hora = ahora.strftime("%d-%m-%Y-%Hh%M")
+log_filename = f"logs/lexico-{username}-{fecha_hora}.txt"
 
-for user, file in archivos.items():
-    with open(file, "r") as f:
-        data = f.read()
+with open(log_filename, "w", encoding="utf-8") as log_file:
+    lexer.input(data)
+    while True:
+        tok = lexer.token()
+        if not tok:
+            break
+        print(tok)
+        log_file.write(str(tok) + '\n')
 
-    logname = f"log/lexico/lexico-{user}-{fecha}-{hora}.txt"
-    with open(logname, "w") as f:
-        lexer.input(data)
-
-        while True:
-            tok = lexer.token()
-            if not tok:
-                break
-            lexic_results.append(str(tok))
-            print(tok)
-            f.write(str(tok) + '\n')
+print(f"\nTokens de {username} guardados en: {log_filename}")
 
 
