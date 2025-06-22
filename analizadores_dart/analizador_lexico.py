@@ -215,8 +215,8 @@ algorithm = """
 
 result = analyze_tokens(algorithm)
 
-username = "javierkiu" #Cambien su username
-file_test = r"/home/javierkiu/lenguajes/Proyecto1-LP/algoritmos_dart/algoritmo_javier.dart" #Cambien su local path
+username = "drac2606" #Cambien su username
+file_test = r"C:\Users\Dario_Anchundia\Documents\GitHub\Proyecto1-LP\algoritmos_dart\algoritmo_dario.dart" #Cambien su local path
 
 os.makedirs("logs", exist_ok=True)
 

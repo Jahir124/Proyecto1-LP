@@ -1,0 +1,16 @@
+Syntax error at token 'QUESTION' (value: '?') on line 40
+Syntax error at token 'IN' (value: 'in') on line 47
+Syntax error at token 'SINGLE_QUOTE' (value: ''') on line 50
+Syntax error at token 'QUESTION' (value: '?') on line 57
+Syntax error at token 'THROW' (value: 'throw') on line 58
+Syntax error at token 'DOT' (value: '.') on line 59
+Syntax error at token 'DOT' (value: '.') on line 59
+Syntax error at token 'FINAL' (value: 'final') on line 60
+Syntax error at token 'DOT' (value: '.') on line 60
+Syntax error at token 'DOT' (value: '.') on line 60
+Syntax error at token 'LPAREN' (value: '(') on line 61
+Syntax error at token 'DOT' (value: '.') on line 65
+Syntax error at token 'LBRACKET' (value: '[') on line 67
+Syntax error at token 'RBRACE' (value: '}') on line 69
+Syntax error at token 'RBRACE' (value: '}') on line 72
+Syntax error at token 'RBRACE' (value: '}') on line 74

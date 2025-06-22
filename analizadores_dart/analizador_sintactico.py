@@ -288,8 +288,8 @@ import os
 from datetime import datetime
 
 # Variables que usas para nombre usuario y archivo de prueba
-username = "javierkiu"  # Cambia por tu usuario
-file_test = r"/home/javierkiu/lenguajes/Proyecto1-LP/algoritmos_dart/algoritmo_javier.dart"  # Cambia por tu ruta local
+username = "drac2606"  # Cambia por tu usuario
+file_test = r"C:\Users\Dario_Anchundia\Documents\GitHub\Proyecto1-LP\algoritmos_dart\algoritmo_dario.dart"  # Cambia por tu ruta local
 
 os.makedirs("logs", exist_ok=True)  # Crea carpeta logs si no existe
 
