@@ -294,7 +294,8 @@ def p_empty(p):
 # Lists
 def p_list_def(p):
     '''list_def : LIST LBRACKET value_list RBRACKET SEMICOLON
-                | LIST LESS type GREATER ID ASSIGN LBRACKET value_list RBRACKET SEMICOLON'''
+                | LIST LESS type GREATER ID ASSIGN LBRACKET value_list RBRACKET SEMICOLON
+                | LIST LESS type GREATER ID SEMICOLON'''
 
 def p_value_list(p):
     '''value_list : value
@@ -363,55 +364,23 @@ def p_error(p):
 parser = yacc.yacc()
 
 
-while True:
-    try:
-        s = input('sintax > ')  # Use raw_input() in Python 2
-    except EOFError:
-        break
-    if not s:
-        continue
-    result = parser.parse(s)
-    print(result)  # Imprime el resultado del análisis sintáctico
-    print(symbol_table)
+# Exportar cosas que usará main.py
+__all__ = [
+    'parser',
+    'semantic_errors',
+    'sintactic_results',
+    'symbol_table',
+    'function_table'
+]
 
+# while True:
+#     try:
+#         s = input('sintax > ')  # Use raw_input() in Python 2
+#     except EOFError:
+#         break
+#     if not s:
+#         continue
+#     result = parser.parse(s)
+#     print(result)  # Imprime el resultado del análisis sintáctico
+#     print(symbol_table)
 
-# def analyze_syntax(data):
-#     sintactic_results.clear()
-#     result = parser.parse(data)
-#     sintactic_results.append(f"Parsing result : {result}")
-#     print(f"Parsing result : {result}")
-#     return sintactic_results
-
-# import os
-# from datetime import datetime
-
-# # Variables que usas para nombre usuario y archivo de prueba
-# username = "drac2606"  # Cambia por tu usuario
-# file_test = r"C:\Users\Dario_Anchundia\Documents\GitHub\Proyecto1-LP\algoritmos_dart\algoritmo_dario.dart"  # Cambia por tu ruta local
-
-# os.makedirs("logs", exist_ok=True)  # Crea carpeta logs si no existe
-
-# # Leer archivo de entrada
-# with open(file_test, "r", encoding="utf-8") as f:
-#     data = f.read()
-
-# # Limpiar resultados anteriores
-# sintactic_results.clear()
-
-# # Parsear el código fuente
-# parser.parse(data)
-
-# # Crear nombre del archivo log con fecha y hora
-# ahora = datetime.now()
-# fecha_hora = ahora.strftime("%d-%m-%Y-%Hh%M")
-# log_filename = f"logs/sintactico-{username}-{fecha_hora}.txt"
-
-# # Guardar resultados en el archivo de log
-# with open(log_filename, "w", encoding="utf-8") as log_file:
-#     for line in sintactic_results:
-#         print(line)             # Opcional: imprimir en consola
-#         log_file.write(line + "\n")
-
-# print(f"\nTokens sintácticos de {username} guardados en: {log_filename}")
-
-#fin Aporte Jahir

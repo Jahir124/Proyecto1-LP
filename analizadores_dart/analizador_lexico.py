@@ -193,6 +193,8 @@ def t_error(t):
 #Construcción del lexer
 lexer = lex.lex()
 
+__all__ = ['tokens', 'lexer']
+
 
 # while(True):
 #     try:
@@ -202,51 +204,5 @@ lexer = lex.lex()
 #     lexer.input(s)
 #     for tok in lexer:
 #         print(tok)
-
-
-
-# lexic_results = []
-# def analyze_tokens(data):
-#     global results
-#     lexic_results.clear()
-#     lexer.input(data)
-
-#     while True:
-#         tok = lexer.token()
-#         if not tok:
-#             break
-#         lexic_results.append(str(tok))
-#         print(tok)
-
-#     return lexic_results
-
-# algorithm = """
-
-# """
-
-# result = analyze_tokens(algorithm)
-
-# username = "drac2606" #Cambien su username
-# file_test = r"C:\Users\Dario_Anchundia\Documents\GitHub\Proyecto1-LP\algoritmos_dart\algoritmo_dario.dart" #Cambien su local path
-
-# os.makedirs("logs", exist_ok=True)
-
-# with open(file_test, "r", encoding="utf-8") as f:
-#     data = f.read()
-
-# ahora = datetime.now()
-# fecha_hora = ahora.strftime("%d-%m-%Y-%Hh%M")
-# log_filename = f"logs/lexico-{username}-{fecha_hora}.txt"
-
-# with open(log_filename, "w", encoding="utf-8") as log_file:
-#     lexer.input(data)
-#     while True:
-#         tok = lexer.token()
-#         if not tok:
-#             break
-#         print(tok)
-#         log_file.write(str(tok) + '\n')
-
-# print(f"\nTokens de {username} guardados en: {log_filename}")
 
 
