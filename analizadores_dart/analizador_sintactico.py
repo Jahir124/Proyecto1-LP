@@ -4,6 +4,8 @@ from datetime import datetime
 import os
 
 symbol_table = {}
+function_table = set()
+semantic_errors = []
 
 
 def p_compiler(p):
@@ -41,11 +43,20 @@ def p_variable_def(p):
     var_name = p[2] if declared_type else p[3]
     expr_type = p[4] if declared_type else p[5]
 
+    if expr_type in [None, 'unknown']:
+        mensaje = f"[Error Semántico] Línea {p.lineno(2)}: No se puede asignar una variable no declarada a '{var_name}'. No se añade a la tabla de símbolos."
+        print(mensaje)
+        semantic_errors.append(mensaje)
+        return  
+
     if declared_type is None or declared_type in ['var', 'dynamic']:
         symbol_table[var_name] = expr_type
     else:
         if declared_type != expr_type:
-            print(f"[Error Semántico] Línea {p.lineno(2)}: Se esperaba tipo '{declared_type}' pero se asignó '{expr_type}'")
+            mensaje = f"[Advertencia Semántica] Línea {p.lineno(2)}: Asignación de tipo '{expr_type}' a variable '{var_name}' de tipo '{declared_type}'"
+            print(mensaje)
+            semantic_errors.append(mensaje)
+
         symbol_table[var_name] = declared_type
 
 # Print
@@ -73,7 +84,9 @@ def p_expression_arithmetic(p):
     right_type = p[3]
 
     if left_type != right_type:
-        print(f"[Advertencia Semántica] Línea {p.lineno(2)}: Operación entre tipos distintos: '{left_type}' y '{right_type}'")
+        mensaje = f"[Advertencia Semántica] Línea {p.lineno(2)}: Operación entre tipos distintos: '{left_type}' y '{right_type}'"
+        print(mensaje)
+        semantic_errors.append(mensaje)
     
     p[0] = left_type
 
@@ -124,6 +137,15 @@ def p_function(p):
                 | VOID ID LPAREN parameters RPAREN LBRACE statement_composed RBRACE
                 | type ID LPAREN RPAREN LBRACE statement_composed RBRACE
                 | VOID ID LPAREN RPAREN LBRACE statement_composed RBRACE'''
+    
+    function_name = p[2]
+    if function_name in function_table:
+        mensaje = f"[Error Semántico] Línea {p.lineno(2)}: La función '{function_name}' ya fue declarada"
+        semantic_errors.append(mensaje)
+        print(mensaje)
+    else:
+        function_table.add(function_name)
+
 
 def p_parameters(p):
     '''parameters : parameter
@@ -149,6 +171,13 @@ def p_incdec_statement(p):
 def p_function_call(p):
     '''function_call : ID LPAREN RPAREN SEMICOLON
                      | ID LPAREN argument_list RPAREN SEMICOLON'''
+
+    function_name = p[1]
+    if function_name not in function_table:
+        mensaje = f"[Error Semántico] Línea {p.lineno(1)}: La función '{function_name}' no está declarada"
+        semantic_errors.append(mensaje)
+        print(mensaje)
+
 
 def p_argument_list(p):
     '''argument_list : expression
@@ -300,12 +329,17 @@ def p_value(p):
         p[0] = 'String'
     elif p[1] == 'true' or p[1] == 'false':
         p[0] = 'bool'
-    elif isinstance(p[1], str):  # ID
-        if p[1] in symbol_table:
-            p[0] = symbol_table[p[1]]
+    else:  # ID
+        nombre = p[1]
+        if nombre in symbol_table:
+            p[0] = symbol_table[nombre]
         else:
-            print(f"[Error Semántico] Línea {p.lineno(1)}: Variable '{p[1]}' no declarada")
-            p[0] = 'unknown'
+            mensaje = f"[Error Semántico] Línea {p.lineno(1)}: Variable '{nombre}' no declarada"
+            semantic_errors.append(mensaje)
+            print(mensaje)
+
+def p_statement_expression(p):
+    '''statement : expression SEMICOLON'''
 
 
 # Lambda functions (Tipo de función)
