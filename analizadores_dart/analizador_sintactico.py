@@ -52,11 +52,14 @@ def p_variable_def(p):
     if declared_type is None or declared_type in ['var', 'dynamic']:
         symbol_table[var_name] = expr_type
     else:
-        if declared_type != expr_type:
+        if declared_type == 'int' and expr_type == 'double':
+            mensaje = f"[Error Semántico] Línea {p.lineno(2)}: Dart no convierte automáticamente de double a int"
+            print(mensaje)
+            semantic_errors.append(mensaje)
+        elif declared_type != expr_type:
             mensaje = f"[Advertencia Semántica] Línea {p.lineno(2)}: Asignación de tipo '{expr_type}' a variable '{var_name}' de tipo '{declared_type}'"
             print(mensaje)
             semantic_errors.append(mensaje)
-
         symbol_table[var_name] = declared_type
 
 # Print
@@ -223,6 +226,12 @@ def p_return_statement(p):
 
 def p_while_loop(p):
     '''while_loop : WHILE LPAREN conditions RPAREN LBRACE statement_composed RBRACE'''
+    if not hasattr(p.parser, 'loop_stack'):
+        p.parser.loop_stack = []
+    p.parser.loop_stack.append('while')
+    # Analizar el cuerpo del bucle
+    # ... aquí va el análisis normal ...
+    p.parser.loop_stack.pop()
 
 def p_object_instantiation(p):
     '''object_instantiation : VAR ID ASSIGN NEW ID LPAREN argument_list_opt RPAREN SEMICOLON
@@ -257,6 +266,12 @@ def p_class_def(p):
 def p_for_loop(p):
     '''for_loop : FOR LPAREN for_init SEMICOLON conditions SEMICOLON for_update RPAREN LBRACE statement_composed RBRACE
                 | FOR LPAREN type ID IN ID RPAREN LBRACE statement_composed RBRACE'''
+    if not hasattr(p.parser, 'loop_stack'):
+        p.parser.loop_stack = []
+    p.parser.loop_stack.append('for')
+    # Analizar el cuerpo del bucle
+    # ... aquí va el análisis normal ...
+    p.parser.loop_stack.pop()
 
 
 def p_for_init(p):
@@ -417,4 +432,14 @@ __all__ = [
 #     result = parser.parse(s)
 #     print(result)  # Imprime el resultado del análisis sintáctico
 #     print(symbol_table)
+
+def p_break_stmt(p):
+    'statement : BREAK SEMICOLON'
+    # Verificar si estamos dentro de un bucle
+    if not hasattr(p.parser, 'loop_stack'):
+        p.parser.loop_stack = []
+    if not p.parser.loop_stack:
+        mensaje = f"[Error Semántico] Línea {p.lineno(1)}: 'break' fuera de un bucle"
+        semantic_errors.append(mensaje)
+        print(mensaje)
 
