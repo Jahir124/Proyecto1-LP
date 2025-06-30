@@ -61,7 +61,6 @@ reserved = {
 # Lista de tokens
 tokens = (
     'ID',
-    'FLOAT',
     'PLUS',
     'MINUS',
     'TIMES',
@@ -161,7 +160,7 @@ def t_COMMENT_MULTI(t):
     r'/\*[\s\S]*?\*/'
     pass  # Ignora comentarios multilínea
 
-def t_FLOAT(t):
+def t_DOUBLE(t):
     r'\d+\.\d+'
     t.value = float(t.value)
     return t
@@ -194,48 +193,60 @@ def t_error(t):
 #Construcción del lexer
 lexer = lex.lex()
 
-lexic_results = []
-def analyze_tokens(data):
-    global results
-    lexic_results.clear()
-    lexer.input(data)
 
-    while True:
-        tok = lexer.token()
-        if not tok:
-            break
-        lexic_results.append(str(tok))
-        print(tok)
+# while(True):
+#     try:
+#         s= input('lex > ')
+#     except EOFError:
+#         break
+#     lexer.input(s)
+#     for tok in lexer:
+#         print(tok)
 
-    return lexic_results
 
-algorithm = """
 
-"""
+# lexic_results = []
+# def analyze_tokens(data):
+#     global results
+#     lexic_results.clear()
+#     lexer.input(data)
 
-result = analyze_tokens(algorithm)
+#     while True:
+#         tok = lexer.token()
+#         if not tok:
+#             break
+#         lexic_results.append(str(tok))
+#         print(tok)
 
-username = "drac2606" #Cambien su username
-file_test = r"C:\Users\Dario_Anchundia\Documents\GitHub\Proyecto1-LP\algoritmos_dart\algoritmo_dario.dart" #Cambien su local path
+#     return lexic_results
 
-os.makedirs("logs", exist_ok=True)
+# algorithm = """
 
-with open(file_test, "r", encoding="utf-8") as f:
-    data = f.read()
+# """
 
-ahora = datetime.now()
-fecha_hora = ahora.strftime("%d-%m-%Y-%Hh%M")
-log_filename = f"logs/lexico-{username}-{fecha_hora}.txt"
+# result = analyze_tokens(algorithm)
 
-with open(log_filename, "w", encoding="utf-8") as log_file:
-    lexer.input(data)
-    while True:
-        tok = lexer.token()
-        if not tok:
-            break
-        print(tok)
-        log_file.write(str(tok) + '\n')
+# username = "drac2606" #Cambien su username
+# file_test = r"C:\Users\Dario_Anchundia\Documents\GitHub\Proyecto1-LP\algoritmos_dart\algoritmo_dario.dart" #Cambien su local path
 
-print(f"\nTokens de {username} guardados en: {log_filename}")
+# os.makedirs("logs", exist_ok=True)
+
+# with open(file_test, "r", encoding="utf-8") as f:
+#     data = f.read()
+
+# ahora = datetime.now()
+# fecha_hora = ahora.strftime("%d-%m-%Y-%Hh%M")
+# log_filename = f"logs/lexico-{username}-{fecha_hora}.txt"
+
+# with open(log_filename, "w", encoding="utf-8") as log_file:
+#     lexer.input(data)
+#     while True:
+#         tok = lexer.token()
+#         if not tok:
+#             break
+#         print(tok)
+#         log_file.write(str(tok) + '\n')
+
+# print(f"\nTokens de {username} guardados en: {log_filename}")
 
 

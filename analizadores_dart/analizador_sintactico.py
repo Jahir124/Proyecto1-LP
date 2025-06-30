@@ -3,7 +3,9 @@ from analizador_lexico import tokens
 from datetime import datetime
 import os
 
-#Inicio Aporte Jahir Cajas
+symbol_table = {}
+
+
 def p_compiler(p):
     '''compiler : statement_composed'''
 
@@ -35,6 +37,17 @@ def p_variable_def(p):
                     | STATIC VAR ID ASSIGN expression SEMICOLON
                     | STATIC DYNAMIC ID ASSIGN expression SEMICOLON'''
 
+    declared_type = p[1] if p[1] in ['int', 'double', 'String', 'bool'] else None
+    var_name = p[2] if declared_type else p[3]
+    expr_type = p[4] if declared_type else p[5]
+
+    if declared_type is None or declared_type in ['var', 'dynamic']:
+        symbol_table[var_name] = expr_type
+    else:
+        if declared_type != expr_type:
+            print(f"[Error Semántico] Línea {p.lineno(2)}: Se esperaba tipo '{declared_type}' pero se asignó '{expr_type}'")
+        symbol_table[var_name] = declared_type
+
 # Print
 def p_print_stmt(p):
     '''print_stmt : PRINT LPAREN RPAREN SEMICOLON
@@ -56,11 +69,23 @@ def p_expression_arithmetic(p):
                   | expression INT_DIVIDE expression
                   | expression MODULE expression'''
 
+    left_type = p[1]
+    right_type = p[3]
+
+    if left_type != right_type:
+        print(f"[Advertencia Semántica] Línea {p.lineno(2)}: Operación entre tipos distintos: '{left_type}' y '{right_type}'")
+    
+    p[0] = left_type
+
+
+
 def p_expression_paren(p):
     '''expression : LPAREN expression RPAREN'''
 
 def p_expression_value(p):
     '''expression : value'''
+    p[0] = p[1] 
+
 
 
 # Conditionals
@@ -217,6 +242,16 @@ def p_type(p):
             | INT
             | DOUBLE
             | BOOL'''
+    if isinstance(p[1], str) and p.slice[1].type=="STRING":
+        p[0] = 'String'
+    elif isinstance(p[1], str) and p.slice[1].type=="INT":
+        p[0] = 'int'
+    elif isinstance(p[1], str) and p.slice[1].type=="DOUBLE":
+        p[0] = 'double'
+    elif isinstance(p[1], str) and p.slice[1].type=="BOOL":
+        p[0] = 'bool'
+    else:
+        p[0] = 'unknown'
 
 def p_argument_list_opt(p):
     '''argument_list_opt : argument_list
@@ -251,11 +286,27 @@ def p_map_entry(p):
 # Values
 def p_value(p):
     '''value : INT
-             | FLOAT
+             | DOUBLE
              | STRING
              | ID
              | TRUE
              | FALSE'''
+
+    if isinstance(p[1], int):
+        p[0] = 'int'
+    elif isinstance(p[1], float):
+        p[0] = 'double'
+    elif isinstance(p[1], str) and p.slice[1].type == 'STRING':
+        p[0] = 'String'
+    elif p[1] == 'true' or p[1] == 'false':
+        p[0] = 'bool'
+    elif isinstance(p[1], str):  # ID
+        if p[1] in symbol_table:
+            p[0] = symbol_table[p[1]]
+        else:
+            print(f"[Error Semántico] Línea {p.lineno(1)}: Variable '{p[1]}' no declarada")
+            p[0] = 'unknown'
+
 
 # Lambda functions (Tipo de función)
 def p_lambda_function(p):
@@ -277,43 +328,56 @@ def p_error(p):
 
 parser = yacc.yacc()
 
-def analyze_syntax(data):
-    sintactic_results.clear()
-    result = parser.parse(data)
-    sintactic_results.append(f"Parsing result : {result}")
-    print(f"Parsing result : {result}")
-    return sintactic_results
 
-import os
-from datetime import datetime
+while True:
+    try:
+        s = input('sintax > ')  # Use raw_input() in Python 2
+    except EOFError:
+        break
+    if not s:
+        continue
+    result = parser.parse(s)
+    print(result)  # Imprime el resultado del análisis sintáctico
+    print(symbol_table)
 
-# Variables que usas para nombre usuario y archivo de prueba
-username = "drac2606"  # Cambia por tu usuario
-file_test = r"C:\Users\Dario_Anchundia\Documents\GitHub\Proyecto1-LP\algoritmos_dart\algoritmo_dario.dart"  # Cambia por tu ruta local
 
-os.makedirs("logs", exist_ok=True)  # Crea carpeta logs si no existe
+# def analyze_syntax(data):
+#     sintactic_results.clear()
+#     result = parser.parse(data)
+#     sintactic_results.append(f"Parsing result : {result}")
+#     print(f"Parsing result : {result}")
+#     return sintactic_results
 
-# Leer archivo de entrada
-with open(file_test, "r", encoding="utf-8") as f:
-    data = f.read()
+# import os
+# from datetime import datetime
 
-# Limpiar resultados anteriores
-sintactic_results.clear()
+# # Variables que usas para nombre usuario y archivo de prueba
+# username = "drac2606"  # Cambia por tu usuario
+# file_test = r"C:\Users\Dario_Anchundia\Documents\GitHub\Proyecto1-LP\algoritmos_dart\algoritmo_dario.dart"  # Cambia por tu ruta local
 
-# Parsear el código fuente
-parser.parse(data)
+# os.makedirs("logs", exist_ok=True)  # Crea carpeta logs si no existe
 
-# Crear nombre del archivo log con fecha y hora
-ahora = datetime.now()
-fecha_hora = ahora.strftime("%d-%m-%Y-%Hh%M")
-log_filename = f"logs/sintactico-{username}-{fecha_hora}.txt"
+# # Leer archivo de entrada
+# with open(file_test, "r", encoding="utf-8") as f:
+#     data = f.read()
 
-# Guardar resultados en el archivo de log
-with open(log_filename, "w", encoding="utf-8") as log_file:
-    for line in sintactic_results:
-        print(line)             # Opcional: imprimir en consola
-        log_file.write(line + "\n")
+# # Limpiar resultados anteriores
+# sintactic_results.clear()
 
-print(f"\nTokens sintácticos de {username} guardados en: {log_filename}")
+# # Parsear el código fuente
+# parser.parse(data)
+
+# # Crear nombre del archivo log con fecha y hora
+# ahora = datetime.now()
+# fecha_hora = ahora.strftime("%d-%m-%Y-%Hh%M")
+# log_filename = f"logs/sintactico-{username}-{fecha_hora}.txt"
+
+# # Guardar resultados en el archivo de log
+# with open(log_filename, "w", encoding="utf-8") as log_file:
+#     for line in sintactic_results:
+#         print(line)             # Opcional: imprimir en consola
+#         log_file.write(line + "\n")
+
+# print(f"\nTokens sintácticos de {username} guardados en: {log_filename}")
 
 #fin Aporte Jahir
