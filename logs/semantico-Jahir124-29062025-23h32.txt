@@ -1,0 +1,15 @@
+[Error Semántico] Línea 135: Variable 'notas' no declarada
+[Error Semántico] Línea 138: Variable 'n' no declarada
+[Error Semántico] Línea 139: La función 'ArgumentError' no está declarada
+[Error Semántico] Línea 143: Variable 'a' no declarada
+[Error Semántico] Línea 143: Variable 'a' no declarada
+[Error Semántico] Línea 143: Variable 'b' no declarada
+[Error Semántico] Línea 143: Operación inválida entre 'None' y 'None' con operador '+'
+[Error Semántico] Línea 148: Variable 'promedio' no declarada
+[Error Semántico] Línea 149: Variable 'promedio' no declarada
+[Error Semántico] Línea 150: Variable 'promedio' no declarada
+[Error Semántico] Línea 175: Variable 'estudiantes' no declarada
+[Error Semántico] Línea 177: Variable 'buscado' no declarada
+[Error Semántico] Línea 177: Variable 'null' no declarada
+[Error Semántico] Línea 188: Variable 'est' no declarada
+[Error Semántico] Línea 191: Variable 'null' no declarada

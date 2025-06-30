@@ -1,0 +1,8 @@
+[Error Semántico] Línea 47: Variable 'texto' no declarada
+[Error Semántico] Línea 49: Variable 'e' no declarada
+[Error Semántico] Línea 56: Variable 'input' no declarada
+[Error Semántico] Línea 56: Variable 'null' no declarada
+[Error Semántico] Línea 56: La función 'ArgumentError' no está declarada
+[Error Semántico] Línea 59: Variable 'a' no declarada
+[Error Semántico] Línea 59: Variable 'z0' no declarada
+[Error Semántico] Línea 64: Variable 'derecha' no declarada

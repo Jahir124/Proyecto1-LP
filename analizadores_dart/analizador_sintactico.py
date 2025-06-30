@@ -6,7 +6,7 @@ import os
 symbol_table = {}
 function_table = set()
 semantic_errors = []
-
+function_return_stack = []
 
 def p_compiler(p):
     '''compiler : statement_composed'''
@@ -82,15 +82,22 @@ def p_expression_arithmetic(p):
 
     left_type = p[1]
     right_type = p[3]
+    operador = p[2]
+
+    # Reglas para operaciones numéricas
+    tipos_validos = ['int', 'double']
 
     if left_type != right_type:
         mensaje = f"[Advertencia Semántica] Línea {p.lineno(2)}: Operación entre tipos distintos: '{left_type}' y '{right_type}'"
         print(mensaje)
         semantic_errors.append(mensaje)
-    
-    p[0] = left_type
 
+    if left_type not in tipos_validos or right_type not in tipos_validos:
+        mensaje = f"[Error Semántico] Línea {p.lineno(2)}: Operación inválida entre '{left_type}' y '{right_type}' con operador '{operador}'"
+        print(mensaje)
+        semantic_errors.append(mensaje)
 
+    p[0] = left_type if left_type == right_type else 'unknown'
 
 def p_expression_paren(p):
     '''expression : LPAREN expression RPAREN'''
@@ -137,14 +144,19 @@ def p_function(p):
                 | VOID ID LPAREN parameters RPAREN LBRACE statement_composed RBRACE
                 | type ID LPAREN RPAREN LBRACE statement_composed RBRACE
                 | VOID ID LPAREN RPAREN LBRACE statement_composed RBRACE'''
-    
     function_name = p[2]
+    return_type = p[1] if p[1] != "VOID" else 'void'
+
     if function_name in function_table:
         mensaje = f"[Error Semántico] Línea {p.lineno(2)}: La función '{function_name}' ya fue declarada"
         semantic_errors.append(mensaje)
         print(mensaje)
     else:
         function_table.add(function_name)
+
+    function_return_stack.append(return_type)  # Guardamos tipo de retorno
+    # El statement_composed ya se procesó como parte del parser
+    function_return_stack.pop()
 
 
 def p_parameters(p):
@@ -185,7 +197,29 @@ def p_argument_list(p):
 
 def p_return_statement(p):
     '''return_statement : RETURN expression SEMICOLON
-                       | RETURN SEMICOLON'''
+                        | RETURN SEMICOLON'''
+
+    if not function_return_stack:
+        return  # No estamos dentro de una función (mal diseño, pero ignoramos)
+
+    expected_type = function_return_stack[-1]
+
+    if len(p) == 4:
+        actual_type = p[2]
+        if expected_type != 'void' and actual_type != expected_type:
+            mensaje = f"[Error Semántico] Línea {p.lineno(1)}: Se esperaba retorno de tipo '{expected_type}', pero se encontró '{actual_type}'"
+            semantic_errors.append(mensaje)
+            print(mensaje)
+        elif expected_type == 'void':
+            mensaje = f"[Error Semántico] Línea {p.lineno(1)}: Función 'void' no debe retornar ningún valor"
+            semantic_errors.append(mensaje)
+            print(mensaje)
+    else:
+        if expected_type != 'void':
+            mensaje = f"[Error Semántico] Línea {p.lineno(1)}: Se esperaba retorno de tipo '{expected_type}', pero no se retornó ningún valor"
+            semantic_errors.append(mensaje)
+            print(mensaje)
+
 
 def p_while_loop(p):
     '''while_loop : WHILE LPAREN conditions RPAREN LBRACE statement_composed RBRACE'''
