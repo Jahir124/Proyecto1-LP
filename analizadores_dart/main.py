@@ -6,9 +6,9 @@ from analizador_sintactico import parser, semantic_errors, sintactic_results, sy
 # --- CONFIGURACIÓN DE RUTAS ---
 # COLOCAR RUTAS ABSOLUTAS CORRECTAS
 # Ruta donde están los archivos .dart de los algoritmos
-RUTA_ALGORITMOS = r"C:\Users\jahir\PycharmProjects\Proyecto1-LP\algoritmos_dart"
+RUTA_ALGORITMOS = "algoritmos_dart"
 # Ruta donde se guardarán los logs
-RUTA_LOGS = r"C:\Users\jahir\PycharmProjects\Proyecto1-LP\logs"
+RUTA_LOGS = "logs"
 
 
 # Crear carpeta logs si no existe

@@ -1,0 +1,26 @@
+[Error Semántico] Línea 252: Variable 'datos' no declarada
+[Error Semántico] Línea 253: Variable 'resumen' no declarada
+[Error Semántico] Línea 261: Variable 'ini' no declarada
+[Error Semántico] Línea 261: Variable 'fin' no declarada
+[Error Semántico] Línea 262: Variable 'ini' no declarada
+[Error Semántico] Línea 262: Variable 'fin' no declarada
+[Error Semántico] Línea 262: Operación inválida entre 'None' y 'None' con operador '+'
+[Advertencia Semántica] Línea 262: Operación entre tipos distintos: 'None' y 'int'
+[Error Semántico] Línea 262: Operación inválida entre 'None' y 'int' con operador '~/'
+[Error Semántico] Línea 262: No se puede asignar una variable no declarada a 'mid'. No se añade a la tabla de símbolos.
+[Error Semántico] Línea 265: Variable 'mid' no declarada
+[Error Semántico] Línea 278: Variable 'val' no declarada
+[Error Semántico] Línea 279: Variable 'val' no declarada
+[Error Semántico] Línea 279: Variable 'min' no declarada
+[Error Semántico] Línea 279: Variable 'val' no declarada
+[Error Semántico] Línea 280: Variable 'val' no declarada
+[Error Semántico] Línea 280: Variable 'max' no declarada
+[Error Semántico] Línea 280: Variable 'val' no declarada
+[Error Semántico] Línea 282: Variable 'min' no declarada
+[Error Semántico] Línea 283: Variable 'max' no declarada
+[Error Semántico] Línea 284: Variable 'suma' no declarada
+[Error Semántico] Línea 297: Variable 'lista' no declarada
+[Error Semántico] Línea 298: La función 'busquedaBinaria' no está declarada
+[Error Semántico] Línea 299: La función 'calcularResumen' no está declarada
+[Error Semántico] Línea 300: Variable 'pos' no declarada
+[Error Semántico] Línea 305: La función 'mostrarResumen' no está declarada
