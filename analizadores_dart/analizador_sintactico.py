@@ -295,20 +295,6 @@ def p_class_def(p):
                  | CLASS ID EXTENDS ID IMPLEMENTS ID LBRACE class_body RBRACE'''
     
 
-# # Sintaxis para Set en Dart (permite var a = {1, 2, 3};)
-# def p_set_def(p):
-#     '''set_def : SET LESS type GREATER ID ASSIGN LBRACE set_value_list RBRACE SEMICOLON
-#                | SET ID ASSIGN LBRACE set_value_list RBRACE SEMICOLON
-#                | SET LESS type GREATER ID SEMICOLON
-#                | SET ID SEMICOLON
-#                '''
-    
-
-# def p_set_value_list(p):
-#     '''set_value_list : value
-#                       | set_value_list COMMA value'''
-
-#FIN APORTE
 
 
 # For loop (Estructura de control)
@@ -409,6 +395,12 @@ def p_list_def(p):
 def p_value_list(p):
     '''value_list : value
                   | value_list COMMA value'''
+    if len(p) == 2:
+        # Devuelve una lista con el tipo del valor
+        p[0] = [p[1]]
+    else:
+        # Acumula los tipos de los valores
+        p[0] = p[1] + [p[3]]
 
 # Maps (Estructura de datos)
 def p_map_def(p):
@@ -425,6 +417,14 @@ def p_map_entry(p):
 
 def p_set_value(p):
     '''set_value : LBRACE value_list RBRACE'''
+    # Verifica que todos los elementos del set sean del mismo tipo
+    tipos = set(p[2]) if isinstance(p[2], list) else set()
+    if len(tipos) > 1:
+        mensaje = f"[Error Semántico] Línea {p.lineno(1)}: Todos los elementos de un Set deben ser del mismo tipo. Encontrados: {tipos}"
+        semantic_errors.append(mensaje)
+        print(mensaje)
+    p[0] = 'Set' if tipos else 'unknown'
+
 # Values
 def p_value(p):
     '''value : INT
