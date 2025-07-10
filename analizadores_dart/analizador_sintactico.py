@@ -24,17 +24,37 @@ def p_statement(p):
                  | list_def
                  | map_def
                  | variable_def
+                | variable_only_def
                  | SEMICOLON
                  | function_call
                  | return_statement
                  | incdec_statement
                  | class_def
                  | object_instantiation
-                 | set_def'''
+                 '''
 
 def p_empty_statement(p):
     '''statement : 
     '''
+
+def p_variable_only_def(p):
+    '''variable_only_def : type ID SEMICOLON
+                         | DYNAMIC ID SEMICOLON
+                         | VAR ID SEMICOLON
+                         | STATIC type ID SEMICOLON
+                         | STATIC VAR ID SEMICOLON
+                         | STATIC DYNAMIC ID SEMICOLON'''
+
+    declared_type = p[1] if p[1] in ['int', 'double', 'String', 'bool'] else None
+    var_name = p[3] if p[1] == 'static' else p[2]
+    if var_name in symbol_table:
+        mensaje = f"[Error Semántico] Línea {p.lineno(2)}: La variable '{var_name}' ya fue declarada"
+        semantic_errors.append(mensaje)
+        print(mensaje)
+    else:
+        symbol_table[var_name] = declared_type if declared_type else 'unknown'
+
+            
 
 def p_variable_def(p):
     '''variable_def : type ID ASSIGN expression SEMICOLON
@@ -44,28 +64,33 @@ def p_variable_def(p):
                     | STATIC VAR ID ASSIGN expression SEMICOLON
                     | STATIC DYNAMIC ID ASSIGN expression SEMICOLON'''
 
-    declared_type = p[1] if p[1] in ['int', 'double', 'String', 'bool'] else None
-    var_name = p[2] if declared_type else p[3]
-    expr_type = p[4] if declared_type else p[5]
+    declared_type = p[1] if p[1] in ['int', 'double', 'String', 'bool', 'Set'] else None
+    if p[1] == 'static':
+        declared_type = p[2] if p[2] in ['int', 'double', 'String', 'bool', 'Set'] else None
+
+    # declared_set = p[2] if p[1] == 'static' else p[1]
+    var_name = p[3] if p[1] == 'static' else p[2]
+    expr_type = p[5] if p[1] == 'static' else p[4]
 
     if expr_type in [None, 'unknown']:
         mensaje = f"[Error Semántico] Línea {p.lineno(2)}: No se puede asignar una variable no declarada a '{var_name}'. No se añade a la tabla de símbolos."
         print(mensaje)
         semantic_errors.append(mensaje)
         return  
+    
+    symbol_table[var_name] = expr_type
 
-    if declared_type is None or declared_type in ['var', 'dynamic']:
-        symbol_table[var_name] = expr_type
-    else:
+    if declared_type is not None:
         if declared_type == 'int' and expr_type == 'double':
+            del symbol_table[var_name]  # No se añade a la tabla de símbolos
             mensaje = f"[Error Semántico] Línea {p.lineno(2)}: Dart no convierte automáticamente de double a int"
             print(mensaje)
             semantic_errors.append(mensaje)
         elif declared_type != expr_type:
-            mensaje = f"[Advertencia Semántica] Línea {p.lineno(2)}: Asignación de tipo '{expr_type}' a variable '{var_name}' de tipo '{declared_type}'"
+            del symbol_table[var_name]  # No se añade a la tabla de símbolos
+            mensaje = f"[Error semántico] Línea {p.lineno(2)}: Asignación de tipo '{expr_type}' a variable '{var_name}' de tipo '{declared_type}'"
             print(mensaje)
             semantic_errors.append(mensaje)
-        symbol_table[var_name] = declared_type
 
 # Print
 def p_print_stmt(p):
@@ -270,17 +295,18 @@ def p_class_def(p):
                  | CLASS ID EXTENDS ID IMPLEMENTS ID LBRACE class_body RBRACE'''
     
 
-# Sintaxis para Set en Dart
+# # Sintaxis para Set en Dart (permite var a = {1, 2, 3};)
+# def p_set_def(p):
+#     '''set_def : SET LESS type GREATER ID ASSIGN LBRACE set_value_list RBRACE SEMICOLON
+#                | SET ID ASSIGN LBRACE set_value_list RBRACE SEMICOLON
+#                | SET LESS type GREATER ID SEMICOLON
+#                | SET ID SEMICOLON
+#                '''
+    
 
-def p_set_def(p):
-    '''set_def : SET LESS type GREATER ID ASSIGN LBRACE set_value_list RBRACE SEMICOLON
-               | SET ID ASSIGN LBRACE set_value_list RBRACE SEMICOLON
-               | SET LESS type GREATER ID SEMICOLON
-               | SET ID SEMICOLON'''
-
-def p_set_value_list(p):
-    '''set_value_list : value
-                      | set_value_list COMMA value'''
+# def p_set_value_list(p):
+#     '''set_value_list : value
+#                       | set_value_list COMMA value'''
 
 #FIN APORTE
 
@@ -336,21 +362,32 @@ def p_constructor(p):
     '''constructor : ID LPAREN parameters RPAREN LBRACE statement_composed RBRACE
                    | ID LPAREN RPAREN LBRACE statement_composed RBRACE'''
 
+def p_set_type(p):
+    '''set_type : SET
+                | SET LESS type GREATER'''
+    # SET o SET<int> como tipo de dato
+    if len(p) == 2:
+        p[0] = 'Set'
+    else:
+        p[0] = f'Set<{p[3]}>'
 
 #Data Types
 def p_type(p):
     '''type : STRING
             | INT
             | DOUBLE
-            | BOOL'''
-    if isinstance(p[1], str) and p.slice[1].type=="STRING":
+            | BOOL
+            | set_type'''
+    if isinstance(p[1], str) and p.slice[1].type == "STRING":
         p[0] = 'String'
-    elif isinstance(p[1], str) and p.slice[1].type=="INT":
+    elif isinstance(p[1], str) and p.slice[1].type == "INT":
         p[0] = 'int'
-    elif isinstance(p[1], str) and p.slice[1].type=="DOUBLE":
+    elif isinstance(p[1], str) and p.slice[1].type == "DOUBLE":
         p[0] = 'double'
-    elif isinstance(p[1], str) and p.slice[1].type=="BOOL":
+    elif isinstance(p[1], str) and p.slice[1].type == "BOOL":
         p[0] = 'bool'
+    elif isinstance(p[1], str) and (p.slice[1].type == "set_type" or p[1].startswith('Set')):
+        p[0] = p[1]
     else:
         p[0] = 'unknown'
 
@@ -385,6 +422,9 @@ def p_map_entries(p):
 def p_map_entry(p):
     '''map_entry : value COLON value'''
 
+
+def p_set_value(p):
+    '''set_value : LBRACE value_list RBRACE'''
 # Values
 def p_value(p):
     '''value : INT
@@ -392,7 +432,8 @@ def p_value(p):
              | STRING
              | ID
              | TRUE
-             | FALSE'''
+             | FALSE
+             | set_value'''
 
     if isinstance(p[1], int):
         p[0] = 'int'
@@ -402,6 +443,8 @@ def p_value(p):
         p[0] = 'String'
     elif p[1] == 'true' or p[1] == 'false':
         p[0] = 'bool'
+    elif p.slice[1].type == 'set_value':
+        p[0] = 'Set'
     else:  # ID
         nombre = p[1]
         if nombre in symbol_table:
