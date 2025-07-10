@@ -22,7 +22,7 @@ reserved = {
     "while": "WHILE",
     "required": "REQUIRED",
     "return": "RETURN",
-    "set": "SET",
+    "Set": "SET",
     "this": "THIS",
     "print": "PRINT",
     "length": "LENGTH",

@@ -29,7 +29,12 @@ def p_statement(p):
                  | return_statement
                  | incdec_statement
                  | class_def
-                 | object_instantiation'''
+                 | object_instantiation
+                 | set_def'''
+
+def p_empty_statement(p):
+    '''statement : 
+    '''
 
 def p_variable_def(p):
     '''variable_def : type ID ASSIGN expression SEMICOLON
@@ -131,7 +136,11 @@ def p_conditions(p):
 
 def p_condition(p):
     '''condition : value comparison_operator value
-                 | NOT value'''
+                 | NOT value
+                 | TRUE
+                 | FALSE
+                 | ID comparison_operator value
+                 | ID comparison_operator ID'''
 
 def p_comparison_operator(p):
     '''comparison_operator : GREATER
@@ -259,6 +268,20 @@ def p_class_def(p):
                  | CLASS ID EXTENDS ID LBRACE class_body RBRACE
                  | CLASS ID IMPLEMENTS ID LBRACE class_body RBRACE
                  | CLASS ID EXTENDS ID IMPLEMENTS ID LBRACE class_body RBRACE'''
+    
+
+# Sintaxis para Set en Dart
+
+def p_set_def(p):
+    '''set_def : SET LESS type GREATER ID ASSIGN LBRACE set_value_list RBRACE SEMICOLON
+               | SET ID ASSIGN LBRACE set_value_list RBRACE SEMICOLON
+               | SET LESS type GREATER ID SEMICOLON
+               | SET ID SEMICOLON'''
+
+def p_set_value_list(p):
+    '''set_value_list : value
+                      | set_value_list COMMA value'''
+
 #FIN APORTE
 
 
