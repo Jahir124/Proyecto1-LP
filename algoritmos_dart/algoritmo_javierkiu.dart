@@ -1,7 +1,6 @@
 // Algoritmo de búsqueda con estadísticas básicas 
 class Analizador { 
-  List<int> datos; 
-  Map<String, dynamic> resumen; 
+  Set<int> datos; 
 
   Analizador(this.datos) { 
     resumen = {"min": 0, "max": 0, "promedio": 0.0, "existe": false}; 
@@ -23,27 +22,28 @@ class Analizador {
     return -1; 
   } 
 
-  void calcularResumen() { 
-    int suma = 0, min = datos[0], max = datos[0]; 
-    for (int val in datos) { 
-      suma += val; 
-      if (val < min) min = val; 
-      if (val > max) max = val; 
-    } 
-    resumen["min"] = min; 
-    resumen["max"] = max; 
-    resumen["promedio"] = suma / datos.length; 
+  void probarReglas() { 
+    Set<int> numeros = {1, 2, 3};
+    var conjunto = {true, false};
+    Set<String> palabras = {"hola", "mundo"};
+    Set<double> vacio = {true, 1};
+    var suma = 1 + 2;
+    double o = 1.2;
+    int retorn() {
+      return 1;  
+    }
+    int i = 0;
+    while (i < 3) {
+      print(i);
+      i++;
+    }
   } 
 
-  void mostrarResumen() { 
-    print("Resumen:"); 
-    print("Min: ${resumen["min"]}, Max: ${resumen["max"]}, Promedio: ${resumen["promedio"]}"); 
-    print("Elemento buscado existe: ${resumen["existe"]}"); 
-  } 
+  Map<String, dynamic> resumen;
 } 
 
 void main() { 
-  List<int> lista = [3, 6, 8, 12, 15, 20]; 
+  Set<int> lista = {3, 6, 8, 12, 15, 20}; 
   int objetivo = 12; 
   var analizador = Analizador(lista); 
   int pos = analizador.busquedaBinaria(objetivo); 
