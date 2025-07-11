@@ -19,6 +19,8 @@ def analizar_codigo():
     for i in tree_tokens.get_children():
         tree_tokens.delete(i)
     text_errores.delete("1.0", tk.END)
+    for i in tree_vars.get_children():
+        tree_vars.delete(i)
 
     codigo = entrada_codigo.get("1.0", tk.END)
 
@@ -27,6 +29,8 @@ def analizar_codigo():
     lexical_errors.clear()
     semantic_errors.clear()
     sintactic_results.clear()
+    symbol_table.clear()
+    function_table.clear()
 
     # Análisis léxico
     lexer.input(codigo)
@@ -46,6 +50,7 @@ def analizar_codigo():
     else:
         text_errores.insert(tk.END, "✅ Análisis exitoso. No se encontraron errores.")
 
+    actualizar_variables()
 
 # --- GUI Principal ---
 ventana = tk.Tk()
@@ -89,9 +94,28 @@ notebook.add(frame_errores, text="Errores")
 text_errores = scrolledtext.ScrolledText(frame_errores, bg="#2b2b2b", fg="white")
 text_errores.pack(fill="both", expand=True)
 
+# --- Pestaña: Variables ---
+frame_vars = ttk.Frame(notebook)
+notebook.add(frame_vars, text="Variables")
+
+tree_vars = ttk.Treeview(frame_vars, columns=("Nombre", "Tipo"), show="headings")
+tree_vars.heading("Nombre", text="Nombre")
+tree_vars.heading("Tipo", text="Tipo")
+tree_vars.column("Nombre", width=200)
+tree_vars.column("Tipo", width=200)
+tree_vars.pack(fill="both", expand=True)
+
 # Estilo para TreeView
 style = ttk.Style()
 style.configure("Treeview", background="#2b2b2b", foreground="white", fieldbackground="#2b2b2b")
 style.map("Treeview", background=[("selected", "#444444")], foreground=[("selected", "white")])
+
+def actualizar_variables():
+    # Limpiar tabla
+    for i in tree_vars.get_children():
+        tree_vars.delete(i)
+    # Insertar variables actuales
+    for nombre, tipo in symbol_table.items():
+        tree_vars.insert("", "end", values=(nombre, tipo))
 
 ventana.mainloop()
