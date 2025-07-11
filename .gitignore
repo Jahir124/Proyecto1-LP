@@ -1,5 +1,6 @@
 # Ignore Python virtual environment
 .venv/
 .idea/
-.parser.out/
-.parsetab.py/
+analizadores_dart/parser.out
+analizadores_dart/parsetab.py
+analizadores_dart/__pycache__/
